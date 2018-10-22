@@ -7,8 +7,7 @@ import kotlinx.serialization.Serializable
 data class Configuration
 (
     //GET
-    @SerialName("group_id")
-    val groupId: Int? = null,
+    @SerialName("group_id") val groupId: Int? = null,
     val id: Int? = null,
 
     //ADD/UPDATE

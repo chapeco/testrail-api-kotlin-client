@@ -9,13 +9,10 @@ data class ResultField
     //GET
     val configs: Array<Configuration>? = null,
     val description: String? = null,
-    @SerialName("display_order")
-    val displayOrder: Int? = null,
+    @SerialName("display_order") val displayOrder: Int? = null,
     val id: Int? = null,
     val label: String? = null,
     val name: String? = null,
-    @SerialName("system_name")
-    val systemName: String? = null,
-    @SerialName("type_id")
-    val typeId: Int? = null
+    @SerialName("system_name") val systemName: String? = null,
+    @SerialName("type_id") val typeId: Int? = null
 )

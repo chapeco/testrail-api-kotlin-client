@@ -7,7 +7,6 @@ import kotlinx.serialization.Serializable
 data class Template
 (
     val id: Int? = null,
-    @SerialName("is_default")
-    val isDefault: Boolean? = null,
+    @SerialName("is_default") val isDefault: Boolean? = null,
     val name: String? = null
 )
