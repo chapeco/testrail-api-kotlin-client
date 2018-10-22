@@ -8,7 +8,6 @@ data class User
 (
     val email: String? = null,
     val id: Int? = null,
-    @SerialName("is_active")
-    val isActive: Boolean? = null,
+    @SerialName("is_active") val isActive: Boolean? = null,
     val name: String? = null
 )

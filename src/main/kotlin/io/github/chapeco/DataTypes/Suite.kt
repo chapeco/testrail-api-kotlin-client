@@ -8,17 +8,12 @@ import kotlinx.serialization.Serializable
 data class Suite
 (
     //GET
-    @SerialName("completed_on")
-    val completedOn: Timestamp? = null,
+    @SerialName("completed_on") val completedOn: Timestamp? = null,
     val id: Int? = null,
-    @SerialName("is_baseline")
-    val isBaseline: Boolean? = null,
-    @SerialName("is_completed")
-    val isCompleted: Boolean? = null,
-    @SerialName("is_master")
-    val isMaster: Boolean? = null,
-    @SerialName("project_id")
-    val projectId: Int? = null,
+    @SerialName("is_baseline") val isBaseline: Boolean? = null,
+    @SerialName("is_completed") val isCompleted: Boolean? = null,
+    @SerialName("is_master") val isMaster: Boolean? = null,
+    @SerialName("project_id") val projectId: Int? = null,
     val url: String? = null,
 
     //ADD/UPDATE

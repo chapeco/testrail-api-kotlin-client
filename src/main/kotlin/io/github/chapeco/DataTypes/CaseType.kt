@@ -8,7 +8,6 @@ data class CaseType
 (
     //GET
     val id: Int? = null,
-    @SerialName("is_default")
-    val isDefault: Boolean? = null,
+    @SerialName("is_default") val isDefault: Boolean? = null,
     val name: String? = null
 )
