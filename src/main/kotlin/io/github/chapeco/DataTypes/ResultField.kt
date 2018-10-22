@@ -1,5 +1,8 @@
 package io.github.chapeco.DataTypes
 
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+
 data class ResultField
 (
     val configs: Array<Configuration>? = null,
