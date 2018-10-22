@@ -1,20 +1,27 @@
 package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timestamp
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Project
 (
-    //Read Only
+    //GET
     val id: Int? = null,
+    @SerialName("completed_on")
     val completedOn: Timestamp? = null,
     val url: String? = null,
 
-    //Read/Write
-    var isCompleted: Boolean? = null,
+    //ADD/UPDATE
     var name: String? = null,
     var announcement: String? = null,
+    @SerialName("show_announcement")
     var showAnnouncement: Boolean? = null,
-    var suiteMode: Int? = null
+    @SerialName("suite_mode")
+    var suiteMode: Int? = null,
+
+    //UPDATE
+    @SerialName("is_completed")
+    var isCompleted: Boolean? = null
 )
-{
-}

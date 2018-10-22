@@ -1,3 +1,13 @@
 package io.github.chapeco.DataTypes
 
-data class Template(){}
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Template
+(
+    val id: Int? = null,
+    @SerialName("is_default")
+    val isDefault: Boolean? = null,
+    val name: String? = null
+)
