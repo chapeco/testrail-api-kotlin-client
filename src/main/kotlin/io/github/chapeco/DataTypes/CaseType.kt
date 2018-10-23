@@ -15,6 +15,7 @@ data class CaseType
     //TODO
     fun getCaseTypes(): Array<CaseType>
     {
+        val endpoint = "get_case_types"
         return Array<CaseType>(0) {CaseType()}
     }
 }

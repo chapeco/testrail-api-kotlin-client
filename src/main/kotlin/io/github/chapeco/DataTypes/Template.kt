@@ -14,6 +14,7 @@ data class Template
     //TODO
     fun getTemplates(projectId: Int): Array<Template>
     {
+        val endpoint = "get_templates/"
         return Array<Template>(0) {Template()}
     }
 }

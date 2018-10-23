@@ -17,6 +17,7 @@ data class Priority
     //TODO
     fun getPriorities(): Array<Priority>
     {
+        val endpoint = "get_priorities"
         return Array<Priority>(0) {Priority()}
     }
 }

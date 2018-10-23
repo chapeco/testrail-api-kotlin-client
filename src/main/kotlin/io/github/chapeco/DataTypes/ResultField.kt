@@ -20,6 +20,7 @@ data class ResultField
     //TODO
     fun getResultFields(): Array<ResultField>
     {
+        val endpoint = "get_result_fields"
         return Array<ResultField>(0) {ResultField()}
     }
 }

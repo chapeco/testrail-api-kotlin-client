@@ -17,36 +17,37 @@ data class Configuration
     //TODO
     fun getConfigs(projectId: Int): Array<Configuration>
     {
+        val endpoint = "get_configs/"
         return Array<Configuration>(0) {Configuration()}
     }
 
     fun addConfigGroup(projectId: Int)
     {
-
+        val endpoint = "add_config_group/"
     }
 
     fun addConfig(configGroupId: Int)
     {
-
+        val endpoint = "add_config/"
     }
 
     fun updateConfigGroup(configGroupId: Int)
     {
-
+        val endpoint = "update_config_group/"
     }
 
     fun updateConfig(configId: Int)
     {
-
+        val endpoint = "update_config/"
     }
 
     fun deleteConfigGroup(configGroupId: Int)
     {
-
+        val endpoint = "delete_config_group/"
     }
 
     fun deleteConfig(configId: Int)
     {
-
+        val endpoint = "delete_config/"
     }
 }

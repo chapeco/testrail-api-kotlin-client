@@ -25,26 +25,30 @@ data class Project
     //TODO
     fun getProject(projectId: Int): Project
     {
+        val endpoint = "get_project/"
         return Project()
     }
 
     fun getProjects(): Array<Project>
     {
+        val endpoint = "get_projects"
         return Array<Project>(0) {Project()}
     }
 
     fun addProject(): Project
     {
+        val endpoint = "add_project"
         return Project()
     }
 
     fun updateProject(projectId: Int): Project
     {
+        val endpoint = "update_project/"
         return Project()
     }
 
     fun deleteProject(projectId: Int)
     {
-
+        val endpoint = "delete_project/"
     }
 }

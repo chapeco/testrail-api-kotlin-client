@@ -30,26 +30,30 @@ data class Milestone
     //TODO
     fun getMilestone(milestoneId: Int): Milestone
     {
+        val endpoint = "get_milestone/"
         return Milestone()
     }
 
     fun getMilestones(projectId: Int): Array<Milestone>
     {
+        val endpoint = "get_milestones/"
         return Array<Milestone>(0) {Milestone()}
     }
 
     fun addMilestone(projectId: Int): Milestone
     {
+        val endpoint = "add_milestone/"
         return Milestone()
     }
 
     fun updateMilestone(milestoneId: Int): Milestone
     {
+        val endpoint = "update_milestone/"
         return Milestone()
     }
 
     fun deleteMilestone(milestoneId: Int)
     {
-
+        val endpoint = "delete_milestone/"
     }
 }

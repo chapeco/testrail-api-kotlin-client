@@ -19,26 +19,31 @@ data class Section
     //TODO
     fun getSection(sectionId: Int): Section
     {
+        val endpoint = "get_section/"
         return Section()
     }
 
     fun getSections(projectId: Int, suiteId: Int): Array<Section>
     {
+        val endpoint = "get_sections/"
         return Array<Section>(0) {Section()}
     }
 
     fun addSection(projectId: Int): Section
     {
+        val endpoint = "add_section/"
         return Section()
     }
 
     fun updateSection(sectionId: Int): Section
     {
+        val endpoint = "update_section/"
         return Section()
     }
 
     fun deleteSection(sectionId: Int)
     {
+        val endpoint = "delete_section/"
 
     }
 }

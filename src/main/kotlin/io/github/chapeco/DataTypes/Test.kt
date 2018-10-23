@@ -24,11 +24,13 @@ data class Test
     //TODO
     fun getTest(testId: Int): Test
     {
+        val endpoint = "get_test/"
         return Test()
     }
 
     fun getTests(runId: Int): Array<Test>
     {
+        val endpoint = "get_tests/"
         return Array<Test>(0) {Test()}
     }
 }

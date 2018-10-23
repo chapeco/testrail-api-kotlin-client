@@ -15,16 +15,19 @@ data class User
     //TODO
     fun getUser(userId: Int): User
     {
+        val endpoint = "get_user/"
         return User()
     }
 
     fun getUserByEmail(email: String): User
     {
+        val endpoint = "get_user_by_email"
         return User()
     }
 
     fun getUsers(): Array<User>
     {
+        val endpoint = "get_users"
         return Array<User>(0) {User()}
     }
 }
