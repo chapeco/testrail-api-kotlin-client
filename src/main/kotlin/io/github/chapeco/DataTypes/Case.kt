@@ -33,30 +33,33 @@ data class Case
     //TODO
     fun getCase(caseId: Int): Case
     {
-        val endpoint = "get_case/"
+        val endpoint = "get_case/$caseId"
         return Case()
     }
 
-    fun getCases(projectId: Int, suiteId: Int, sectionId: Int): Array<Case>
+    fun getCases(projectId: Int, suiteId: Int? = -1, sectionId: Int? = -1): Array<Case>
     {
-        val endpoint = "get_cases/"
+        val suiteIdParam = if(suiteId == -1) "" else "&suite_id=$suiteId"
+        val sectionIdParam = if(sectionId == -1) "" else "&section_id=$sectionId"
+        val endpoint = "get_cases/$projectId$suiteIdParam$sectionIdParam"
+
         return Array<Case>(0) {Case()}
     }
 
     fun addCase(sectionId: Int): Case
     {
-        val endpoint = "add_case/"
+        val endpoint = "add_case/$sectionId"
         return Case()
     }
 
     fun updateCase(caseId: Int): Case
     {
-        val endpoint = "update_case/"
+        val endpoint = "update_case/$caseId"
         return Case()
     }
 
     fun deleteCase(caseId: Int)
     {
-        val endpoint = "delete_case/"
+        val endpoint = "delete_case/$caseId"
     }
 }
