@@ -37,4 +37,35 @@ data class Run
     @SerialName("include_all") var includeAll: Boolean? = null,
     @SerialName("case_ids") var caseIds: Array<Int>? = null
 )
-{}
+{
+    //TODO
+    fun getRun(runId: Int): Run
+    {
+        return Run()
+    }
+
+    fun getRuns(projectId: Int): Array<Run>
+    {
+        return Array<Run>(0) {Run()}
+    }
+
+    fun addRun(projectId: Int): Run
+    {
+        return Run()
+    }
+
+    fun updateRun(runId: Int): Run
+    {
+        return Run()
+    }
+
+    fun closeRun(runId: Int): Run
+    {
+        return Run()
+    }
+
+    fun deleteRun(runId: Int)
+    {
+
+    }
+}

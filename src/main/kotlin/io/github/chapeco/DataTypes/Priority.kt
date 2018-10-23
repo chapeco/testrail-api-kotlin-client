@@ -13,3 +13,10 @@ data class Priority
     val priority: Int? = null,
     @SerialName("short_name") val shortName: String? = null
 )
+{
+    //TODO
+    fun getPriorities(): Array<Priority>
+    {
+        return Array<Priority>(0) {Priority()}
+    }
+}

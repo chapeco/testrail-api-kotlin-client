@@ -20,4 +20,30 @@ data class Suite
     var name: String? = null,
     var description: String? = null
 )
-{}
+{
+    //TODO
+    fun getSuite(suiteId: Int): Suite
+    {
+        return Suite()
+    }
+
+    fun getSuites(projectId: Int): Array<Suite>
+    {
+        return Array<Suite>(0) {Suite()}
+    }
+
+    fun addSuite(projectId: Int): Suite
+    {
+        return Suite()
+    }
+
+    fun updateSuite(suiteId: Int): Suite
+    {
+        return Suite()
+    }
+
+    fun deleteSuite(suiteId: Int)
+    {
+
+    }
+}

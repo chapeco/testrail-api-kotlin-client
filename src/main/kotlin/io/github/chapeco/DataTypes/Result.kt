@@ -22,3 +22,40 @@ data class Result
     var defects: String? = null,
     @SerialName("assignedto_id") var assignedToId: Int? = null
 )
+{
+    //TODO
+    fun getResults(testId: Int): Array<Result>
+    {
+        return Array<Result>(0) {Result()}
+    }
+
+    fun getResultsForCase(runId: Int, caseId: Int): Array<Result>
+    {
+        return Array<Result>(0) {Result()}
+    }
+
+    fun getResultsForRun(runId: Int): Array<Result>
+    {
+        return Array<Result>(0) {Result()}
+    }
+
+    fun addResult(testId: Int): Result
+    {
+        return Result()
+    }
+
+    fun addResultForCase(runId: Int, caseId: Int): Result
+    {
+        return Result()
+    }
+
+    fun addResults(runId: Int): Array<Result>
+    {
+        return Array<Result>(0) {Result()}
+    }
+
+    fun addResultsForCases(runId: Int): Array<Result>
+    {
+        return Array<Result>(0) {Result()}
+    }
+}

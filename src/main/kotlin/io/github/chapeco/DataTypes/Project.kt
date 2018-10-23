@@ -21,3 +21,30 @@ data class Project
     //UPDATE
     @SerialName("is_completed") var isCompleted: Boolean? = null
 )
+{
+    //TODO
+    fun getProject(projectId: Int): Project
+    {
+        return Project()
+    }
+
+    fun getProjects(): Array<Project>
+    {
+        return Array<Project>(0) {Project()}
+    }
+
+    fun addProject(): Project
+    {
+        return Project()
+    }
+
+    fun updateProject(projectId: Int): Project
+    {
+        return Project()
+    }
+
+    fun deleteProject(projectId: Int)
+    {
+
+    }
+}

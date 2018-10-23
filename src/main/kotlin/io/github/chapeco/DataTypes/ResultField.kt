@@ -16,3 +16,10 @@ data class ResultField
     @SerialName("system_name") val systemName: String? = null,
     @SerialName("type_id") val typeId: Int? = null
 )
+{
+    //TODO
+    fun getResultFields(): Array<ResultField>
+    {
+        return Array<ResultField>(0) {ResultField()}
+    }
+}

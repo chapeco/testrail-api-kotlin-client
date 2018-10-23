@@ -11,3 +11,10 @@ data class CaseType
     @SerialName("is_default") val isDefault: Boolean? = null,
     val name: String? = null
 )
+{
+    //TODO
+    fun getCaseTypes(): Array<CaseType>
+    {
+        return Array<CaseType>(0) {CaseType()}
+    }
+}

@@ -29,3 +29,30 @@ data class Case
     @SerialName("milestone_id") var milestoneId: Int? = null,
     var refs: String? = null
 )
+{
+    //TODO
+    fun getCase(caseId: Int): Case
+    {
+        return Case()
+    }
+
+    fun getCases(projectId: Int, suiteId: Int, sectionId: Int): Array<Case>
+    {
+        return Array<Case>(0) {Case()}
+    }
+
+    fun addCase(sectionId: Int): Case
+    {
+        return Case()
+    }
+
+    fun updateCase(caseId: Int): Case
+    {
+        return Case()
+    }
+
+    fun deleteCase(caseId: Int)
+    {
+
+    }
+}

@@ -25,27 +25,39 @@ data class Plan
     val url: String? = null,
 
     //ADD/UPDATE
-    var name: String,
+    var name: String? = null,
     var description: String? = null,
     @SerialName("milestone_id") var milestoneId: Int? = null,
     var entries: Array<PlanEntry>? = null
 )
 {
-    @Serializable
-    data class PlanEntry
-    (
-        //ADD
-        @SerialName("suite_id") var suiteId: Int? = null,
-        @SerialName("config_ids") var configIds: Array<Int>? = null,
-        var runs: Array<Run>? = null,
+    //TODO
+    fun getPlan(planId: Int): Plan
+    {
+        return Plan()
+    }
 
-        //ADD/UPDATE
-        var name: String? = null,
-        var description: String? = null,
-        @SerialName("assignedto_id") var assignedToId: Int? = null,
-        @SerialName("include_all") var includeAll: Boolean? = null,
-        @SerialName("case_ids") var caseIds: Array<Int>? = null
-    )
+    fun getPlans(projectId: Int): Array<Plan>
+    {
+        return Array<Plan>(0) {Plan()}
+    }
+
+    fun addPlan(projectId: Int): Plan
+    {
+        return Plan()
+    }
+
+    fun updatePlan(planId: Int): Plan
+    {
+        return Plan()
+    }
+
+    fun closePlan(planId: Int): Plan
+    {
+        return Plan()
+    }
+
+    fun deletePlan(planId: Int)
     {
 
     }

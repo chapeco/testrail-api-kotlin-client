@@ -15,3 +15,30 @@ data class Section
     @SerialName("parent_id") var parentId: Int? = null,
     var name: String? = null
 )
+{
+    //TODO
+    fun getSection(sectionId: Int): Section
+    {
+        return Section()
+    }
+
+    fun getSections(projectId: Int, suiteId: Int): Array<Section>
+    {
+        return Array<Section>(0) {Section()}
+    }
+
+    fun addSection(projectId: Int): Section
+    {
+        return Section()
+    }
+
+    fun updateSection(sectionId: Int): Section
+    {
+        return Section()
+    }
+
+    fun deleteSection(sectionId: Int)
+    {
+
+    }
+}

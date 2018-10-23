@@ -30,5 +30,14 @@ data class CaseField
     var configs: Array<Configuration>? = null
 )
 {
+    //TODO
+    fun getCaseFields(): Array<CaseField>
+    {
+        return Array<CaseField>(0) {CaseField()}
+    }
 
+    fun addCaseField(): CaseField
+    {
+        return CaseField()
+    }
 }

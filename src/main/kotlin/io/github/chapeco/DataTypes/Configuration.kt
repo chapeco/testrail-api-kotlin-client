@@ -14,5 +14,39 @@ data class Configuration
     var name: String? = null
 )
 {
+    //TODO
+    fun getConfigs(projectId: Int): Array<Configuration>
+    {
+        return Array<Configuration>(0) {Configuration()}
+    }
 
+    fun addConfigGroup(projectId: Int)
+    {
+
+    }
+
+    fun addConfig(configGroupId: Int)
+    {
+
+    }
+
+    fun updateConfigGroup(configGroupId: Int)
+    {
+
+    }
+
+    fun updateConfig(configId: Int)
+    {
+
+    }
+
+    fun deleteConfigGroup(configGroupId: Int)
+    {
+
+    }
+
+    fun deleteConfig(configId: Int)
+    {
+
+    }
 }
