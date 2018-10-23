@@ -20,3 +20,15 @@ data class Test
     val title: String? = null,
     @SerialName("type_id") val typeId: Int? = null
 )
+{
+    //TODO
+    fun getTest(testId: Int): Test
+    {
+        return Test()
+    }
+
+    fun getTests(runId: Int): Array<Test>
+    {
+        return Array<Test>(0) {Test()}
+    }
+}

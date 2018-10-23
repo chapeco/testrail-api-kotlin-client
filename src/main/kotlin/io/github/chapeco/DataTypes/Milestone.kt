@@ -25,5 +25,31 @@ data class Milestone
     //UPDATE
     @SerialName("is_completed") var isCompleted: Boolean? = null,
     @SerialName("is_started") var isStarted: Boolean? = null
-
 )
+{
+    //TODO
+    fun getMilestone(milestoneId: Int): Milestone
+    {
+        return Milestone()
+    }
+
+    fun getMilestones(projectId: Int): Array<Milestone>
+    {
+        return Array<Milestone>(0) {Milestone()}
+    }
+
+    fun addMilestone(projectId: Int): Milestone
+    {
+        return Milestone()
+    }
+
+    fun updateMilestone(milestoneId: Int): Milestone
+    {
+        return Milestone()
+    }
+
+    fun deleteMilestone(milestoneId: Int)
+    {
+
+    }
+}

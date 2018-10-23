@@ -10,3 +10,10 @@ data class Template
     @SerialName("is_default") val isDefault: Boolean? = null,
     val name: String? = null
 )
+{
+    //TODO
+    fun getTemplates(projectId: Int): Array<Template>
+    {
+        return Array<Template>(0) {Template()}
+    }
+}

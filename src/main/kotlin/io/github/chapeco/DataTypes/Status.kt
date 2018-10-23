@@ -17,3 +17,10 @@ data class Status
     val label: String? = null,
     val name: String? = null
 )
+{
+    //TODO
+    fun getStatuses(): Array<Status>
+    {
+        return Array<Status>(0) {Status()}
+    }
+}
