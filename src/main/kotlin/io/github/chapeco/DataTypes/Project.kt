@@ -29,9 +29,12 @@ data class Project
         return Project()
     }
 
-    fun getProjects(): Array<Project>
+    fun getProjects(isCompleted: Boolean? = null): Array<Project>
     {
-        val endpoint = "get_projects"
+        val endpoint = StringBuilder()
+        endpoint.append("get_projects")
+        if(isCompleted != null) endpoint.append("&is_completed=$isCompleted")
+
         return Array<Project>(0) {Project()}
     }
 

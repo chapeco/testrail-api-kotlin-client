@@ -45,9 +45,30 @@ data class Run
         return Run()
     }
 
-    fun getRuns(projectId: Int): Array<Run>
+    fun getRuns
+    (
+        projectId: Int,
+        createdAfter: Timestamp? = null,
+        createdBefore: Timestamp? = null,
+        createdBy: Array<Int>? = null,
+        isCompleted: Boolean? = null,
+        limit: Int? = null,
+        offset: Int? = null,
+        milestoneId: Array<Int>? = null,
+        suiteId: Array<Int>? = null
+    ): Array<Run>
     {
-        val endpoint = "get_runs/$projectId"
+        val endpoint = StringBuilder()
+        endpoint.append("get_runs/$projectId")
+        if(createdAfter != null) endpoint.append("&created_after=$createdAfter")
+        if(createdBefore != null) endpoint.append("&created_before=$createdBefore")
+        if(createdBy != null) endpoint.append("&created_by=$createdBy")
+        if(isCompleted != null) endpoint.append("&is_completed=$isCompleted")
+        if(limit != null) endpoint.append("&limit=$limit")
+        if(offset != null) endpoint.append("&offset=$offset")
+        if(milestoneId != null) endpoint.append("&milestone_id=$milestoneId")
+        if(suiteId != null) endpoint.append("&suite_id=$suiteId")
+
         return Array<Run>(0) {Run()}
     }
 

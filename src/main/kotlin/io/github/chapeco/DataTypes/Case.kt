@@ -40,8 +40,8 @@ data class Case
     fun getCases
     (
         projectId: Int,
-        suiteId: Int? = -1,
-        sectionId: Int? = -1,
+        suiteId: Int? = null,
+        sectionId: Int? = null,
         createdAfter: Timestamp? = null,
         createdBefore: Timestamp? = null,
         createdBy: Array<Int>? = null,
@@ -54,31 +54,20 @@ data class Case
         updatedBy: Array<Int>? = null
     ): Array<Case>
     {
-        val suiteIdParam = if(suiteId == -1) "" else "&suite_id=$suiteId"
-        val sectionIdParam = if(sectionId == -1) "" else "&section_id=$sectionId"
-        val createdAfterParam = if(createdAfter == null) "" else "&created_after=$createdAfter"
-        val createdBeforeParam = if(createdBefore == null) "" else "&created_before=$createdBefore"
-        val createdByParam = if(createdBy == null) "" else "&created_by=$createdBy"
-        val milestoneIdParam = if(milestoneId == null) "" else "&milestone_id=$milestoneId"
-        val priorityIdParam = if(priorityId == null) "" else "&priority_id=$priorityId"
-        val templateIdParam = if(templateId == null) "" else "&template_id=$templateId"
-        val typeIdParam = if(typeId == null) "" else "&type_id=$typeId"
-        val updatedAfterParam = if(updatedAfter == null) "" else "&updated_after=$updatedAfter"
-        val updatedBeforeParam = if(updatedBefore == null) "" else "&updated_before=$updatedBefore"
-        val updatedByParam = if(updatedBy == null) "" else "&updated_by=$updatedBy"
-        val endpoint = "get_cases/$projectId" +
-                suiteIdParam +
-                sectionIdParam +
-                createdAfterParam +
-                createdBeforeParam +
-                createdByParam +
-                milestoneIdParam +
-                priorityIdParam +
-                templateIdParam +
-                typeIdParam +
-                updatedAfterParam +
-                updatedBeforeParam +
-                updatedByParam
+        val endpoint = StringBuilder()
+        endpoint.append("get_cases/$projectId")
+        if(suiteId != null) endpoint.append("&suite_id=$suiteId")
+        if(sectionId != null) endpoint.append("&section_id=$sectionId")
+        if(createdAfter != null) endpoint.append("&created_after=$createdAfter")
+        if(createdBefore != null) endpoint.append("&created_before=$createdBefore")
+        if(createdBy != null) endpoint.append("&created_by=$createdBy")
+        if(milestoneId != null) endpoint.append("&milestone_id=$milestoneId")
+        if(priorityId != null) endpoint.append("&priority_id=$priorityId")
+        if(templateId != null) endpoint.append("&template_id=$templateId")
+        if(typeId != null) endpoint.append("&type_id=$typeId")
+        if(updatedAfter != null) endpoint.append("&updated_after=$updatedAfter")
+        if(updatedBefore != null) endpoint.append("&updated_before=$updatedBefore")
+        if(updatedBy != null) endpoint.append("&updated_by=$updatedBy")
 
         return Array<Case>(0) {Case()}
     }
