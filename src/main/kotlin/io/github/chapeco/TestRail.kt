@@ -10,6 +10,7 @@ data class TestRail
     val password: String
 )
 {
+    private val indexBase = "index.php?/api/v2/"
     init {
         FuelManager.instance.basePath = endpoint
         "/get".httpGet().responseString { request, response, result ->  

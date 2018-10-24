@@ -21,6 +21,7 @@ data class Status
     //TODO
     fun getStatuses(): Array<Status>
     {
+        val endpoint = "get_statuses"
         return Array<Status>(0) {Status()}
     }
 }

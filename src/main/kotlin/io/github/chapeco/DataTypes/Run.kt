@@ -41,31 +41,37 @@ data class Run
     //TODO
     fun getRun(runId: Int): Run
     {
+        val endpoint = "get_run/$runId"
         return Run()
     }
 
     fun getRuns(projectId: Int): Array<Run>
     {
+        val endpoint = "get_runs/$projectId"
         return Array<Run>(0) {Run()}
     }
 
     fun addRun(projectId: Int): Run
     {
+        val endpoint = "add_run/$projectId"
         return Run()
     }
 
     fun updateRun(runId: Int): Run
     {
+        val endpoint = "update_run/$runId"
         return Run()
     }
 
     fun closeRun(runId: Int): Run
     {
+        val endpoint = "close_run/$runId"
         return Run()
     }
 
     fun deleteRun(runId: Int)
     {
+        val endpoint = "delete_run/$runId"
 
     }
 }

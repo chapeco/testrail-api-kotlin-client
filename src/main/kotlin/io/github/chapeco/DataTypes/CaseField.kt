@@ -33,11 +33,13 @@ data class CaseField
     //TODO
     fun getCaseFields(): Array<CaseField>
     {
+        val endpoint = "get_case_fields/"
         return Array<CaseField>(0) {CaseField()}
     }
 
     fun addCaseField(): CaseField
     {
+        val endpoint = "add_case_field/"
         return CaseField()
     }
 }

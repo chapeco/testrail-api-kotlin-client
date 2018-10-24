@@ -34,31 +34,36 @@ data class Plan
     //TODO
     fun getPlan(planId: Int): Plan
     {
+        val endpoint = "get_plan/$planId"
         return Plan()
     }
 
     fun getPlans(projectId: Int): Array<Plan>
     {
+        val endpoint = "get_plans/$projectId"
         return Array<Plan>(0) {Plan()}
     }
 
     fun addPlan(projectId: Int): Plan
     {
+        val endpoint = "add_plan/$projectId"
         return Plan()
     }
 
     fun updatePlan(planId: Int): Plan
     {
+        val endpoint = "update_plan/$planId"
         return Plan()
     }
 
     fun closePlan(planId: Int): Plan
     {
+        val endpoint = "close_plan/$planId"
         return Plan()
     }
 
     fun deletePlan(planId: Int)
     {
-
+        val endpoint = "delete_plan/$planId"
     }
 }
