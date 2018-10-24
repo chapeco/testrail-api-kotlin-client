@@ -26,43 +26,43 @@ data class Result
     //TODO
     fun getResults(testId: Int): Array<Result>
     {
-        val endpoint = "get_results/"
+        val endpoint = "get_results/$testId"
         return Array<Result>(0) {Result()}
     }
 
     fun getResultsForCase(runId: Int, caseId: Int): Array<Result>
     {
-        val endpoint = "get_results_for_case/"
+        val endpoint = "get_results_for_case/$runId/$caseId"
         return Array<Result>(0) {Result()}
     }
 
     fun getResultsForRun(runId: Int): Array<Result>
     {
-        val endpoint = "get_results_for_run/"
+        val endpoint = "get_results_for_run/$runId"
         return Array<Result>(0) {Result()}
     }
 
     fun addResult(testId: Int): Result
     {
-        val endpoint = "add_result/"
+        val endpoint = "add_result/$testId"
         return Result()
     }
 
     fun addResultForCase(runId: Int, caseId: Int): Result
     {
-        val endpoint = "add_result_for_case/"
+        val endpoint = "add_result_for_case/$runId/$caseId"
         return Result()
     }
 
     fun addResults(runId: Int): Array<Result>
     {
-        val endpoint = "add_results/"
+        val endpoint = "add_results/$runId"
         return Array<Result>(0) {Result()}
     }
 
     fun addResultsForCases(runId: Int): Array<Result>
     {
-        val endpoint = "add_results_for_cases/"
+        val endpoint = "add_results_for_cases/$runId"
         return Array<Result>(0) {Result()}
     }
 }

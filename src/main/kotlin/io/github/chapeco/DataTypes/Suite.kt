@@ -24,31 +24,31 @@ data class Suite
     //TODO
     fun getSuite(suiteId: Int): Suite
     {
-        val endpoint = "get_suite/"
+        val endpoint = "get_suite/$suiteId"
         return Suite()
     }
 
     fun getSuites(projectId: Int): Array<Suite>
     {
-        val endpoint = "get_suites/"
+        val endpoint = "get_suites/$projectId"
         return Array<Suite>(0) {Suite()}
     }
 
     fun addSuite(projectId: Int): Suite
     {
-        val endpoint = "add_suite/"
+        val endpoint = "add_suite/$projectId"
         return Suite()
     }
 
     fun updateSuite(suiteId: Int): Suite
     {
-        val endpoint = "update_suite/"
+        val endpoint = "update_suite/$suiteId"
         return Suite()
     }
 
     fun deleteSuite(suiteId: Int)
     {
-        val endpoint = "delete_suite/"
+        val endpoint = "delete_suite/$suiteId"
 
     }
 }

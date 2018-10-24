@@ -22,18 +22,18 @@ data class PlanEntry
     //TODO
     fun addPlanEntry(planId: Int): Plan
     {
-        val endpoint = "add_plan_entry/"
+        val endpoint = "add_plan_entry/$planId"
         return Plan()
     }
 
     fun updatePlanEntry(planId: Int, entryId: Int): Plan
     {
-        val endpoint = "update_plan_entry/"
+        val endpoint = "update_plan_entry/$planId/$entryId"
         return Plan()
     }
 
     fun deletePlanEntry(planId: Int, entryId: Int)
     {
-        val endpoint = "delete_plan_entry/"
+        val endpoint = "delete_plan_entry/$planId/$entryId"
     }
 }
