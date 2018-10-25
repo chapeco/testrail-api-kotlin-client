@@ -16,10 +16,14 @@ data class Timespan
 
     fun getTimespan(): String{
         var timespanString: String = ""
-        if (days > 0) timespanString = timespanString + daysString + days
-        if (hours > 0) timespanString = timespanString + hoursString + hours
-        if (minutes > 0) timespanString = timespanString + minutesString + minutes
-        if (seconds > 0) timespanString = timespanString + secondsString + seconds
+        if (days > 0) timespanString = timespanString + days + daysString
+        if (hours > 0) timespanString = timespanString + hours + hoursString
+        if (minutes > 0) timespanString = timespanString + minutes + minutesString
+        if (seconds > 0) timespanString = timespanString + seconds + secondsString
         return timespanString
+    }
+
+    override fun toString(): String {
+        return getTimespan()
     }
 }
