@@ -1,6 +1,18 @@
 package io.github.chapeco.DataTypes
 
-class TemplateTest()
-{
+import org.junit.jupiter.api.Test
 
+class TemplateTest
+{
+    @Test
+    fun instantiateTemplateTest()
+    {
+
+    }
+
+    @Test
+    fun getTemplatesTest()
+    {
+
+    }
 }

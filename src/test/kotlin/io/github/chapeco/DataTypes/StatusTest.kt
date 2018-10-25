@@ -1,6 +1,18 @@
 package io.github.chapeco.DataTypes
 
-class StatusTest()
-{
+import org.junit.jupiter.api.Test
 
+class StatusTest
+{
+    @Test
+    fun instantiateStatusTest()
+    {
+
+    }
+
+    @Test
+    fun getStatusesTest()
+    {
+
+    }
 }

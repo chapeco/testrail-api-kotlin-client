@@ -1,6 +1,18 @@
 package io.github.chapeco.DataTypes
 
-class ResultFieldTest()
-{
+import org.junit.jupiter.api.Test
 
+class ResultFieldTest
+{
+    @Test
+    fun instantiateResultFieldTest()
+    {
+
+    }
+
+    @Test
+    fun getResultFieldsTest()
+    {
+
+    }
 }

@@ -1,6 +1,18 @@
 package io.github.chapeco.DataTypes
 
-class CaseTypeTest()
-{
+import org.junit.jupiter.api.Test
 
+class CaseTypeTest
+{
+    @Test
+    fun instantiateCaseTypeTest()
+    {
+
+    }
+
+    @Test
+    fun getCaseTypesTest()
+    {
+
+    }
 }
