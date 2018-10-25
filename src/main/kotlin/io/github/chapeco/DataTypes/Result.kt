@@ -24,21 +24,61 @@ data class Result
 )
 {
     //TODO
-    fun getResults(testId: Int): Array<Result>
+    fun getResults
+    (
+        testId: Int,
+        limit: Int? = null,
+        offset: Int? = null,
+        statusId: Array<Int>? = null
+    ): Array<Result>
     {
-        val endpoint = "get_results/$testId"
+        val endpoint = StringBuilder()
+        endpoint.append("get_results/$testId")
+        if(limit != null) endpoint.append("&limit=$limit")
+        if(offset != null) endpoint.append("&offset=$offset")
+        if(statusId != null) endpoint.append("&status_id=$statusId")
+
         return Array<Result>(0) {Result()}
     }
 
-    fun getResultsForCase(runId: Int, caseId: Int): Array<Result>
+    fun getResultsForCase
+    (
+        runId: Int,
+        caseId: Int,
+        limit: Int? = null,
+        offset: Int? = null,
+        statusId: Int? = null
+    ): Array<Result>
     {
-        val endpoint = "get_results_for_case/$runId/$caseId"
+        val endpoint = StringBuilder()
+        endpoint.append("get_results_for_case/$runId/$caseId")
+        if(limit != null) endpoint.append("&limit=$limit")
+        if(offset != null) endpoint.append("&offset=$offset")
+        if(statusId != null) endpoint.append("&status_id=$statusId")
+
         return Array<Result>(0) {Result()}
     }
 
-    fun getResultsForRun(runId: Int): Array<Result>
+    fun getResultsForRun
+    (
+        runId: Int,
+        createdAfter: Timestamp? = null,
+        createdBefore: Timestamp? = null,
+        createdBy: Array<Int>? = null,
+        limit: Int? = null,
+        offset: Int? = null,
+        statusId: Array<Int>? = null
+    ): Array<Result>
     {
-        val endpoint = "get_results_for_run/$runId"
+        val endpoint = StringBuilder()
+        endpoint.append("get_results_for_run/$runId")
+        if(createdAfter != null) endpoint.append("&created_after=$createdAfter")
+        if(createdBefore != null) endpoint.append("&created_before=$createdBefore")
+        if(createdBy != null) endpoint.append("&created_by=$createdBy")
+        if(limit != null) endpoint.append("&limit=$limit")
+        if(offset != null) endpoint.append("&offset=$offset")
+        if(statusId != null) endpoint.append("&status_id=$statusId")
+
         return Array<Result>(0) {Result()}
     }
 

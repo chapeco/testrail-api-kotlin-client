@@ -28,9 +28,12 @@ data class Test
         return Test()
     }
 
-    fun getTests(runId: Int): Array<Test>
+    fun getTests(runId: Int, statusId: Int? = null): Array<Test>
     {
-        val endpoint = "get_tests/$runId"
+        val endpoint = StringBuilder()
+        endpoint.append("get_tests/$runId")
+        if(statusId != null) endpoint.append("&status_id=$statusId")
+
         return Array<Test>(0) {Test()}
     }
 }

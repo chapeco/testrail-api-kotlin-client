@@ -1,5 +1,6 @@
 package io.github.chapeco
 
+import io.github.chapeco.Utilities.Request
 import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.httpGet
 
@@ -21,5 +22,10 @@ data class TestRail
 
             }
         }
+    }
+
+    fun foo()
+    {
+        Request().Get("/get")
     }
 }

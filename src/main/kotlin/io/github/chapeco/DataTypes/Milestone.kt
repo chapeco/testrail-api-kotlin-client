@@ -34,9 +34,12 @@ data class Milestone
         return Milestone()
     }
 
-    fun getMilestones(projectId: Int): Array<Milestone>
+    fun getMilestones(projectId: Int, isCompleted: Boolean? = null, isStarted: Boolean? = null): Array<Milestone>
     {
-        val endpoint = "get_milestones/$projectId"
+        val endpoint = StringBuilder()
+        endpoint.append("get_milestones/$projectId")
+        if(isCompleted != null) endpoint.append("&is_completed=$isCompleted")
+        if(isStarted != null) endpoint.append("&is_started=$isStarted")
         return Array<Milestone>(0) {Milestone()}
     }
 

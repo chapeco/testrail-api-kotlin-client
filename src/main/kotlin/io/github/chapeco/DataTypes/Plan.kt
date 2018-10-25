@@ -38,9 +38,27 @@ data class Plan
         return Plan()
     }
 
-    fun getPlans(projectId: Int): Array<Plan>
+    fun getPlans
+    (
+        projectId: Int,
+        createdAfter: Timestamp? = null,
+        createdBefore: Timestamp? = null,
+        createdBy: Array<Int>? = null,
+        isCompleted: Boolean? = null,
+        limit: Int? = null,
+        offset: Int? = null,
+        milestoneId: Array<Int>? = null
+    ): Array<Plan>
     {
-        val endpoint = "get_plans/$projectId"
+        val endpoint = StringBuilder()
+        endpoint.append("get_plans/$projectId")
+        if(createdAfter != null) endpoint.append("&created_after=$createdAfter")
+        if(createdBefore != null) endpoint.append("&created_before=$createdBefore")
+        if(createdBy != null) endpoint.append("&created_by=$createdBy")
+        if(isCompleted != null) endpoint.append("&is_completed=$isCompleted")
+        if(limit != null) endpoint.append("&limit=$limit")
+        if(offset != null) endpoint.append("&offset=$offset")
+        if(milestoneId != null) endpoint.append("&milestone_id=$milestoneId")
         return Array<Plan>(0) {Plan()}
     }
 
