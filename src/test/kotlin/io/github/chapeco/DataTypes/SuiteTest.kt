@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -10,10 +11,30 @@ class SuiteTest
     fun instantiateSuiteTest()
     {
         val expectedSuite = Suite(
-
+                completedOn = Timestamp(
+                        time = 1000
+                ),
+                id = 1,
+                isBaseline = true,
+                isCompleted = false,
+                isMaster = true,
+                projectId = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description"
         )
         val actualSuite = Suite(
-
+                completedOn = Timestamp(
+                        time = 1000
+                ),
+                id = 1,
+                isBaseline = true,
+                isCompleted = false,
+                isMaster = true,
+                projectId = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description"
         )
         Assertions.assertEquals(expectedSuite,actualSuite)
     }
@@ -23,7 +44,17 @@ class SuiteTest
     {
         val expectedSuite: String = ""
         val actualSuite = Suite(
-
+                completedOn = Timestamp(
+                        time = 1000
+                ),
+                id = 1,
+                isBaseline = true,
+                isCompleted = false,
+                isMaster = true,
+                projectId = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description"
         )
         println(JSON.unquoted.stringify(actualSuite))
         Assertions.assertEquals(expectedSuite,JSON.unquoted.stringify(actualSuite))
@@ -33,7 +64,17 @@ class SuiteTest
     fun deserializeSuiteTest()
     {
         val expectedSuite = Suite(
-
+                completedOn = Timestamp(
+                        time = 1000
+                ),
+                id = 1,
+                isBaseline = true,
+                isCompleted = false,
+                isMaster = true,
+                projectId = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description"
         )
         Assertions.assertEquals(expectedSuite,JSON.unquoted.parse<Suite>(""))
     }

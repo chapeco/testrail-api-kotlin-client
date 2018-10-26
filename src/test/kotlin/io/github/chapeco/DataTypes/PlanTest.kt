@@ -20,11 +20,40 @@ class PlanTest
                 createdOn = Timestamp(
                         time = 1000
                 ),
-                
+                failedCount = 1,
+                isCompleted = false,
+                passedCount = 1,
+                projectId = 1,
+                retestCount = 1,
+                untestedCount = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description",
+                milestoneId = 1,
+                entries = Array<PlanEntry>(1) { PlanEntry() }
 
         )
         val actualPlan = Plan(
-
+                assignedToId = 1,
+                blockedCount = 1,
+                completedOn = Timestamp(
+                        time = 1000
+                ),
+                createdBy = 1,
+                createdOn = Timestamp(
+                        time = 1000
+                ),
+                failedCount = 1,
+                isCompleted = false,
+                passedCount = 1,
+                projectId = 1,
+                retestCount = 1,
+                untestedCount = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description",
+                milestoneId = 1,
+                entries = Array<PlanEntry>(1) {PlanEntry()}
         )
         Assertions.assertEquals(expectedPlan,actualPlan)
     }
@@ -34,7 +63,26 @@ class PlanTest
     {
         val expectedPlan: String = ""
         val actualPlan = Plan(
-
+                assignedToId = 1,
+                blockedCount = 1,
+                completedOn = Timestamp(
+                        time = 1000
+                ),
+                createdBy = 1,
+                createdOn = Timestamp(
+                        time = 1000
+                ),
+                failedCount = 1,
+                isCompleted = false,
+                passedCount = 1,
+                projectId = 1,
+                retestCount = 1,
+                untestedCount = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description",
+                milestoneId = 1,
+                entries = Array<PlanEntry>(1) {PlanEntry()}
         )
         println(JSON.unquoted.stringify(actualPlan))
         Assertions.assertEquals(expectedPlan,JSON.unquoted.stringify(actualPlan))
@@ -44,7 +92,26 @@ class PlanTest
     fun deserializePlanTest()
     {
         val expectedPlan = Plan(
-
+                assignedToId = 1,
+                blockedCount = 1,
+                completedOn = Timestamp(
+                        time = 1000
+                ),
+                createdBy = 1,
+                createdOn = Timestamp(
+                        time = 1000
+                ),
+                failedCount = 1,
+                isCompleted = false,
+                passedCount = 1,
+                projectId = 1,
+                retestCount = 1,
+                untestedCount = 1,
+                url = "some url",
+                name = "some name",
+                description = "some description",
+                milestoneId = 1,
+                entries = Array<PlanEntry>(1) {PlanEntry()}
         )
         Assertions.assertEquals(expectedPlan,JSON.unquoted.parse<Plan>(""))
     }
