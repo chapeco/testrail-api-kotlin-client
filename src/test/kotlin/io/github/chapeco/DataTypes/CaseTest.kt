@@ -69,7 +69,8 @@ class CaseTest
     @Test
     fun serializeCaseTest()
     {
-        val expectedCase = Case(
+        val expectedCase: String = "{created_by:1,created_on:null,estimate_forecast:1s,id:1,section_id:1,suite_id:1,updated_by:1,updated_on:2000,title:\"My Expected Case\",template_id:1,type_id:1,priority_id:1,estimate:1s,milestone_id:1,refs:\"My Expected Reference\"}"
+        val actualCase = Case(
                 createdBy = 1,
                 estimateForecast = Timespan(
                         seconds = 1
@@ -91,7 +92,8 @@ class CaseTest
                 milestoneId = 1,
                 refs = "My Expected Reference"
         )
-        println(JSON.unquoted.stringify(expectedCase))
+        println(JSON.unquoted.stringify(actualCase))
+        Assertions.assertEquals(expectedCase,JSON.unquoted.stringify(actualCase))
     }
 
     @Test
@@ -119,7 +121,6 @@ class CaseTest
                 milestoneId = 1,
                 refs = "My Expected Reference"
         )
-        //{created_by:1,created_on:null,estimate_forecast:1s,id:1,section_id:1,suite_id:1,updated_by:1,updated_on:2000,title:"My Expected Case",template_id:1,type_id:1,priority_id:1,estimate:1s,milestone_id:1,refs:"My Expected Reference"}
         Assertions.assertEquals(expectedCase, JSON.unquoted.parse<Case>("{created_by:1,created_on:null,estimate_forecast:1s,id:1,section_id:1,suite_id:1,updated_by:1,updated_on:2000,title:\"My Expected Case\",template_id:1,type_id:1,priority_id:1,estimate:1s,milestone_id:1,refs:\"My Expected Reference\"}"))
     }
 

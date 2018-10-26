@@ -1,6 +1,7 @@
 package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timestamp
+import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -8,11 +9,11 @@ import kotlinx.serialization.Serializable
 data class Milestone
 (
     //GET
-    @SerialName("completed_on") val completedOn: Timestamp? = null,
+    @SerialName("completed_on") var completedOn: Timestamp? = null,
     val id: Int? = null,
     val milestones: Array<Milestone>? = null,
     @SerialName("project_id") val projectId: Int? = null,
-    @SerialName("started_on") val startedOn: Timestamp? = null,
+    @SerialName("started_on") var startedOn: Timestamp? = null,
     val url: String? = null,
 
     //ADD/UPDATE
@@ -27,6 +28,18 @@ data class Milestone
     @SerialName("is_started") var isStarted: Boolean? = null
 )
 {
+    @Optional @SerialName("completed_on") val completedOnActual: Long? = completedOn.toString().toLongOrNull()
+    @Optional @SerialName("started_on") val startedOnActual: Long? = startedOn.toString().toLongOrNull()
+    @Optional @SerialName("due_on") val dueOnActual: Long? = dueOn.toString().toLongOrNull()
+    @Optional @SerialName("start_on") val startOnActual: Long? = startOn.toString().toLongOrNull()
+
+    init {
+        if(completedOn == null) completedOn = Timestamp(completedOnActual)
+        if(startedOn == null) startedOn = Timestamp(startedOnActual)
+        if(dueOn == null) dueOn = Timestamp(dueOnActual)
+        if(startOn == null) startOn = Timestamp(startOnActual)
+    }
+
     //TODO
     fun getMilestone(milestoneId: Int): Milestone
     {

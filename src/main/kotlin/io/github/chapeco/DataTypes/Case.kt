@@ -28,7 +28,7 @@ data class Case
     @Optional @SerialName("created_on") private val createdOnActual: Long? = createdOn.toString().toLongOrNull()
     @Optional @SerialName("updated_on") private val updatedOnActual: Long? = updatedOn.toString().toLongOrNull()
     @Optional @SerialName("estimate_forecast") private val estimateForecastActual: String? = estimateForecast.toString()
-    @Optional @SerialName("estimate") private val estimateActual: String? = null
+    @Optional @SerialName("estimate") private val estimateActual: String? = estimate.toString()
 
     init {
         if(createdOn == null) createdOn = Timestamp(createdOnActual)

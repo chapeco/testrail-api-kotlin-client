@@ -1,26 +1,34 @@
 package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timestamp
+import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class Suite
 (
     //GET
-    @SerialName("completed_on") val completedOn: Timestamp? = null,
-    val id: Int? = null,
-    @SerialName("is_baseline") val isBaseline: Boolean? = null,
-    @SerialName("is_completed") val isCompleted: Boolean? = null,
-    @SerialName("is_master") val isMaster: Boolean? = null,
-    @SerialName("project_id") val projectId: Int? = null,
-    val url: String? = null,
+        @Transient var completedOn: Timestamp? = null,
+        val id: Int? = null,
+        @SerialName("is_baseline") val isBaseline: Boolean? = null,
+        @SerialName("is_completed") val isCompleted: Boolean? = null,
+        @SerialName("is_master") val isMaster: Boolean? = null,
+        @SerialName("project_id") val projectId: Int? = null,
+        val url: String? = null,
 
     //ADD/UPDATE
-    var name: String? = null,
-    var description: String? = null
+        var name: String? = null,
+        var description: String? = null
 )
 {
+    @Optional @SerialName("completed_on") val completedOnActual: Long? = completedOn.toString().toLongOrNull()
+
+    init {
+        if(completedOn == null) completedOn = Timestamp(completedOnActual)
+    }
+
     //TODO
     fun getSuite(suiteId: Int): Suite
     {

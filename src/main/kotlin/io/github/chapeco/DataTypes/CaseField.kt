@@ -11,8 +11,7 @@ data class CaseField
     val id: Int? = null,
     @SerialName("system_name") val systemName: String? = null,
     @SerialName("entity_id") val entityId: Int? = null,
-    @SerialName("type_id")
-    val typeId: Int? = null,
+    @SerialName("type_id") val typeId: Int? = null,
     @SerialName("location_id") val locationId: Int? = null,
     @SerialName("display_order") val displayOrder: Int? = null,
     @SerialName("is_multi") val isMulti: Boolean? = null,
