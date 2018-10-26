@@ -1,15 +1,18 @@
 package io.github.chapeco.Utilities
 
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.Request
+import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.result.Result
 import kotlinx.serialization.json.JSON
 
 class Request()
 {
-    fun Get(endpoint: String): JSON
+    fun Get(endpoint: String): JSON?
     {
-        var returnValue: JSON
-        Fuel.get(endpoint).
-
+        var returnValue: JSON? = null
+        Fuel.get(endpoint)
+        return returnValue
     }
 
     fun Post(endpoint: String, jsonPayload: String): Request

@@ -2,34 +2,41 @@ package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
-import kotlinx.serialization.SerialId
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 
 @Serializable
 data class Case
 (
-    //GET
-    @SerialName("created_by") val createdBy: Int? = null,
-    @SerialName("created_on") val createdOn: Timestamp? = null,
-    @SerialName("estimate_forecast") val estimateForecast: Timespan? = null,
-    val id: Int? = null,
-    @SerialName("section_id") val sectionId: Int? = null,
-    @SerialName("suite_id") val suiteId: Int? = null,
-    @SerialName("updated_by") val updatedBy: Int? = null,
-    @SerialName("updated_on") val updatedOn: Timestamp? = null,
+        @Optional @SerialName("created_by") val createdBy: Int? = null,
+        @Transient var createdOn: Timestamp? = null,
+        @Transient var estimateForecast: Timespan? = null,
+        @Optional val id: Int? = null,
+        @Optional @SerialName("section_id") val sectionId: Int? = null,
+        @Optional @SerialName("suite_id") val suiteId: Int? = null,
+        @Optional @SerialName("updated_by") val updatedBy: Int? = null,
+        @Transient var updatedOn: Timestamp? = null,
 
-    //ADD/UPDATE
-    var title: String? = null,
-    @SerialName("template_id") var templateId: Int? = null,
-    @SerialName("type_id") var typeId: Int? = null,
-    @SerialName("priority_id")
-    var priorityId: Int? = null,
-    var estimate: Timespan? = null,
-    @SerialName("milestone_id") var milestoneId: Int? = null,
-    var refs: String? = null
+        @Optional var title: String? = null,
+        @Optional @SerialName("template_id") var templateId: Int? = null,
+        @Optional @SerialName("type_id") var typeId: Int? = null,
+        @Optional @SerialName("priority_id") var priorityId: Int? = null,
+        @Transient var estimate: Timespan? = null,
+        @Optional @SerialName("milestone_id") var milestoneId: Int? = null,
+        @Optional var refs: String? = null
 )
 {
+    @Optional @SerialName("created_on") private val createdOnActual: Long? = createdOn.toString().toLongOrNull()
+    @Optional @SerialName("updated_on") private val updatedOnActual: Long? = updatedOn.toString().toLongOrNull()
+    @Optional @SerialName("estimate_forecast") private val estimateForecastActual: String? = estimateForecast.toString()
+    @Optional @SerialName("estimate") private val estimateActual: String? = estimate.toString()
+
+    init {
+        if(createdOn == null) createdOn = Timestamp(createdOnActual)
+        if(updatedOn == null) updatedOn = Timestamp(updatedOnActual)
+        if(estimateForecast == null) estimateForecast = Timespan().parseTimespan(estimateForecastActual)
+        if(estimate == null) estimate = Timespan().parseTimespan(estimateActual)
+    }
+
     //TODO
     fun getCase(caseId: Int): Case
     {

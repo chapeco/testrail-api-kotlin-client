@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <kotlin.version>1.2.71</kotlin.version>
-        <serialization.version>0.6.1</serialization.version>
+        <kotlin.version>1.2.70</kotlin.version>
+        <serialization.version>0.6.2</serialization.version>
     </properties>
 
     <repositories>
