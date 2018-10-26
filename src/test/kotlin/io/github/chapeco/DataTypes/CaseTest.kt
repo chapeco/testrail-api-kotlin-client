@@ -121,7 +121,7 @@ class CaseTest
                 milestoneId = 1,
                 refs = "My Expected Reference"
         )
-        Assertions.assertEquals(expectedCase, JSON.unquoted.parse<Case>("{created_by:1,created_on:null,estimate_forecast:1s,id:1,section_id:1,suite_id:1,updated_by:1,updated_on:2000,title:\"My Expected Case\",template_id:1,type_id:1,priority_id:1,estimate:1s,milestone_id:1,refs:\"My Expected Reference\"}"))
+        Assertions.assertEquals(expectedCase,JSON.unquoted.parse<Case>("{created_by:1,created_on:null,estimate_forecast:1s,id:1,section_id:1,suite_id:1,updated_by:1,updated_on:2000,title:\"My Expected Case\",template_id:1,type_id:1,priority_id:1,estimate:1s,milestone_id:1,refs:\"My Expected Reference\"}"))
     }
 
     @Test

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable
-data class Test
+data class TestObj
 (
         @SerialName("assignedto_id") val assignedToId: Int? = null,
         @SerialName("case_id") val caseId: Int? = null,
@@ -31,18 +31,18 @@ data class Test
         if(estimateForecast == null) estimateForecast = Timespan().parseTimespan(estimateForecastActual)
     }
     //TODO
-    fun getTest(testId: Int): Test
+    fun getTest(testId: Int): TestObj
     {
         val endpoint = "get_test/$testId"
-        return Test()
+        return TestObj()
     }
 
-    fun getTests(runId: Int, statusId: Int? = null): Array<Test>
+    fun getTests(runId: Int, statusId: Int? = null): Array<TestObj>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_tests/$runId")
         if(statusId != null) endpoint.append("&status_id=$statusId")
 
-        return Array<Test>(0) {Test()}
+        return Array<TestObj>(0) {TestObj()}
     }
 }
