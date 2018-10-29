@@ -40,7 +40,7 @@ class ProjectTest
     @Test
     fun serializeProjectTest()
     {
-        val expectedProject: String = ""
+        val expectedProject: String = "{id:1,url:\"some url\",name:\"some name\",announcement:\"some announcement\",show_announcement:true,suite_mode:1,is_completed:false,completed_on:1000}"
         val actualProject = Project(
                 id = 1,
                 completedOn = Timestamp(
@@ -54,7 +54,7 @@ class ProjectTest
                 isCompleted = false
         )
         println(JSON.unquoted.stringify(actualProject))
-        Assertions.assertEquals(expectedProject,actualProject)
+        Assertions.assertEquals(expectedProject,JSON.unquoted.stringify(actualProject))
     }
 
     @Test
@@ -72,7 +72,7 @@ class ProjectTest
                 suiteMode = 1,
                 isCompleted = false
         )
-        Assertions.assertEquals(expectedProject,JSON.unquoted.parse<Project>(""))
+        Assertions.assertEquals(expectedProject,JSON.unquoted.parse<Project>("{id:1,url:\"some url\",name:\"some name\",announcement:\"some announcement\",show_announcement:true,suite_mode:1,is_completed:false,completed_on:1000}"))
     }
 
     @Test

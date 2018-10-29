@@ -49,7 +49,7 @@ class ResultTest
     @Test
     fun serializeResultTest()
     {
-        val expectedResult: String = ""
+        val expectedResult: String = "{created_by:1,id:1,test_id:1,status_id:1,comment:\"some comment\",version:\"some version\",defects:\"some defects\",assignedto_id:1,created_on:1000,elapsed:1s}"
         val actualResult = Result(
                 createdBy = 1,
                 createdOn = Timestamp(
@@ -89,7 +89,7 @@ class ResultTest
                 defects = "some defects",
                 assignedToId = 1
         )
-        Assertions.assertEquals(expectedResult,JSON.unquoted.parse<Result>(""))
+        Assertions.assertEquals(expectedResult,JSON.unquoted.parse<Result>("{created_by:1,id:1,test_id:1,status_id:1,comment:\"some comment\",version:\"some version\",defects:\"some defects\",assignedto_id:1,created_on:1000,elapsed:1s}"))
     }
 
     @Test
