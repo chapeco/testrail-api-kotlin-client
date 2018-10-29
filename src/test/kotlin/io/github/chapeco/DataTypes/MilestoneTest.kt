@@ -62,7 +62,7 @@ class MilestoneTest
     @Test
     fun serializeMilestoneTest()
     {
-        val expectedMilestone: String = ""
+        val expectedMilestone: String = "{id:1,milestones:[{id:null,milestones:null,project_id:null,url:null,name:null,description:null,parent_id:null,is_completed:null,is_started:null,completed_on:null,started_on:null,due_on:null,start_on:null}],project_id:1,url:\"some url\",name:\"some name\",description:\"some description\",parent_id:1,is_completed:false,is_started:true,completed_on:1000,started_on:500,due_on:2000,start_on:400}"
         val actualMilestone = Milestone(
                 completedOn = Timestamp(
                         time = 1000
@@ -116,7 +116,7 @@ class MilestoneTest
                 isCompleted = false,
                 isStarted = true
         )
-        Assertions.assertEquals(expectedMilestone,JSON.unquoted.parse<Milestone>(""))
+        Assertions.assertEquals(expectedMilestone.toString(),JSON.unquoted.parse<Milestone>("{id:1,milestones:[{id:null,milestones:null,project_id:null,url:null,name:null,description:null,parent_id:null,is_completed:null,is_started:null,completed_on:null,started_on:null,due_on:null,start_on:null}],project_id:1,url:\"some url\",name:\"some name\",description:\"some description\",parent_id:1,is_completed:false,is_started:true,completed_on:1000,started_on:500,due_on:2000,start_on:400}").toString())
     }
 
     @Test

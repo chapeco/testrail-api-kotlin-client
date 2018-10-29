@@ -5,6 +5,7 @@ import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class Result

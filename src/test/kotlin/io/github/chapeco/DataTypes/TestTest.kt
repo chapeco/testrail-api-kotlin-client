@@ -52,7 +52,7 @@ class TestTest
     @Test
     fun serializeTestTest()
     {
-        val expectedTest: String = ""
+        val expectedTest: String = "{assignedto_id:1,case_id:1,id:1,milestone_id:1,priority_id:1,refs:\"some refs\",run_id:1,status_id:1,title:\"some title\",type_id:1,estimate:1s,estimate_forecast:1s}"
         val actualTest = TestObj(
                 assignedToId = 1,
                 caseId = 1,
@@ -96,7 +96,7 @@ class TestTest
                 title = "some title",
                 typeId = 1
         )
-        Assertions.assertEquals(expectedTest,JSON.unquoted.parse<TestObj>(""))
+        Assertions.assertEquals(expectedTest,JSON.unquoted.parse<TestObj>("{assignedto_id:1,case_id:1,id:1,milestone_id:1,priority_id:1,refs:\"some refs\",run_id:1,status_id:1,title:\"some title\",type_id:1,estimate:1s,estimate_forecast:1s}"))
     }
 
     @Test
