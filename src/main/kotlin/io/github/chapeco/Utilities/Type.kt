@@ -1,3 +1,6 @@
 package io.github.chapeco.Utilities
 
-enum class Type(){}
+enum class Type
+{
+    FOO
+}
