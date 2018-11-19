@@ -1,7 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 @Serializable
 data class Configuration
@@ -15,10 +18,10 @@ data class Configuration
 )
 {
     //TODO
-    fun getConfigs(projectId: Int): Array<Configuration>
+    fun getConfigs(projectId: Int): List<Configuration>
     {
         val endpoint = "get_configs/$projectId"
-        return Array<Configuration>(0) {Configuration()}
+        return JSON.unquoted.parse(Configuration.serializer().list, Request().Get(endpoint)!!)
     }
 
     fun addConfigGroup(projectId: Int)

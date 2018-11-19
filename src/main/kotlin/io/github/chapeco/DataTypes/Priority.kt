@@ -1,7 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 @Serializable
 data class Priority
@@ -15,9 +18,9 @@ data class Priority
 )
 {
     //TODO
-    fun getPriorities(): Array<Priority>
+    fun getPriorities(): List<Priority>
     {
         val endpoint = "get_priorities"
-        return Array<Priority>(0) {Priority()}
+        return JSON.unquoted.parse(Priority.serializer().list, Request().Get(endpoint)!!)
     }
 }

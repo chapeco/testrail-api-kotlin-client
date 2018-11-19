@@ -27,7 +27,8 @@ data class Timespan
         return getTimespan()
     }
 
-    fun parseTimespan(timespanString: String?): Timespan{
+    fun parseTimespan(timespanString: String?): Timespan? {
+        if (timespanString.toString().equals("null")) return null
         var currentString = timespanString!!.replace(" ","")
         var days: Int = 0
         var hours: Int = 0

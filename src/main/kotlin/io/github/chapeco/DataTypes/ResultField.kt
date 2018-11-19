@@ -1,7 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 @Serializable
 data class ResultField
@@ -18,9 +21,9 @@ data class ResultField
 )
 {
     //TODO
-    fun getResultFields(): Array<ResultField>
+    fun getResultFields(): List<ResultField>
     {
         val endpoint = "get_result_fields"
-        return Array<ResultField>(0) {ResultField()}
+        return JSON.unquoted.parse(ResultField.serializer().list, Request().Get(endpoint)!!)
     }
 }

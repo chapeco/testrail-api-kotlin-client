@@ -24,7 +24,14 @@ data class Case
         @Optional @SerialName("priority_id") var priorityId: Int? = null,
         @Transient var estimate: Timespan? = null,
         @Optional @SerialName("milestone_id") var milestoneId: Int? = null,
-        @Optional var refs: String? = null
+        @Optional var refs: String? = null,
+        @Optional @SerialName("custom_automation_type") var automationType: String? = null,
+        @Optional @SerialName("custom_expected") var expected: String? = null,
+        @Optional @SerialName("custom_preconds") var preconds: String? = null,
+        @Optional @SerialName("custom_steps") var steps: String? = null,
+        @Optional @SerialName("custom_steps_separated") var stepsSeparated: String? = null,
+        @Optional @SerialName("custom_mission") var mission: String? = null,
+        @Optional @SerialName("custom_goals") var goals: String? = null
 )
 {
     @Optional @SerialName("created_on") private val createdOnActual: Long? = createdOn.toString().toLongOrNull()
@@ -61,7 +68,7 @@ data class Case
         updatedAfter: Timestamp? = null,
         updatedBefore: Timestamp? = null,
         updatedBy: Array<Int>? = null
-    ): Array<Case>
+    ): List<Case>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_cases/$projectId")
@@ -78,7 +85,7 @@ data class Case
         if(updatedBefore != null) endpoint.append("&updated_before=$updatedBefore")
         if(updatedBy != null) endpoint.append("&updated_by=$updatedBy")
 
-        return JSON.unquoted.parse<Array<Case>>(Request().Get(endpoint = endpoint.toString())!!)
+        return JSON.unquoted.parse(Case.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
     fun addCase(sectionId: Int, case: Case): Case

@@ -1,7 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 @Serializable
 data class Status
@@ -19,9 +22,9 @@ data class Status
 )
 {
     //TODO
-    fun getStatuses(): Array<Status>
+    fun getStatuses(): List<Status>
     {
         val endpoint = "get_statuses"
-        return Array<Status>(0) {Status()}
+        return JSON.unquoted.parse(Status.serializer().list, Request().Get(endpoint)!!)
     }
 }
