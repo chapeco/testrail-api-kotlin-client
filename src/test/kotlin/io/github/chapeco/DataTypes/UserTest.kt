@@ -1,8 +1,10 @@
 package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class UserTest()
 {
@@ -53,18 +55,28 @@ class UserTest()
     @Test
     fun getUserTest()
     {
-
+        val expectedUser = User(email = "dparker@betabreakers.com",id = 1,isActive = true, name = "David Parker")
+        val actualUser = User().getUser(1)
+        println(JSON.unquoted.stringify(actualUser))
+        assertEquals(expectedUser,actualUser)
     }
 
     @Test
     fun getUserByEmailTest()
     {
-
+        val expectedUser = User(email = "dparker@betabreakers.com",id = 1,isActive = true, name = "David Parker")
+        val actualUser = User().getUserByEmail("dparker@betabreakers.com")
+        println(JSON.unquoted.stringify(actualUser))
+        assertEquals(expectedUser,actualUser)
     }
 
     @Test
     fun getUsersTest()
     {
-
+        val expectedUser = User(email = "dparker@betabreakers.com",id = 1,isActive = true, name = "David Parker")
+        val expectedUserList = List<User>(1) {expectedUser}
+        val actualUserList = User().getUsers()
+        println(JSON.unquoted.stringify(User.serializer().list,actualUserList))
+        assertEquals(expectedUserList,actualUserList)
     }
 }
