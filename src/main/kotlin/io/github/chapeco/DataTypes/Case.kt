@@ -2,7 +2,9 @@ package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Case
@@ -41,7 +43,7 @@ data class Case
     fun getCase(caseId: Int): Case
     {
         val endpoint = "get_case/$caseId"
-        return Case()
+        return JSON.unquoted.parse<Case>(Request().Get(endpoint)!!)
     }
 
     fun getCases
@@ -76,16 +78,16 @@ data class Case
         if(updatedBefore != null) endpoint.append("&updated_before=$updatedBefore")
         if(updatedBy != null) endpoint.append("&updated_by=$updatedBy")
 
-        return Array<Case>(0) {Case()}
+        return JSON.unquoted.parse<Array<Case>>(Request().Get(endpoint = endpoint.toString())!!)
     }
 
-    fun addCase(sectionId: Int): Case
+    fun addCase(sectionId: Int, case: Case): Case
     {
         val endpoint = "add_case/$sectionId"
         return Case()
     }
 
-    fun updateCase(caseId: Int): Case
+    fun updateCase(caseId: Int, case: Case): Case
     {
         val endpoint = "update_case/$caseId"
         return Case()

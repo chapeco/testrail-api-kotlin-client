@@ -127,7 +127,9 @@ class CaseTest
     @Test
     fun getCaseTest()
     {
-
+            val expectedCase = Case()
+            val actualCase = Case().getCase(1)
+            Assertions.assertEquals(expectedCase,actualCase)
     }
 
     @Test

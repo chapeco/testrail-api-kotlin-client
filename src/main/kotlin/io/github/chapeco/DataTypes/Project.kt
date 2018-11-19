@@ -1,10 +1,9 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
-import kotlinx.serialization.Optional
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Project
@@ -34,16 +33,16 @@ data class Project
     fun getProject(projectId: Int): Project
     {
         val endpoint = "get_project/$projectId"
-        return Project()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
-    fun getProjects(isCompleted: Boolean? = null): Array<Project>
+    fun getProjects(isCompleted: Boolean? = null): List<Project>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_projects")
         if(isCompleted != null) endpoint.append("&is_completed=$isCompleted")
 
-        return Array<Project>(0) {Project()}
+        return JSON.unquoted.parse(Project.serializer().list,Request().Get(endpoint.toString())!!)
     }
 
     fun addProject(): Project

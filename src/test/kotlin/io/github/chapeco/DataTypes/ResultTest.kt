@@ -113,7 +113,9 @@ class ResultTest
     @Test
     fun addResultTest()
     {
-
+        val expectedResult = Result(testId = 1)
+        val actualResult = Result().addResult(expectedResult)
+        Assertions.assertEquals(expectedResult,actualResult)
     }
 
     @Test

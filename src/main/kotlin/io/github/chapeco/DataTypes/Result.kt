@@ -1,11 +1,13 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Result
@@ -25,8 +27,8 @@ data class Result
         @SerialName("assignedto_id") var assignedToId: Int? = null
 )
 {
-    @Optional @SerialName("created_on") private val createdOnActual: Long? = createdOn.toString().toLong()
-    @Optional @SerialName("elapsed") private val elapsedActual: String? = elapsed.toString()
+    @Optional @SerialName("created_on") private val createdOnActual: Long? = if(createdOn != null) createdOn.toString().toLong() else -1
+    @Optional @SerialName("elapsed") private val elapsedActual: String? = if(elapsed != null) elapsed.toString() else "-1"
 
     init {
         if(createdOn == null) createdOn = Timestamp(createdOnActual)
@@ -92,10 +94,10 @@ data class Result
         return Array<Result>(0) {Result()}
     }
 
-    fun addResult(testId: Int): Result
+    fun addResult(result: Result): Result
     {
         val endpoint = "add_result/$testId"
-        return Result()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(Result))!!)
     }
 
     fun addResultForCase(runId: Int, caseId: Int): Result
