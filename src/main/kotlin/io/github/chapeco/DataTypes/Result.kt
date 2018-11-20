@@ -29,7 +29,7 @@ data class Result
 
     init {
         if(createdOn == null) createdOn = Timestamp(createdOnActual)
-        if(elapsed == null) elapsed = Timespan().parseTimespan(elapsedActual!!)
+        if(elapsed == null) elapsed = Timespan().parseTimespan(elapsedActual)
     }
 
     //TODO

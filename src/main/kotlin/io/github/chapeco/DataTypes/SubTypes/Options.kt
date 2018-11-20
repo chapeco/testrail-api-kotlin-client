@@ -7,6 +7,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Options
 (
+    @Optional var items: String? = null,
+    @Optional @SerialName("default_value") var defaultValue: String? = null,
     @Optional @SerialName("is_required") var isRequired: Boolean? = null,
     @Optional var format: String? = null,
     @Optional @SerialName("has_expected") var hasExpected: Boolean? = null,

@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.DataTypes.SubTypes.Step
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timespan
 import kotlinx.serialization.*
@@ -19,15 +20,23 @@ data class TestObj
         @SerialName("run_id") val runId: Int? = null,
         @SerialName("status_id") val statusId: Int? = null,
         val title: String? = null,
-        @SerialName("type_id") val typeId: Int? = null
+        @SerialName("type_id") val typeId: Int? = null,
+        @SerialName("template_id") val templateId: Int? = null,
+        @SerialName("custom_automation_type") val customAutomationType: String? = null,
+        @SerialName("custom_expected") val customExpected: String? = null,
+        @SerialName("custom_preconds") val customPreconds: String? = null,
+        @SerialName("custom_steps_separated") val customStepsSeparated: List<Step>? = null,
+        @SerialName("custom_steps") val customSteps: String? = null,
+        @SerialName("custom_mission") val customMission: String? = null,
+        @SerialName("custom_goals") val customGoals: String? = null
 )
 {
     @Optional @SerialName("estimate") private val estimateActual: String? = estimate.toString()
     @Optional @SerialName("estimate_forecast") private val estimateForecastActual: String? = estimateForecast.toString()
 
     init {
-        if(estimate == null) estimate = Timespan().parseTimespan(estimateActual!!)
-        if(estimateForecast == null) estimateForecast = Timespan().parseTimespan(estimateForecastActual!!)
+        if(estimate == null) estimate = Timespan().parseTimespan(estimateActual)
+        if(estimateForecast == null) estimateForecast = Timespan().parseTimespan(estimateForecastActual)
     }
     //TODO
     fun getTest(testId: Int): TestObj
