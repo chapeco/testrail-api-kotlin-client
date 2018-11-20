@@ -2,6 +2,7 @@ package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timespan
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -102,12 +103,40 @@ class TestTest
     @Test
     fun getTestTest()
     {
-
+        val expectedTestObj = TestObj(
+                caseId = 1,
+                id = 1,
+                priorityId = 2,
+                runId = 1,
+                statusId = 1,
+                title = "Case_Foo",
+                typeId = 7,
+                templateId = 1,
+                customAutomationType = "0"
+        )
+        val actualTestObj = TestObj().getTest(1)
+        println(JSON.unquoted.stringify(actualTestObj))
+        Assertions.assertEquals(expectedTestObj,actualTestObj)
     }
 
     @Test
     fun getTestsTest()
     {
-
+        val expectedTestObjList = listOf(
+                TestObj(
+                        caseId = 1,
+                        id = 1,
+                        priorityId = 2,
+                        runId = 1,
+                        statusId = 1,
+                        title = "Case_Foo",
+                        typeId = 7,
+                        templateId = 1,
+                        customAutomationType = "0"
+                )
+        )
+        val actualTestObjList = TestObj().getTests(1)
+        println(JSON.unquoted.stringify(TestObj.serializer().list,actualTestObjList))
+        Assertions.assertEquals(expectedTestObjList,actualTestObjList)
     }
 }
