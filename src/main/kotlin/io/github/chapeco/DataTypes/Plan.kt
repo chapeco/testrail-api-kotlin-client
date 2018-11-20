@@ -1,10 +1,9 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
-import kotlinx.serialization.Optional
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Plan
@@ -45,7 +44,7 @@ data class Plan
     fun getPlan(planId: Int): Plan
     {
         val endpoint = "get_plan/$planId"
-        return Plan()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
     fun getPlans
@@ -58,7 +57,7 @@ data class Plan
         limit: Int? = null,
         offset: Int? = null,
         milestoneId: Array<Int>? = null
-    ): Array<Plan>
+    ): List<Plan>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_plans/$projectId")
@@ -69,7 +68,7 @@ data class Plan
         if(limit != null) endpoint.append("&limit=$limit")
         if(offset != null) endpoint.append("&offset=$offset")
         if(milestoneId != null) endpoint.append("&milestone_id=$milestoneId")
-        return Array<Plan>(0) {Plan()}
+        return JSON.unquoted.parse(Plan.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
     fun addPlan(projectId: Int): Plan

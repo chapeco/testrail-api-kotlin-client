@@ -1,31 +1,60 @@
 package io.github.chapeco.Utilities
 
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelError
+import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.fuel.core.Request
+import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
 import kotlinx.serialization.json.JSON
 
-class Request()
+class Request
 {
-    fun Get(endpoint: String): JSON?
-    {
-        var returnValue: JSON? = null
-        Fuel.get(endpoint)
-        return returnValue
+    private val endpoint = System.getProperty("testrailEndpoint")
+    private val indexBase = "index.php?/api/v2/"
+    private val username = System.getProperty("testrailUsername")
+    val password = System.getProperty("testrailPassword")
+
+    init {
+        FuelManager.instance.basePath = endpoint + indexBase
+        FuelManager.instance.baseHeaders = hashMapOf(
+                "Content-Type" to "application/json"
+        )
+        println(FuelManager.instance.basePath)
     }
 
-    fun Post(endpoint: String, jsonPayload: String): Request
+    fun Get(endpoint: String): String?
     {
-        return endpoint.httpPost().body(jsonPayload, Charsets.UTF_8).header("Content-Type" to "application/json").response { request, response, result ->
-            when(result){
-                is Result.Failure -> {
-                    val ex = result.getException()
-                }
-                is Result.Success -> {
-                    val data = result.get()
-                }
-            }
+        val (request, response, result) = endpoint.httpGet()
+                .authenticate(username,password)
+                .responseString()
+        val (data, error) = result
+        if(error == null)
+        {
+            println(data)
+            return data
+        }
+        else
+        {
+            throw error
+        }
+    }
+
+    fun Post(endpoint: String, jsonPayload: String): String?
+    {
+        val (request, response, result) = endpoint.httpPost()
+                .authenticate(username,password)
+                .body(jsonPayload)
+                .responseString()
+        val (data, error) = result
+        if(error == null)
+        {
+            return data
+        }
+        else
+        {
+            throw error
         }
     }
 

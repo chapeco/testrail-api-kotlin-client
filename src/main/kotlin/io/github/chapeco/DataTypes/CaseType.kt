@@ -1,7 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 @Serializable
 data class CaseType
@@ -13,9 +16,9 @@ data class CaseType
 )
 {
     //TODO
-    fun getCaseTypes(): Array<CaseType>
+    fun getCaseTypes(): List<CaseType>
     {
         val endpoint = "get_case_types"
-        return Array<CaseType>(0) {CaseType()}
+        return JSON.unquoted.parse(CaseType.serializer().list, Request().Get(endpoint)!!)
     }
 }

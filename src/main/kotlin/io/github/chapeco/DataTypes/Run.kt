@@ -1,10 +1,9 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
-import kotlinx.serialization.Optional
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Run
@@ -52,7 +51,7 @@ data class Run
     fun getRun(runId: Int): Run
     {
         val endpoint = "get_run/$runId"
-        return Run()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
     fun getRuns
@@ -66,7 +65,7 @@ data class Run
         offset: Int? = null,
         milestoneId: Array<Int>? = null,
         suiteId: Array<Int>? = null
-    ): Array<Run>
+    ): List<Run>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_runs/$projectId")
@@ -79,7 +78,7 @@ data class Run
         if(milestoneId != null) endpoint.append("&milestone_id=$milestoneId")
         if(suiteId != null) endpoint.append("&suite_id=$suiteId")
 
-        return Array<Run>(0) {Run()}
+        return JSON.unquoted.parse(Run.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
     fun addRun(projectId: Int): Run

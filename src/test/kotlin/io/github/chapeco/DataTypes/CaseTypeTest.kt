@@ -1,6 +1,7 @@
 package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -49,6 +50,22 @@ class CaseTypeTest
     @Test
     fun getCaseTypesTest()
     {
-
+        val expectedCaseTypeList = listOf(
+                CaseType(1,false,"Acceptance"),
+                CaseType(2,false,"Accessibility"),
+                CaseType(3,false,"Automated"),
+                CaseType(4,false,"Compatibility"),
+                CaseType(5,false,"Destructive"),
+                CaseType(6,false,"Functional"),
+                CaseType(7,true,"Other"),
+                CaseType(8,false,"Performance"),
+                CaseType(9,false,"Regression"),
+                CaseType(10,false,"Security"),
+                CaseType(11,false,"Smoke & Sanity"),
+                CaseType(12,false,"Usability")
+        )
+        val actualCaseTypeList = CaseType().getCaseTypes()
+        println(JSON.unquoted.stringify(CaseType.serializer().list,actualCaseTypeList))
+        Assertions.assertEquals(expectedCaseTypeList,actualCaseTypeList)
     }
 }

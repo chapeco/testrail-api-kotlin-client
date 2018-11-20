@@ -1,10 +1,9 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
-import kotlinx.serialization.Optional
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Milestone
@@ -45,16 +44,16 @@ data class Milestone
     fun getMilestone(milestoneId: Int): Milestone
     {
         val endpoint = "get_milestone/$milestoneId"
-        return Milestone()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
-    fun getMilestones(projectId: Int, isCompleted: Boolean? = null, isStarted: Boolean? = null): Array<Milestone>
+    fun getMilestones(projectId: Int, isCompleted: Boolean? = null, isStarted: Boolean? = null): List<Milestone>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_milestones/$projectId")
         if(isCompleted != null) endpoint.append("&is_completed=$isCompleted")
         if(isStarted != null) endpoint.append("&is_started=$isStarted")
-        return Array<Milestone>(0) {Milestone()}
+        return JSON.unquoted.parse(Milestone.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
     fun addMilestone(projectId: Int): Milestone

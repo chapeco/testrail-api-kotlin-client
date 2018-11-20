@@ -8,6 +8,8 @@ import kotlin.test.assertEquals
 
 class CaseFieldTest
 {
+    val jsonPayload = "{id:1,system_name:\"some system name\",entity_id:1,type_id:1,location_id:1,display_order:1,is_multi:true,is_active:true,status_id:1,is_system:true,type:FOO,name:\"some name\",label:\"some label\",description:\"some description\",include_all:true,template_ids:[1],configs:[{group_id:null,id:null,name:null}]}"
+
     @Test
     fun instantiateCaseFieldTest()
     {
@@ -55,7 +57,7 @@ class CaseFieldTest
     @Test
     fun serializeCaseFieldTest()
     {
-        val expectedCaseField: String = "{id:1,system_name:\"some system name\",entity_id:1,type_id:1,location_id:1,display_order:1,is_multi:true,is_active:true,status_id:1,is_system:true,type:FOO,name:\"some name\",label:\"some label\",description:\"some description\",include_all:true,template_ids:[1],configs:[{group_id:null,id:null,name:null}]}"
+        val expectedCaseField: String = jsonPayload
         val actualCaseField = CaseField(
                 id = 1,
                 systemName = "some system name",
@@ -101,7 +103,7 @@ class CaseFieldTest
                 templateIds = Array<Int>(1) {1},
                 configs = Array<Configuration>(1) {Configuration()}
         )
-        Assertions.assertEquals(expectedCaseField.toString(),JSON.unquoted.parse<CaseField>("{id:1,system_name:\"some system name\",entity_id:1,type_id:1,location_id:1,display_order:1,is_multi:true,is_active:true,status_id:1,is_system:true,type:FOO,name:\"some name\",label:\"some label\",description:\"some description\",include_all:true,template_ids:[1],configs:[{group_id:null,id:null,name:null}]}").toString())
+        Assertions.assertEquals(expectedCaseField.toString(),JSON.unquoted.parse<CaseField>(jsonPayload).toString())
     }
 
     @Test

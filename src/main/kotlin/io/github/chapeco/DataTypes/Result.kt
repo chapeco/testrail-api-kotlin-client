@@ -1,11 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
-import kotlinx.serialization.Optional
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Result
@@ -25,12 +24,12 @@ data class Result
         @SerialName("assignedto_id") var assignedToId: Int? = null
 )
 {
-    @Optional @SerialName("created_on") private val createdOnActual: Long? = createdOn.toString().toLong()
-    @Optional @SerialName("elapsed") private val elapsedActual: String? = elapsed.toString()
+    @Optional @SerialName("created_on") private val createdOnActual: Long? = if(createdOn != null) createdOn.toString().toLong() else -1
+    @Optional @SerialName("elapsed") private val elapsedActual: String? = if(elapsed != null) elapsed.toString() else "-1"
 
     init {
         if(createdOn == null) createdOn = Timestamp(createdOnActual)
-        if(elapsed == null) elapsed = Timespan().parseTimespan(elapsedActual)
+        if(elapsed == null) elapsed = Timespan().parseTimespan(elapsedActual!!)
     }
 
     //TODO
@@ -40,7 +39,7 @@ data class Result
         limit: Int? = null,
         offset: Int? = null,
         statusId: Array<Int>? = null
-    ): Array<Result>
+    ): List<Result>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_results/$testId")
@@ -48,7 +47,7 @@ data class Result
         if(offset != null) endpoint.append("&offset=$offset")
         if(statusId != null) endpoint.append("&status_id=$statusId")
 
-        return Array<Result>(0) {Result()}
+        return JSON.unquoted.parse(Result.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
     fun getResultsForCase
@@ -58,7 +57,7 @@ data class Result
         limit: Int? = null,
         offset: Int? = null,
         statusId: Int? = null
-    ): Array<Result>
+    ): List<Result>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_results_for_case/$runId/$caseId")
@@ -66,7 +65,7 @@ data class Result
         if(offset != null) endpoint.append("&offset=$offset")
         if(statusId != null) endpoint.append("&status_id=$statusId")
 
-        return Array<Result>(0) {Result()}
+        return JSON.unquoted.parse(Result.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
     fun getResultsForRun
@@ -78,7 +77,7 @@ data class Result
         limit: Int? = null,
         offset: Int? = null,
         statusId: Array<Int>? = null
-    ): Array<Result>
+    ): List<Result>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_results_for_run/$runId")
@@ -89,13 +88,13 @@ data class Result
         if(offset != null) endpoint.append("&offset=$offset")
         if(statusId != null) endpoint.append("&status_id=$statusId")
 
-        return Array<Result>(0) {Result()}
+        return JSON.unquoted.parse(Result.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addResult(testId: Int): Result
+    fun addResult(result: Result): Result
     {
         val endpoint = "add_result/$testId"
-        return Result()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(Result))!!)
     }
 
     fun addResultForCase(runId: Int, caseId: Int): Result

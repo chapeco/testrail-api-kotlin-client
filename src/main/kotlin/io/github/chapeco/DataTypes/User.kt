@@ -1,7 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 @Serializable
 data class User
@@ -16,18 +19,18 @@ data class User
     fun getUser(userId: Int): User
     {
         val endpoint = "get_user/$userId"
-        return User()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
     fun getUserByEmail(email: String): User
     {
         val endpoint = "get_user_by_email&email=$email"
-        return User()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
-    fun getUsers(): Array<User>
+    fun getUsers(): List<User>
     {
         val endpoint = "get_users"
-        return Array<User>(0) {User()}
+        return JSON.unquoted.parse(User.serializer().list, Request().Get(endpoint)!!)
     }
 }

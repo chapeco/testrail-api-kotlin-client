@@ -2,6 +2,7 @@ package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -78,13 +79,16 @@ class ProjectTest
     @Test
     fun getProjectTest()
     {
-
+        val expectedProject = JSON.unquoted.parse<Project>("{\"id\":1,\"name\":\"API_Test_Project\",\"announcement\":null,\"show_announcement\":false,\"is_completed\":false,\"completed_on\":null,\"suite_mode\":3,\"url\":\"https:\\/\\/techdemo4.testrail.io\\/index.php?\\/projects\\/overview\\/1\"}")
+        val actualProject = Project().getProject(1)
+        Assertions.assertEquals(expectedProject,actualProject)
     }
 
     @Test
     fun getProjectsTest()
     {
-
+        val actualProject = Project().getProjects()
+        println(JSON.unquoted.stringify(Project.serializer().list,actualProject))
     }
 
     @Test

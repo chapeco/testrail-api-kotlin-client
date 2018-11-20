@@ -1,10 +1,9 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timespan
-import kotlinx.serialization.Optional
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class TestObj
@@ -27,22 +26,22 @@ data class TestObj
     @Optional @SerialName("estimate_forecast") private val estimateForecastActual: String? = estimateForecast.toString()
 
     init {
-        if(estimate == null) estimate = Timespan().parseTimespan(estimateActual)
-        if(estimateForecast == null) estimateForecast = Timespan().parseTimespan(estimateForecastActual)
+        if(estimate == null) estimate = Timespan().parseTimespan(estimateActual!!)
+        if(estimateForecast == null) estimateForecast = Timespan().parseTimespan(estimateForecastActual!!)
     }
     //TODO
     fun getTest(testId: Int): TestObj
     {
         val endpoint = "get_test/$testId"
-        return TestObj()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
-    fun getTests(runId: Int, statusId: Int? = null): Array<TestObj>
+    fun getTests(runId: Int, statusId: Int? = null): List<TestObj>
     {
         val endpoint = StringBuilder()
         endpoint.append("get_tests/$runId")
         if(statusId != null) endpoint.append("&status_id=$statusId")
 
-        return Array<TestObj>(0) {TestObj()}
+        return JSON.unquoted.parse(TestObj.serializer().list, Request().Get(endpoint.toString())!!)
     }
 }

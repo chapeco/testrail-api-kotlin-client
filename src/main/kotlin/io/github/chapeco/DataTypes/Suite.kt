@@ -1,10 +1,9 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
-import kotlinx.serialization.Optional
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class Suite
@@ -33,13 +32,13 @@ data class Suite
     fun getSuite(suiteId: Int): Suite
     {
         val endpoint = "get_suite/$suiteId"
-        return Suite()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
-    fun getSuites(projectId: Int): Array<Suite>
+    fun getSuites(projectId: Int): List<Suite>
     {
         val endpoint = "get_suites/$projectId"
-        return Array<Suite>(0) {Suite()}
+        return JSON.unquoted.parse(Suite.serializer().list, Request().Get(endpoint)!!)
     }
 
     fun addSuite(projectId: Int): Suite

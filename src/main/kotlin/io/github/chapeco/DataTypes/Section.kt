@@ -1,7 +1,10 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 @Serializable
 data class Section
@@ -20,14 +23,15 @@ data class Section
     fun getSection(sectionId: Int): Section
     {
         val endpoint = "get_section/$sectionId"
-        return Section()
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
-    fun getSections(projectId: Int, suiteId: Int? = -1): Array<Section>
+    fun getSections(projectId: Int, suiteId: Int? = null): List<Section>
     {
-        val suiteIdParam = if(suiteId == -1) "" else "&suite_id=$suiteId"
-        val endpoint = "get_sections/$projectId$suiteIdParam"
-        return Array<Section>(0) {Section()}
+        val endpoint = StringBuilder()
+        endpoint.append("get_sections/$projectId")
+        if(suiteId != null) endpoint.append("&suite_id=$suiteId")
+        return JSON.unquoted.parse(Section.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
     fun addSection(projectId: Int): Section
