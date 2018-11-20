@@ -1,6 +1,8 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.DataTypes.SubTypes.Config
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -10,7 +12,7 @@ class ResultFieldTest
     fun instantiateResultFieldTest()
     {
         val expectedResultField = ResultField(
-                configs = Array<Configuration>(1) { Configuration() },
+                configs = List(1) { Config() },
                 description = "some description",
                 displayOrder = 1,
                 id = 1,
@@ -20,7 +22,7 @@ class ResultFieldTest
                 typeId = 1
         )
         val actualResultField = ResultField(
-                configs = Array<Configuration>(1) { Configuration() },
+                configs = List(1) { Config() },
                 description = "some description",
                 displayOrder = 1,
                 id = 1,
@@ -37,7 +39,7 @@ class ResultFieldTest
     {
         val expectedResultField: String = "{configs:[{group_id:null,id:null,name:null}],description:\"some description\",display_order:1,id:1,label:\"some label\",name:\"some name\",system_name:\"some system name\",type_id:1}"
         val actualResultField = ResultField(
-                configs = Array<Configuration>(1) { Configuration() },
+                configs = List(1) { Config() },
                 description = "some description",
                 displayOrder = 1,
                 id = 1,
@@ -54,7 +56,7 @@ class ResultFieldTest
     fun deserializeResultFieldTest()
     {
         val expectedResultField = ResultField(
-                configs = Array<Configuration>(1) { Configuration() },
+                configs = List(1) { Config() },
                 description = "some description",
                 displayOrder = 1,
                 id = 1,
@@ -69,6 +71,10 @@ class ResultFieldTest
     @Test
     fun getResultFieldsTest()
     {
-
+        val expectedResultFieldList = listOf(
+                ResultField()
+        )
+        val actualResultFieldList = ResultField().getResultFields()
+        println(JSON.stringify(ResultField.serializer().list,actualResultFieldList))
     }
 }
