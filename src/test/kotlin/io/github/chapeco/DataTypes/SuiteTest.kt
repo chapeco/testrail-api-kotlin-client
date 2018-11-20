@@ -2,6 +2,7 @@ package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -82,13 +83,37 @@ class SuiteTest
     @Test
     fun getSuiteTest()
     {
-
+        val expectedSuite = Suite(
+                id = 1,
+                isBaseline = false,
+                isCompleted = false,
+                isMaster = false,
+                projectId = 1,
+                url = "https://techdemo4.testrail.io/index.php?/suites/view/1",
+                name = "API_Test_Suite"
+        )
+        val actualSuite = Suite().getSuite(1)
+        println(JSON.unquoted.stringify(actualSuite))
+        Assertions.assertEquals(expectedSuite,actualSuite)
     }
 
     @Test
     fun getSuitesTest()
     {
-
+        val expectedSuitesList = listOf(
+                Suite(
+                        id = 1,
+                        isBaseline = false,
+                        isCompleted = false,
+                        isMaster = false,
+                        projectId = 1,
+                        url = "https://techdemo4.testrail.io/index.php?/suites/view/1",
+                        name = "API_Test_Suite"
+                )
+        )
+        val actualSuitesList = Suite().getSuites(1)
+        println(JSON.unquoted.stringify(Suite.serializer().list,actualSuitesList))
+        Assertions.assertEquals(expectedSuitesList,actualSuitesList)
     }
 
     @Test

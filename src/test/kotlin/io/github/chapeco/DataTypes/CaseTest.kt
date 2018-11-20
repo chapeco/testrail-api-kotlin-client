@@ -128,7 +128,20 @@ class CaseTest
     @Test
     fun getCaseTest()
     {
-            val expectedCase = Case(createdBy=1, createdOn=Timestamp(1542142832), estimateForecast=null, id=1, sectionId=1, suiteId=1, updatedBy=1, updatedOn=Timestamp(1542142832), title="Case_Foo", templateId=1, typeId=7, priorityId=2, estimate=null, milestoneId=null, refs=null, automationType="0", expected=null, preconds=null, steps=null, stepsSeparated=null, mission=null, goals=null)
+            val expectedCase = Case(
+                    createdBy=1,
+                    createdOn=Timestamp(1542142832),
+                    id=1,
+                    sectionId=1,
+                    suiteId=1,
+                    updatedBy=1,
+                    updatedOn=Timestamp(1542142832),
+                    title="Case_Foo",
+                    templateId=1,
+                    typeId=7,
+                    priorityId=2,
+                    automationType="0"
+            )
             val actualCase = Case().getCase(1)
             println(actualCase)
             Assertions.assertEquals(expectedCase,actualCase)
@@ -137,8 +150,25 @@ class CaseTest
     @Test
     fun getCasesTest()
     {
+            val expectedCaseList = listOf(
+                    Case(
+                            createdBy=1,
+                            createdOn=Timestamp(1542142832),
+                            id=1,
+                            sectionId=1,
+                            suiteId=1,
+                            updatedBy=1,
+                            updatedOn=Timestamp(1542142832),
+                            title="Case_Foo",
+                            templateId=1,
+                            typeId=7,
+                            priorityId=2,
+                            automationType="0"
+                    )
+            )
             val actualCaseList = Case().getCases(1,suiteId = 1)
             println(JSON.unquoted.stringify(Case.serializer().list,actualCaseList))
+            Assertions.assertEquals(expectedCaseList,actualCaseList)
     }
 
     @Test
