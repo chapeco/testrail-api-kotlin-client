@@ -32,7 +32,6 @@ class Request
         val (data, error) = result
         if(error == null)
         {
-            println(data)
             return data
         }
         else
