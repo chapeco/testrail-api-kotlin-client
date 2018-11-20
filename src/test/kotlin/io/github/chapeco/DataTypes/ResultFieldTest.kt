@@ -1,6 +1,8 @@
 package io.github.chapeco.DataTypes
 
 import io.github.chapeco.DataTypes.SubTypes.Config
+import io.github.chapeco.DataTypes.SubTypes.Context
+import io.github.chapeco.DataTypes.SubTypes.Options
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
@@ -72,9 +74,37 @@ class ResultFieldTest
     fun getResultFieldsTest()
     {
         val expectedResultFieldList = listOf(
-                ResultField()
+                ResultField(
+                        id = 11,
+                        isActive = true,
+                        typeId = 11,
+                        name = "step_results",
+                        systemName = "custom_step_results",
+                        label = "Steps",
+                        configs = listOf(
+                                Config(
+                                        context = Context(
+                                                isGlobal = true
+                                        ),
+                                        options = Options(
+                                                isRequired = false,
+                                                format = "markdown",
+                                                hasExpected = true,
+                                                hasActual = true,
+                                                rows = 5
+                                        ),
+                                        id = "4be97c65ea2fd"
+                                )
+                        ),
+                        displayOrder = 1,
+                        includeAll = false,
+                        templateIds = listOf(
+                                2
+                        )
+                )
         )
         val actualResultFieldList = ResultField().getResultFields()
         println(JSON.stringify(ResultField.serializer().list,actualResultFieldList))
+        Assertions.assertEquals(expectedResultFieldList,actualResultFieldList)
     }
 }
