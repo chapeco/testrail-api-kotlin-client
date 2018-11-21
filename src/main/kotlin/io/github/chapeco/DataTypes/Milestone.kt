@@ -9,23 +9,23 @@ import kotlinx.serialization.json.JSON
 data class Milestone
 (
     //GET
-        @Transient var completedOn: Timestamp? = null,
-        val id: Int? = null,
-        val milestones: Array<Milestone>? = null,
-        @SerialName("project_id") val projectId: Int? = null,
-        @Transient var startedOn: Timestamp? = null,
-        val url: String? = null,
+        @Optional @Transient var completedOn: Timestamp? = null,
+        @Optional val id: Int? = null,
+        @Optional val milestones: List<Milestone>? = null,
+        @Optional @SerialName("project_id") val projectId: Int? = null,
+        @Optional @Transient var startedOn: Timestamp? = null,
+        @Optional val url: String? = null,
 
     //ADD/UPDATE
-        var name: String? = null,
-        var description: String? = null,
-        @Transient var dueOn: Timestamp? = null,
-        @SerialName("parent_id") var parentId: Int? = null,
-        @Transient var startOn: Timestamp? = null,
+        @Optional var name: String? = null,
+        @Optional var description: String? = null,
+        @Optional @Transient var dueOn: Timestamp? = null,
+        @Optional @SerialName("parent_id") var parentId: Int? = null,
+        @Optional @Transient var startOn: Timestamp? = null,
 
     //UPDATE
-        @SerialName("is_completed") var isCompleted: Boolean? = null,
-        @SerialName("is_started") var isStarted: Boolean? = null
+        @Optional @SerialName("is_completed") var isCompleted: Boolean? = null,
+        @Optional @SerialName("is_started") var isStarted: Boolean? = null
 )
 {
     @Optional @SerialName("completed_on") private val completedOnActual: Long? = completedOn.toString().toLongOrNull()
