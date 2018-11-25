@@ -1,6 +1,7 @@
 package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -45,7 +46,10 @@ class ConfigurationTest
     @Test
     fun getConfigsTest()
     {
-
+        val expectedConfigurationsList = listOf<Configuration>()
+        val actualConfigurationsList = Configuration().getConfigs(1)
+        println(JSON.unquoted.stringify(Configuration.serializer().list,actualConfigurationsList))
+        Assertions.assertEquals(expectedConfigurationsList,actualConfigurationsList)
     }
 
     @Test

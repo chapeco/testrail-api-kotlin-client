@@ -9,27 +9,32 @@ import kotlinx.serialization.json.JSON
 data class Plan
 (
     //GET
-        @SerialName("assignedto_id") val assignedToId: Int? = null,
-        @SerialName("blocked_count") val blockedCount: Int? = null,
-        @Transient var completedOn: Timestamp? = null,
-        @SerialName("created_by") val createdBy: Int? = null,
-        @Transient var createdOn: Timestamp? = null,
-    //TODO Add status count 1-7
-        @SerialName("custom_status?_count") val customStatusCount: Int? = null,
-        @SerialName("failed_count") val failedCount: Int? = null,
-        val id: Int? = null,
-        @SerialName("is_completed") val isCompleted: Boolean? = null,
-        @SerialName("passed_count") val passedCount: Int? = null,
-        @SerialName("project_id") val projectId: Int? = null,
-        @SerialName("retest_count") val retestCount: Int? = null,
-        @SerialName("untested_count") val untestedCount: Int? = null,
-        val url: String? = null,
+        @Optional @SerialName("assignedto_id") val assignedToId: Int? = null,
+        @Optional @SerialName("blocked_count") val blockedCount: Int? = null,
+        @Optional @Transient var completedOn: Timestamp? = null,
+        @Optional @SerialName("created_by") val createdBy: Int? = null,
+        @Optional @Transient var createdOn: Timestamp? = null,
+        @Optional @SerialName("custom_status1_count") val customStatus1Count: Int? = null,
+        @Optional @SerialName("custom_status2_count") val customStatus2Count: Int? = null,
+        @Optional @SerialName("custom_status3_count") val customStatus3Count: Int? = null,
+        @Optional @SerialName("custom_status4_count") val customStatus4Count: Int? = null,
+        @Optional @SerialName("custom_status5_count") val customStatus5Count: Int? = null,
+        @Optional @SerialName("custom_status6_count") val customStatus6Count: Int? = null,
+        @Optional @SerialName("custom_status7_count") val customStatus7Count: Int? = null,
+        @Optional @SerialName("failed_count") val failedCount: Int? = null,
+        @Optional val id: Int? = null,
+        @Optional @SerialName("is_completed") val isCompleted: Boolean? = null,
+        @Optional @SerialName("passed_count") val passedCount: Int? = null,
+        @Optional @SerialName("project_id") val projectId: Int? = null,
+        @Optional @SerialName("retest_count") val retestCount: Int? = null,
+        @Optional @SerialName("untested_count") val untestedCount: Int? = null,
+        @Optional val url: String? = null,
 
     //ADD/UPDATE
-        var name: String? = null,
-        var description: String? = null,
-        @SerialName("milestone_id") var milestoneId: Int? = null,
-        var entries: Array<PlanEntry>? = null
+        @Optional var name: String? = null,
+        @Optional var description: String? = null,
+        @Optional @SerialName("milestone_id") var milestoneId: Int? = null,
+        @Optional var entries: List<PlanEntry>? = null
 )
 {
     @Optional @SerialName("completed_on") val completedOnActual: Long? = completedOn.toString().toLongOrNull()

@@ -2,6 +2,7 @@ package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -15,7 +16,7 @@ class MilestoneTest
                         time = 1000
                 ),
                 id = 1,
-                milestones = Array<Milestone>(1) { Milestone() },
+                milestones = List<Milestone>(1) { Milestone() },
                 projectId = 1,
                 startedOn = Timestamp(
                         time = 500
@@ -38,7 +39,7 @@ class MilestoneTest
                         time = 1000
                 ),
                 id = 1,
-                milestones = Array<Milestone>(1) { Milestone() },
+                milestones = List<Milestone>(1) { Milestone() },
                 projectId = 1,
                 startedOn = Timestamp(
                         time = 500
@@ -68,7 +69,7 @@ class MilestoneTest
                         time = 1000
                 ),
                 id = 1,
-                milestones = Array<Milestone>(1) { Milestone() },
+                milestones = List<Milestone>(1) { Milestone() },
                 projectId = 1,
                 startedOn = Timestamp(
                         time = 500
@@ -98,7 +99,7 @@ class MilestoneTest
                         time = 1000
                 ),
                 id = 1,
-                milestones = Array<Milestone>(1) { Milestone() },
+                milestones = List<Milestone>(1) { Milestone() },
                 projectId = 1,
                 startedOn = Timestamp(
                         time = 500
@@ -122,13 +123,42 @@ class MilestoneTest
     @Test
     fun getMilestoneTest()
     {
-
+        val expectedMilestone = Milestone(
+                id = 1,
+                milestones = listOf<Milestone>(),
+                projectId = 1,
+                url = "https://techdemo4.testrail.io/index.php?/milestones/view/1",
+                name = "API TEST Milestone",
+                description = "This is my description",
+                isCompleted = false,
+                isStarted = false,
+                dueOn = Timestamp(1546387200),
+                startOn = Timestamp(1542758400)
+        )
+        val actualMilestone = Milestone().getMilestone(1)
+        println(JSON.unquoted.stringify(actualMilestone))
+        Assertions.assertEquals(expectedMilestone,actualMilestone)
     }
 
     @Test
     fun getMilestonesTest()
     {
-
+        val expectedMilestonesList = listOf(
+                Milestone(
+                        id = 1,
+                        projectId = 1,
+                        url = "https://techdemo4.testrail.io/index.php?/milestones/view/1",
+                        name = "API TEST Milestone",
+                        description = "This is my description",
+                        isCompleted = false,
+                        isStarted = false,
+                        dueOn = Timestamp(1546387200),
+                        startOn = Timestamp(1542758400)
+                )
+        )
+        val actualMilestonesList = Milestone().getMilestones(1)
+        println(JSON.unquoted.stringify(Milestone.serializer().list,actualMilestonesList))
+        Assertions.assertEquals(expectedMilestonesList,actualMilestonesList)
     }
 
     @Test
