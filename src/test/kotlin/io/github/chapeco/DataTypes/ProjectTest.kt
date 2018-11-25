@@ -87,8 +87,19 @@ class ProjectTest
     @Test
     fun getProjectsTest()
     {
-        val actualProject = Project().getProjects()
-        println(JSON.unquoted.stringify(Project.serializer().list,actualProject))
+        val expectedProjectsList = listOf(
+                Project(
+                        id = 1,
+                        url = "https://techdemo4.testrail.io/index.php?/projects/overview/1",
+                        name = "API_Test_Project",
+                        showAnnouncement = false,
+                        suiteMode = 3,
+                        isCompleted = false
+                )
+        )
+        val actualProjectsList = Project().getProjects()
+        println(JSON.unquoted.stringify(Project.serializer().list,actualProjectsList))
+        Assertions.assertEquals(expectedProjectsList,actualProjectsList)
     }
 
     @Test

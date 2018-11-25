@@ -1,6 +1,7 @@
 package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -65,13 +66,21 @@ class SectionTest
     @Test
     fun getSectionTest()
     {
-
+        val expectedSection = JSON.unquoted.parse<Section>("{depth:0,display_order:1,id:1,description:null,suite_id:1,parent_id:null,name:API_Test_Section}")
+        val actualSection = Section().getSection(1)
+        println(JSON.unquoted.stringify(actualSection))
+        Assertions.assertEquals(expectedSection,actualSection)
     }
 
     @Test
     fun getSectionsTest()
     {
-
+        val expectedSectionsList = listOf(
+                JSON.unquoted.parse<Section>("{depth:0,display_order:1,id:1,description:null,suite_id:1,parent_id:null,name:API_Test_Section}")
+        )
+        val actualSectionsList = Section().getSections(1,1)
+        println(JSON.unquoted.stringify(Section.serializer().list,actualSectionsList))
+        Assertions.assertEquals(expectedSectionsList,actualSectionsList)
     }
 
     @Test

@@ -14,7 +14,6 @@ data class Plan
         @Optional @Transient var completedOn: Timestamp? = null,
         @Optional @SerialName("created_by") val createdBy: Int? = null,
         @Optional @Transient var createdOn: Timestamp? = null,
-    //TODO Add status count 1-7
         @Optional @SerialName("custom_status1_count") val customStatus1Count: Int? = null,
         @Optional @SerialName("custom_status2_count") val customStatus2Count: Int? = null,
         @Optional @SerialName("custom_status3_count") val customStatus3Count: Int? = null,

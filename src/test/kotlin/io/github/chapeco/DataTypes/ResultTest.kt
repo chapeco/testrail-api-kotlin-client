@@ -3,6 +3,7 @@ package io.github.chapeco.DataTypes
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -95,19 +96,52 @@ class ResultTest
     @Test
     fun getResultsTest()
     {
-
+        val expectedResultsList = listOf(
+                Result(
+                        createdBy = 1,
+                        id = 1,
+                        testId = 1,
+                        statusId = 1,
+                        createdOn = Timestamp(1542143242)
+                )
+        )
+        val actualResultsList = Result().getResults(1)
+        println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
+        Assertions.assertEquals(expectedResultsList,actualResultsList)
     }
 
     @Test
     fun getResultsForCaseTest()
     {
-
+        val expectedResultsList = listOf(
+                Result(
+                        createdBy = 1,
+                        id = 1,
+                        testId = 1,
+                        statusId = 1,
+                        createdOn = Timestamp(1542143242)
+                )
+        )
+        val actualResultsList = Result().getResultsForCase(1,1)
+        println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
+        Assertions.assertEquals(expectedResultsList,actualResultsList)
     }
 
     @Test
     fun getResultsForRunTest()
     {
-
+        val expectedResultsList = listOf(
+                Result(
+                        createdBy = 1,
+                        id = 1,
+                        testId = 1,
+                        statusId = 1,
+                        createdOn = Timestamp(1542143242)
+                )
+        )
+        val actualResultsList = Result().getResultsForRun(1)
+        println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
+        Assertions.assertEquals(expectedResultsList,actualResultsList)
     }
 
     @Test

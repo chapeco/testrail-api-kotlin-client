@@ -10,22 +10,23 @@ import kotlinx.serialization.json.JSON
 data class Result
 (
     //GET
-        @SerialName("created_by") val createdBy: Int? = null,
-        @Transient var createdOn: Timestamp? = null,
-        val id: Int? = null,
-        @SerialName("test_id") val testId: Int? = null,
+        @Optional @SerialName("created_by") val createdBy: Int? = null,
+        @Optional @Transient var createdOn: Timestamp? = null,
+        @Optional val id: Int? = null,
+        @Optional @SerialName("test_id") val testId: Int? = null,
 
     //ADD
-        @SerialName("status_id") var statusId: Int? = null,
-        var comment: String? = null,
-        var version: String? = null,
-        @Transient var elapsed: Timespan? = null,
-        var defects: String? = null,
-        @SerialName("assignedto_id") var assignedToId: Int? = null
+        @Optional @SerialName("status_id") var statusId: Int? = null,
+        @Optional var comment: String? = null,
+        @Optional var version: String? = null,
+        @Optional @Transient var elapsed: Timespan? = null,
+        @Optional var defects: String? = null,
+        @Optional @SerialName("assignedto_id") var assignedToId: Int? = null,
+        @Optional @SerialName("custom_step_results") val customStepResults: String? = null
 )
 {
-    @Optional @SerialName("created_on") private val createdOnActual: Long? = if(createdOn != null) createdOn.toString().toLong() else -1
-    @Optional @SerialName("elapsed") private val elapsedActual: String? = if(elapsed != null) elapsed.toString() else "-1"
+    @Optional @SerialName("created_on") private val createdOnActual: Long? = createdOn.toString().toLongOrNull()
+    @Optional @SerialName("elapsed") private val elapsedActual: String? = elapsed.toString()
 
     init {
         if(createdOn == null) createdOn = Timestamp(createdOnActual)
