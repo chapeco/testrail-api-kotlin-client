@@ -42,13 +42,16 @@ class Request
 
     fun Post(endpoint: String, jsonPayload: String): String?
     {
+        println(jsonPayload)
         val (request, response, result) = endpoint.httpPost()
                 .authenticate(username,password)
                 .body(jsonPayload)
+                .also { println(it) }
                 .responseString()
         val (data, error) = result
         if(error == null)
         {
+            println(data)
             return data
         }
         else

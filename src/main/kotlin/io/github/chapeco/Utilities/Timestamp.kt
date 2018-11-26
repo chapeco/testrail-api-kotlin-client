@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Timestamp
 (
-    var time: Long? = null
+    var time: Long? = -1
 )
 {
     override fun toString(): String {

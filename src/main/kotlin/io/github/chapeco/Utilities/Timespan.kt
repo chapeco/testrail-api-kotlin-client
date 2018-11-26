@@ -1,5 +1,7 @@
 package io.github.chapeco.Utilities
 
+import java.lang.StringBuilder
+
 
 data class Timespan
 (
@@ -15,12 +17,12 @@ data class Timespan
     private val secondsString: String = "s"
 
     private fun getTimespan(): String{
-        var timespanString: String = ""
-        if (days > 0) timespanString = timespanString + days + daysString
-        if (hours > 0) timespanString = timespanString + hours + hoursString
-        if (minutes > 0) timespanString = timespanString + minutes + minutesString
-        if (seconds > 0) timespanString = timespanString + seconds + secondsString
-        return timespanString
+        val timespanString = StringBuilder()
+        if(days > 0) timespanString.append(days.toString() + daysString)
+        if(hours > 0) timespanString.append(hours.toString() + hoursString)
+        if(minutes > 0) timespanString.append(minutes.toString() + minutesString)
+        if(seconds > 0) timespanString.append(seconds.toString() + secondsString)
+        return timespanString.toString()
     }
 
     override fun toString(): String {
@@ -28,7 +30,7 @@ data class Timespan
     }
 
     fun parseTimespan(timespanString: String?): Timespan? {
-        if (timespanString.toString().equals("null")) return null
+        if (timespanString.toString().equals("null")) return Timespan(seconds = 1)
         var currentString = timespanString!!.replace(" ","")
         var days: Int = 0
         var hours: Int = 0
