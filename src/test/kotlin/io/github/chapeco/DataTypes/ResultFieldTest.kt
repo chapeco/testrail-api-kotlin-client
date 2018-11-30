@@ -5,8 +5,8 @@ import io.github.chapeco.DataTypes.SubTypes.Context
 import io.github.chapeco.DataTypes.SubTypes.Options
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class ResultFieldTest
 {
@@ -33,7 +33,7 @@ class ResultFieldTest
                 systemName = "some system name",
                 typeId = 1
         )
-        Assertions.assertEquals(expectedResultField.toString(),actualResultField.toString())
+        Assert.assertEquals(expectedResultField.toString(),actualResultField.toString())
     }
 
     @Test
@@ -51,7 +51,7 @@ class ResultFieldTest
                 typeId = 1
         )
         println(JSON.unquoted.stringify(actualResultField))
-        Assertions.assertEquals(expectedResultField,JSON.unquoted.stringify(actualResultField))
+        Assert.assertEquals(expectedResultField,JSON.unquoted.stringify(actualResultField))
     }
 
     @Test
@@ -67,7 +67,7 @@ class ResultFieldTest
                 systemName = "some system name",
                 typeId = 1
         )
-        Assertions.assertEquals(expectedResultField.toString(),JSON.unquoted.parse<ResultField>("{configs:[{group_id:null,id:null,name:null}],description:\"some description\",display_order:1,id:1,label:\"some label\",name:\"some name\",system_name:\"some system name\",type_id:1}").toString())
+        Assert.assertEquals(expectedResultField.toString(),JSON.unquoted.parse<ResultField>("{configs:[{group_id:null,id:null,name:null}],description:\"some description\",display_order:1,id:1,label:\"some label\",name:\"some name\",system_name:\"some system name\",type_id:1}").toString())
     }
 
     @Test
@@ -105,6 +105,6 @@ class ResultFieldTest
         )
         val actualResultFieldList = ResultField().getResultFields()
         println(JSON.stringify(ResultField.serializer().list,actualResultFieldList))
-        Assertions.assertEquals(expectedResultFieldList,actualResultFieldList)
+        Assert.assertEquals(expectedResultFieldList,actualResultFieldList)
     }
 }

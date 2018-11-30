@@ -2,8 +2,8 @@ package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class ConfigurationTest
 {
@@ -18,7 +18,7 @@ class ConfigurationTest
                 id = 1,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedConfiguration,actualConfiguration)
+        Assert.assertEquals(expectedConfiguration,actualConfiguration)
     }
 
     @Test
@@ -30,7 +30,7 @@ class ConfigurationTest
                 name = "some name"
         )
         println(JSON.unquoted.stringify(actualConfiguration))
-        Assertions.assertEquals(expectedConfiguration,JSON.unquoted.stringify(actualConfiguration))
+        Assert.assertEquals(expectedConfiguration,JSON.unquoted.stringify(actualConfiguration))
     }
 
     @Test
@@ -40,7 +40,7 @@ class ConfigurationTest
                 id = 1,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedConfiguration, JSON.unquoted.parse<Configuration>("{group_id:null,id:1,name:\"some name\"}"))
+        Assert.assertEquals(expectedConfiguration, JSON.unquoted.parse<Configuration>("{group_id:null,id:1,name:\"some name\"}"))
     }
 
     @Test
@@ -49,7 +49,7 @@ class ConfigurationTest
         val expectedConfigurationsList = listOf<Configuration>()
         val actualConfigurationsList = Configuration().getConfigs(1)
         println(JSON.unquoted.stringify(Configuration.serializer().list,actualConfigurationsList))
-        Assertions.assertEquals(expectedConfigurationsList,actualConfigurationsList)
+        Assert.assertEquals(expectedConfigurationsList,actualConfigurationsList)
     }
 
     @Test

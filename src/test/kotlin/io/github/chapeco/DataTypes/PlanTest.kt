@@ -3,8 +3,8 @@ package io.github.chapeco.DataTypes
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class PlanTest
 {
@@ -56,7 +56,7 @@ class PlanTest
                 milestoneId = 1,
                 entries = List<PlanEntry>(1) {PlanEntry()}
         )
-        Assertions.assertEquals(expectedPlan.toString(),actualPlan.toString())
+        Assert.assertEquals(expectedPlan.toString(),actualPlan.toString())
     }
 
     @Test
@@ -86,7 +86,7 @@ class PlanTest
                 entries = List<PlanEntry>(1) {PlanEntry()}
         )
         println(JSON.unquoted.stringify(actualPlan))
-        Assertions.assertEquals(expectedPlan,JSON.unquoted.stringify(actualPlan))
+        Assert.assertEquals(expectedPlan,JSON.unquoted.stringify(actualPlan))
     }
 
     @Test
@@ -114,7 +114,7 @@ class PlanTest
                 milestoneId = 1,
                 entries = List<PlanEntry>(1) {PlanEntry()}
         )
-        Assertions.assertEquals(expectedPlan.toString(),JSON.unquoted.parse<Plan>("{assignedto_id:1,blocked_count:1,created_by:1,custom_status?_count:null,failed_count:1,id:null,is_completed:false,passed_count:1,project_id:1,retest_count:1,untested_count:1,url:\"some url\",name:\"some name\",description:\"some description\",milestone_id:1,entries:[{suite_id:null,config_ids:null,runs:null,name:null,description:null,assignedto_id:null,include_all:null,case_ids:null}],completed_on:1000,created_on:1000}").toString())
+        Assert.assertEquals(expectedPlan.toString(),JSON.unquoted.parse<Plan>("{assignedto_id:1,blocked_count:1,created_by:1,custom_status?_count:null,failed_count:1,id:null,is_completed:false,passed_count:1,project_id:1,retest_count:1,untested_count:1,url:\"some url\",name:\"some name\",description:\"some description\",milestone_id:1,entries:[{suite_id:null,config_ids:null,runs:null,name:null,description:null,assignedto_id:null,include_all:null,case_ids:null}],completed_on:1000,created_on:1000}").toString())
     }
 
     @Test
@@ -146,7 +146,7 @@ class PlanTest
         )
         val actualPlan = Plan().getPlan(2)
         println(JSON.unquoted.stringify(actualPlan))
-        Assertions.assertEquals(expectedPlan,actualPlan)
+        Assert.assertEquals(expectedPlan,actualPlan)
     }
 
     @Test
@@ -179,7 +179,7 @@ class PlanTest
         )
         val actualPlansList = Plan().getPlans(1)
         println(JSON.unquoted.stringify(Plan.serializer().list,actualPlansList))
-        Assertions.assertEquals(expectedPlansList,actualPlansList)
+        Assert.assertEquals(expectedPlansList,actualPlansList)
     }
 
     @Test

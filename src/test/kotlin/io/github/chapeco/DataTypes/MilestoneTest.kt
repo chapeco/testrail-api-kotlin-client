@@ -3,8 +3,8 @@ package io.github.chapeco.DataTypes
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class MilestoneTest
 {
@@ -57,7 +57,7 @@ class MilestoneTest
                 isCompleted = false,
                 isStarted = true
         )
-        Assertions.assertEquals(expectedMilestone,actualMilestone)
+        Assert.assertEquals(expectedMilestone,actualMilestone)
     }
 
     @Test
@@ -88,7 +88,7 @@ class MilestoneTest
                 isStarted = true
         )
         println(JSON.unquoted.stringify(actualMilestone))
-        Assertions.assertEquals(expectedMilestone,JSON.unquoted.stringify(actualMilestone))
+        Assert.assertEquals(expectedMilestone,JSON.unquoted.stringify(actualMilestone))
     }
 
     @Test
@@ -117,7 +117,7 @@ class MilestoneTest
                 isCompleted = false,
                 isStarted = true
         )
-        Assertions.assertEquals(expectedMilestone.toString(),JSON.unquoted.parse<Milestone>("{id:1,milestones:[{id:null,milestones:null,project_id:null,url:null,name:null,description:null,parent_id:null,is_completed:null,is_started:null,completed_on:null,started_on:null,due_on:null,start_on:null}],project_id:1,url:\"some url\",name:\"some name\",description:\"some description\",parent_id:1,is_completed:false,is_started:true,completed_on:1000,started_on:500,due_on:2000,start_on:400}").toString())
+        Assert.assertEquals(expectedMilestone.toString(),JSON.unquoted.parse<Milestone>("{id:1,milestones:[{id:null,milestones:null,project_id:null,url:null,name:null,description:null,parent_id:null,is_completed:null,is_started:null,completed_on:null,started_on:null,due_on:null,start_on:null}],project_id:1,url:\"some url\",name:\"some name\",description:\"some description\",parent_id:1,is_completed:false,is_started:true,completed_on:1000,started_on:500,due_on:2000,start_on:400}").toString())
     }
 
     @Test
@@ -137,7 +137,7 @@ class MilestoneTest
         )
         val actualMilestone = Milestone().getMilestone(1)
         println(JSON.unquoted.stringify(actualMilestone))
-        Assertions.assertEquals(expectedMilestone,actualMilestone)
+        Assert.assertEquals(expectedMilestone,actualMilestone)
     }
 
     @Test
@@ -158,7 +158,7 @@ class MilestoneTest
         )
         val actualMilestonesList = Milestone().getMilestones(1)
         println(JSON.unquoted.stringify(Milestone.serializer().list,actualMilestonesList))
-        Assertions.assertEquals(expectedMilestonesList,actualMilestonesList)
+        Assert.assertEquals(expectedMilestonesList,actualMilestonesList)
     }
 
     @Test

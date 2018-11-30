@@ -2,8 +2,8 @@ package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class PriorityTest
 {
@@ -24,7 +24,7 @@ class PriorityTest
                 priority = 1,
                 shortName = "some short name"
         )
-        Assertions.assertEquals(expectedPriority,actualPriority)
+        Assert.assertEquals(expectedPriority,actualPriority)
     }
 
     @Test
@@ -39,7 +39,7 @@ class PriorityTest
                 shortName = "some short name"
         )
         println(JSON.unquoted.stringify(actualPriority))
-        Assertions.assertEquals(expectedPriority,JSON.unquoted.stringify(actualPriority))
+        Assert.assertEquals(expectedPriority,JSON.unquoted.stringify(actualPriority))
     }
 
     @Test
@@ -52,7 +52,7 @@ class PriorityTest
                 priority = 1,
                 shortName = "some short name"
         )
-        Assertions.assertEquals(expectedPriority,JSON.unquoted.parse<Priority>("{id:1,is_default:true,name:\"some name\",priority:1,short_name:\"some short name\"}"))
+        Assert.assertEquals(expectedPriority,JSON.unquoted.parse<Priority>("{id:1,is_default:true,name:\"some name\",priority:1,short_name:\"some short name\"}"))
     }
 
     @Test
@@ -66,6 +66,6 @@ class PriorityTest
         )
         val actualPrioritiesList = Priority().getPriorities()
         println(JSON.unquoted.stringify(Priority.serializer().list,actualPrioritiesList))
-        Assertions.assertEquals(expectedPrioritiesList,actualPrioritiesList)
+        Assert.assertEquals(expectedPrioritiesList,actualPrioritiesList)
     }
 }

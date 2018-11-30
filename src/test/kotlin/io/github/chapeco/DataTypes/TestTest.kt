@@ -3,8 +3,8 @@ package io.github.chapeco.DataTypes
 import io.github.chapeco.Utilities.Timespan
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class TestTest
 {
@@ -47,7 +47,7 @@ class TestTest
                 title = "some title",
                 typeId = 1
         )
-        Assertions.assertEquals(expectedTest,actualTest)
+        Assert.assertEquals(expectedTest,actualTest)
     }
 
     @Test
@@ -73,7 +73,7 @@ class TestTest
                 typeId = 1
         )
         println(JSON.unquoted.stringify(actualTest))
-        Assertions.assertEquals(expectedTest,JSON.unquoted.stringify(actualTest))
+        Assert.assertEquals(expectedTest,JSON.unquoted.stringify(actualTest))
     }
 
     @Test
@@ -97,7 +97,7 @@ class TestTest
                 title = "some title",
                 typeId = 1
         )
-        Assertions.assertEquals(expectedTest,JSON.unquoted.parse<TestObj>("{assignedto_id:1,case_id:1,id:1,milestone_id:1,priority_id:1,refs:\"some refs\",run_id:1,status_id:1,title:\"some title\",type_id:1,estimate:1s,estimate_forecast:1s}"))
+        Assert.assertEquals(expectedTest,JSON.unquoted.parse<TestObj>("{assignedto_id:1,case_id:1,id:1,milestone_id:1,priority_id:1,refs:\"some refs\",run_id:1,status_id:1,title:\"some title\",type_id:1,estimate:1s,estimate_forecast:1s}"))
     }
 
     @Test
@@ -116,7 +116,7 @@ class TestTest
         )
         val actualTestObj = TestObj().getTest(1)
         println(JSON.unquoted.stringify(actualTestObj))
-        Assertions.assertEquals(expectedTestObj,actualTestObj)
+        Assert.assertEquals(expectedTestObj,actualTestObj)
     }
 
     @Test
@@ -137,6 +137,6 @@ class TestTest
         )
         val actualTestObjList = TestObj().getTests(1)
         println(JSON.unquoted.stringify(TestObj.serializer().list,actualTestObjList))
-        Assertions.assertEquals(expectedTestObjList,actualTestObjList)
+        Assert.assertEquals(expectedTestObjList,actualTestObjList)
     }
 }

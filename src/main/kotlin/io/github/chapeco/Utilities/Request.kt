@@ -40,15 +40,18 @@ class Request
         }
     }
 
-    fun Post(endpoint: String, jsonPayload: String): String?
+    fun Post(endpoint: String, jsonPayload: String = ""): String?
     {
+        println(jsonPayload.replace(":\"null\"",":null"))
         val (request, response, result) = endpoint.httpPost()
                 .authenticate(username,password)
-                .body(jsonPayload)
+                .body(jsonPayload.replace(":\"null\"",":null"))
+                .also { println(it) }
                 .responseString()
         val (data, error) = result
         if(error == null)
         {
+            println(data)
             return data
         }
         else

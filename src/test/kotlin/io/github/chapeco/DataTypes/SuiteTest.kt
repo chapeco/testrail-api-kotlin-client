@@ -3,8 +3,8 @@ package io.github.chapeco.DataTypes
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class SuiteTest
 {
@@ -37,7 +37,7 @@ class SuiteTest
                 name = "some name",
                 description = "some description"
         )
-        Assertions.assertEquals(expectedSuite,actualSuite)
+        Assert.assertEquals(expectedSuite,actualSuite)
     }
 
     @Test
@@ -58,7 +58,7 @@ class SuiteTest
                 description = "some description"
         )
         println(JSON.unquoted.stringify(actualSuite))
-        Assertions.assertEquals(expectedSuite,JSON.unquoted.stringify(actualSuite))
+        Assert.assertEquals(expectedSuite,JSON.unquoted.stringify(actualSuite))
     }
 
     @Test
@@ -77,7 +77,7 @@ class SuiteTest
                 name = "some name",
                 description = "some description"
         )
-        Assertions.assertEquals(expectedSuite,JSON.unquoted.parse<Suite>("{id:1,is_baseline:true,is_completed:false,is_master:true,project_id:1,url:\"some url\",name:\"some name\",description:\"some description\",completed_on:1000}"))
+        Assert.assertEquals(expectedSuite,JSON.unquoted.parse<Suite>("{id:1,is_baseline:true,is_completed:false,is_master:true,project_id:1,url:\"some url\",name:\"some name\",description:\"some description\",completed_on:1000}"))
     }
 
     @Test
@@ -94,7 +94,7 @@ class SuiteTest
         )
         val actualSuite = Suite().getSuite(1)
         println(JSON.unquoted.stringify(actualSuite))
-        Assertions.assertEquals(expectedSuite,actualSuite)
+        Assert.assertEquals(expectedSuite,actualSuite)
     }
 
     @Test
@@ -113,7 +113,7 @@ class SuiteTest
         )
         val actualSuitesList = Suite().getSuites(1)
         println(JSON.unquoted.stringify(Suite.serializer().list,actualSuitesList))
-        Assertions.assertEquals(expectedSuitesList,actualSuitesList)
+        Assert.assertEquals(expectedSuitesList,actualSuitesList)
     }
 
     @Test

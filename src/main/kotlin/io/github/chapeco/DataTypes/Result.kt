@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.DataTypes.SubTypes.Results
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
@@ -10,10 +11,11 @@ import kotlinx.serialization.json.JSON
 data class Result
 (
     //GET
-        @Optional @SerialName("created_by") val createdBy: Int? = null,
+        @Optional @SerialName("created_by") var createdBy: Int? = null,
         @Optional @Transient var createdOn: Timestamp? = null,
-        @Optional val id: Int? = null,
-        @Optional @SerialName("test_id") val testId: Int? = null,
+        @Optional var id: Int? = null,
+        @Optional @SerialName("test_id") var testId: Int? = null,
+        @Optional @SerialName("case_id") var caseId: Int? = null,
 
     //ADD
         @Optional @SerialName("status_id") var statusId: Int? = null,
@@ -25,11 +27,11 @@ data class Result
         @Optional @SerialName("custom_step_results") val customStepResults: String? = null
 )
 {
-    @Optional @SerialName("created_on") private val createdOnActual: Long? = createdOn.toString().toLongOrNull()
+    @Optional @SerialName("created_on") private val createdOnActual: String? = createdOn.toString()
     @Optional @SerialName("elapsed") private val elapsedActual: String? = elapsed.toString()
 
     init {
-        if(createdOn == null) createdOn = Timestamp(createdOnActual)
+        if(createdOn == null) createdOn = Timestamp(createdOnActual?.toLongOrNull())
         if(elapsed == null) elapsed = Timespan().parseTimespan(elapsedActual)
     }
 
@@ -94,25 +96,30 @@ data class Result
 
     fun addResult(result: Result): Result
     {
+        val testId = result.testId
         val endpoint = "add_result/$testId"
-        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(Result))!!)
+        //println(JSON.stringify(result))
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(result))!!)
     }
 
-    fun addResultForCase(runId: Int, caseId: Int): Result
+    fun addResultForCase(runId: Int, caseId: Int, result: Result): Result
     {
         val endpoint = "add_result_for_case/$runId/$caseId"
-        return Result()
+        println(JSON.stringify(result))
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(result))!!)
     }
 
-    fun addResults(runId: Int): Array<Result>
+    fun addResults(runId: Int, results: Results): List<Result>
     {
         val endpoint = "add_results/$runId"
-        return Array<Result>(0) {Result()}
+        println(JSON.stringify(results))
+        return JSON.unquoted.parse(Result.serializer().list,Request().Post(endpoint,JSON.stringify(results))!!)
     }
 
-    fun addResultsForCases(runId: Int): Array<Result>
+    fun addResultsForCases(runId: Int, results: Results): List<Result>
     {
         val endpoint = "add_results_for_cases/$runId"
-        return Array<Result>(0) {Result()}
+        println(JSON.stringify(results))
+        return JSON.unquoted.parse(Result.serializer().list,Request().Post(endpoint,JSON.stringify(results))!!)
     }
 }

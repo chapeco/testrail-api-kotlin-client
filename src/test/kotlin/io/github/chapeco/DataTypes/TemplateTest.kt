@@ -2,8 +2,8 @@ package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class TemplateTest
 {
@@ -20,7 +20,7 @@ class TemplateTest
                 isDefault = true,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedTemplate,actualTemplate)
+        Assert.assertEquals(expectedTemplate,actualTemplate)
     }
 
     @Test
@@ -33,7 +33,7 @@ class TemplateTest
                 name = "some name"
         )
         println(JSON.unquoted.stringify(actualTemplate))
-        Assertions.assertEquals(expectedTemplate,JSON.unquoted.stringify(actualTemplate))
+        Assert.assertEquals(expectedTemplate,JSON.unquoted.stringify(actualTemplate))
     }
 
     @Test
@@ -44,7 +44,7 @@ class TemplateTest
                 isDefault = true,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedTemplate,JSON.unquoted.parse<Template>("{id:1,is_default:true,name:\"some name\"}"))
+        Assert.assertEquals(expectedTemplate,JSON.unquoted.parse<Template>("{id:1,is_default:true,name:\"some name\"}"))
     }
 
     @Test
@@ -69,6 +69,6 @@ class TemplateTest
         )
         val actualTemplatesList = Template().getTemplates(1)
         println(JSON.stringify(Template.serializer().list,actualTemplatesList))
-        Assertions.assertEquals(expectedTemplatesList,actualTemplatesList)
+        Assert.assertEquals(expectedTemplatesList,actualTemplatesList)
     }
 }

@@ -91,17 +91,18 @@ data class Case
     fun addCase(sectionId: Int, case: Case): Case
     {
         val endpoint = "add_case/$sectionId"
-        return Case()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(case))!!)
     }
 
     fun updateCase(caseId: Int, case: Case): Case
     {
         val endpoint = "update_case/$caseId"
-        return Case()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(case))!!)
     }
 
     fun deleteCase(caseId: Int)
     {
         val endpoint = "delete_case/$caseId"
+        Request().Post(endpoint)
     }
 }

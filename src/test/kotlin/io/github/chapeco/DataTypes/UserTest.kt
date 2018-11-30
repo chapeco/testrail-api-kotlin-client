@@ -2,8 +2,8 @@ package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class UserTest()
@@ -23,7 +23,7 @@ class UserTest()
                 isActive = true,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedUser,actualUser)
+        Assert.assertEquals(expectedUser,actualUser)
     }
 
     @Test
@@ -37,7 +37,7 @@ class UserTest()
                 name = "some name"
         )
         println(JSON.unquoted.stringify(actualUser))
-        Assertions.assertEquals(expectedUser,JSON.unquoted.stringify(actualUser))
+        Assert.assertEquals(expectedUser,JSON.unquoted.stringify(actualUser))
     }
 
     @Test
@@ -49,7 +49,7 @@ class UserTest()
                 isActive = true,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedUser,JSON.unquoted.parse<User>("{email:\"some email\",id:1,is_active:true,name:\"some name\"}"))
+        Assert.assertEquals(expectedUser,JSON.unquoted.parse<User>("{email:\"some email\",id:1,is_active:true,name:\"some name\"}"))
     }
 
     @Test
