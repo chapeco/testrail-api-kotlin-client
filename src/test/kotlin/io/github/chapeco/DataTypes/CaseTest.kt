@@ -70,7 +70,7 @@ class CaseTest
     @Test
     fun serializeCaseTest()
     {
-        val expectedCase: String = "{created_by:1,created_on:null,estimate_forecast:1s,id:1,section_id:1,suite_id:1,updated_by:1,updated_on:2000,title:\"My Expected Case\",template_id:1,type_id:1,priority_id:1,estimate:1s,milestone_id:1,refs:\"My Expected Reference\"}"
+        val expectedCase: String = "{created_by:1,id:1,section_id:1,suite_id:1,updated_by:1,title:\"My Expected Case\",template_id:1,type_id:1,priority_id:1,milestone_id:1,refs:\"My Expected Reference\",custom_automation_type:null,custom_expected:null,custom_preconds:null,custom_steps:null,custom_steps_separated:null,custom_mission:null,custom_goals:null,created_on:null,updated_on:2000,estimate_forecast:1s,estimate:1s}"
         val actualCase = Case(
                 createdBy = 1,
                 estimateForecast = Timespan(

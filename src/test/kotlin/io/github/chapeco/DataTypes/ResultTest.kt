@@ -69,7 +69,7 @@ class ResultTest
                 defects = "some defects",
                 assignedToId = 1
         )
-        println(JSON.unquoted.stringify(actualResult))
+        println(JSON.unquoted.stringify(actualResult).replace(":\"null\"",":null"))
         Assertions.assertEquals(expectedResult,JSON.unquoted.stringify(actualResult))
     }
 

@@ -42,10 +42,10 @@ class Request
 
     fun Post(endpoint: String, jsonPayload: String): String?
     {
-        println(jsonPayload)
+        println(jsonPayload.replace(":\"null\"",":null"))
         val (request, response, result) = endpoint.httpPost()
                 .authenticate(username,password)
-                .body(jsonPayload)
+                .body(jsonPayload.replace(":\"null\"",":null"))
                 .also { println(it) }
                 .responseString()
         val (data, error) = result

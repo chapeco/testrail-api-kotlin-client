@@ -11,38 +11,28 @@ import kotlinx.serialization.json.JSON
 data class Result
 (
     //GET
-        @Optional @Transient var createdBy: Int? = null,
+        @Optional @SerialName("created_by") var createdBy: Int? = null,
         @Optional @Transient var createdOn: Timestamp? = null,
-        @Optional @Transient var id: Int? = null,
-        @Optional @Transient var testId: Int? = null,
-        @Optional @Transient var caseId: Int? = null,
+        @Optional var id: Int? = null,
+        @Optional @SerialName("test_id") var testId: Int? = null,
+        @Optional @SerialName("case_id") var caseId: Int? = null,
 
     //ADD
-        @Optional @SerialName("status_id") var statusId: Int? = -1,
-        @Optional var comment: String? = "",
-        @Optional var version: String? = "",
+        @Optional @SerialName("status_id") var statusId: Int? = null,
+        @Optional var comment: String? = null,
+        @Optional var version: String? = null,
         @Optional @Transient var elapsed: Timespan? = null,
-        @Optional var defects: String? = "",
-        @Optional @Transient var assignedToId: Int? = null,
-        @Optional @SerialName("custom_step_results") val customStepResults: String? = ""
+        @Optional var defects: String? = null,
+        @Optional @SerialName("assignedto_id") var assignedToId: Int? = null,
+        @Optional @SerialName("custom_step_results") val customStepResults: String? = null
 )
 {
-    @Optional @SerialName("created_on") private val createdOnActual: String? = if (createdOn == null) "" else createdOn.toString()
-    @Optional @SerialName("elapsed") private val elapsedActual: String? = if (elapsed == null) "" else elapsed.toString()
-    @Optional @SerialName("assignedto_id") private val assignedToIdActual: String? = if (assignedToId == null) "" else assignedToId.toString()
-    @Optional @SerialName("created_by") private val createdByActual: String? = if (createdBy == null) "" else createdBy.toString()
-    @Optional @SerialName("id") private val idActual: String? = if (id == null) "" else id.toString()
-    @Optional @SerialName("test_id") private val testIdActual: String? = if (testId == null) "" else testId.toString()
-    @Optional @SerialName("case_id") private val caseIdActual: String? = if (caseId == null) "" else caseId.toString()
+    @Optional @SerialName("created_on") private val createdOnActual: String? = createdOn.toString()
+    @Optional @SerialName("elapsed") private val elapsedActual: String? = elapsed.toString()
 
     init {
         if(createdOn == null) createdOn = Timestamp(createdOnActual?.toLongOrNull())
-        if(elapsed == null && elapsedActual != "") elapsed = Timespan().parseTimespan(elapsedActual)
-        if(assignedToId == null && assignedToIdActual != "") assignedToId = assignedToIdActual?.toInt()
-        if(createdBy == null && createdByActual != "") createdBy = createdByActual?.toInt()
-        if(id == null && idActual != "") id = idActual?.toInt()
-        if(testId == null && testIdActual != "") testId = testIdActual?.toInt()
-        if(caseId == null && caseIdActual != "") caseId = caseIdActual?.toInt()
+        if(elapsed == null) elapsed = Timespan().parseTimespan(elapsedActual)
     }
 
     //TODO
@@ -108,7 +98,7 @@ data class Result
     {
         val testId = result.testId
         val endpoint = "add_result/$testId"
-        println(JSON.stringify(result))
+        //println(JSON.stringify(result))
         return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(result))!!)
     }
 
