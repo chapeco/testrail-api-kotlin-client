@@ -3,8 +3,8 @@ package io.github.chapeco.DataTypes
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class ProjectTest
 {
@@ -35,7 +35,7 @@ class ProjectTest
                 suiteMode = 1,
                 isCompleted = false
         )
-        Assertions.assertEquals(expectedProject,actualProject)
+        Assert.assertEquals(expectedProject,actualProject)
     }
 
     @Test
@@ -55,7 +55,7 @@ class ProjectTest
                 isCompleted = false
         )
         println(JSON.unquoted.stringify(actualProject))
-        Assertions.assertEquals(expectedProject,JSON.unquoted.stringify(actualProject))
+        Assert.assertEquals(expectedProject,JSON.unquoted.stringify(actualProject))
     }
 
     @Test
@@ -73,7 +73,7 @@ class ProjectTest
                 suiteMode = 1,
                 isCompleted = false
         )
-        Assertions.assertEquals(expectedProject,JSON.unquoted.parse<Project>("{id:1,url:\"some url\",name:\"some name\",announcement:\"some announcement\",show_announcement:true,suite_mode:1,is_completed:false,completed_on:1000}"))
+        Assert.assertEquals(expectedProject,JSON.unquoted.parse<Project>("{id:1,url:\"some url\",name:\"some name\",announcement:\"some announcement\",show_announcement:true,suite_mode:1,is_completed:false,completed_on:1000}"))
     }
 
     @Test
@@ -81,7 +81,7 @@ class ProjectTest
     {
         val expectedProject = JSON.unquoted.parse<Project>("{\"id\":1,\"name\":\"API_Test_Project\",\"announcement\":null,\"show_announcement\":false,\"is_completed\":false,\"completed_on\":null,\"suite_mode\":3,\"url\":\"https:\\/\\/techdemo4.testrail.io\\/index.php?\\/projects\\/overview\\/1\"}")
         val actualProject = Project().getProject(1)
-        Assertions.assertEquals(expectedProject,actualProject)
+        Assert.assertEquals(expectedProject,actualProject)
     }
 
     @Test
@@ -99,7 +99,7 @@ class ProjectTest
         )
         val actualProjectsList = Project().getProjects()
         println(JSON.unquoted.stringify(Project.serializer().list,actualProjectsList))
-        Assertions.assertEquals(expectedProjectsList,actualProjectsList)
+        Assert.assertEquals(expectedProjectsList,actualProjectsList)
     }
 
     @Test

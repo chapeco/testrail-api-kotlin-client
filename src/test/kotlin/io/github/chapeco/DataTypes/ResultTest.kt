@@ -5,9 +5,8 @@ import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Disabled
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class ResultTest
 {
@@ -46,7 +45,7 @@ class ResultTest
                 defects = "some defects",
                 assignedToId = 1
         )
-        Assertions.assertEquals(expectedResult,actualResult)
+        Assert.assertEquals(expectedResult,actualResult)
     }
 
     @Test
@@ -70,7 +69,7 @@ class ResultTest
                 assignedToId = 1
         )
         println(JSON.unquoted.stringify(actualResult).replace(":\"null\"",":null"))
-        Assertions.assertEquals(expectedResult,JSON.unquoted.stringify(actualResult))
+        Assert.assertEquals(expectedResult,JSON.unquoted.stringify(actualResult))
     }
 
     @Test
@@ -93,7 +92,7 @@ class ResultTest
                 assignedToId = 1,
                 customStepResults = null
         )
-        Assertions.assertEquals(expectedResult,JSON.unquoted.parse<Result>("{test_id:1,status_id:1,comment:\"some comment\",version:\"some version\",defects:\"some defects\",custom_step_results:null,created_on:1000,elapsed:1s,assignedto_id:1,created_by:\"1\",id:1}"))
+        Assert.assertEquals(expectedResult,JSON.unquoted.parse<Result>("{test_id:1,status_id:1,comment:\"some comment\",version:\"some version\",defects:\"some defects\",custom_step_results:null,created_on:1000,elapsed:1s,assignedto_id:1,created_by:\"1\",id:1}"))
     }
 
     @Test
@@ -101,7 +100,7 @@ class ResultTest
     {
         val actualResultsList = Result().getResults(1)
         println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
-        Assertions.assertTrue(actualResultsList.isNotEmpty())
+        Assert.assertTrue(actualResultsList.isNotEmpty())
     }
 
     @Test
@@ -109,7 +108,7 @@ class ResultTest
     {
         val actualResultsList = Result().getResultsForCase(1,1)
         println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
-        Assertions.assertTrue(actualResultsList.isNotEmpty())
+        Assert.assertTrue(actualResultsList.isNotEmpty())
     }
 
     @Test
@@ -117,7 +116,7 @@ class ResultTest
     {
         val actualResultsList = Result().getResultsForRun(1)
         println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
-        Assertions.assertTrue(actualResultsList.isNotEmpty())
+        Assert.assertTrue(actualResultsList.isNotEmpty())
     }
 
     @Test
@@ -126,7 +125,7 @@ class ResultTest
         val expectedResult = Result(testId = 1, statusId = 1)
         val actualResult = Result().addResult(expectedResult)
         println(JSON.unquoted.stringify(actualResult))
-        Assertions.assertEquals(expectedResult.testId,actualResult.testId)
+        Assert.assertEquals(expectedResult.testId,actualResult.testId)
     }
 
     @Test
@@ -135,7 +134,7 @@ class ResultTest
         val expectedResult = Result(testId = 1, statusId = 1)
         val actualResult = Result().addResultForCase(1,1,expectedResult)
         println(JSON.unquoted.stringify(actualResult))
-        Assertions.assertEquals(expectedResult.testId,actualResult.testId)
+        Assert.assertEquals(expectedResult.testId,actualResult.testId)
     }
 
     @Test
@@ -143,7 +142,7 @@ class ResultTest
     {
         val actualResultsList = Result().addResults(1, Results(listOf(Result(testId = 1, statusId = 1))))
         println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
-        Assertions.assertTrue(actualResultsList.isNotEmpty())
+        Assert.assertTrue(actualResultsList.isNotEmpty())
     }
 
     @Test
@@ -151,6 +150,6 @@ class ResultTest
     {
         val actualResultsList = Result().addResultsForCases(1, Results(listOf(Result(caseId = 1, statusId = 1))))
         println(JSON.unquoted.stringify(Result.serializer().list,actualResultsList))
-        Assertions.assertTrue(actualResultsList.isNotEmpty())
+        Assert.assertTrue(actualResultsList.isNotEmpty())
     }
 }

@@ -6,8 +6,8 @@ import io.github.chapeco.DataTypes.SubTypes.Options
 import io.github.chapeco.Utilities.Type
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class CaseFieldTest
@@ -82,7 +82,7 @@ class CaseFieldTest
                 configs = List<Config>(1) { Config() }
         )
         println(JSON.unquoted.stringify(actualCaseField))
-        Assertions.assertEquals(expectedCaseField, JSON.unquoted.stringify(actualCaseField))
+        Assert.assertEquals(expectedCaseField, JSON.unquoted.stringify(actualCaseField))
     }
 
     @Test
@@ -107,7 +107,7 @@ class CaseFieldTest
                 templateIds = List<Int>(1) {1},
                 configs = List<Config>(1) { Config() }
         )
-        Assertions.assertEquals(expectedCaseField.toString(),JSON.unquoted.parse<CaseField>(jsonPayload).toString())
+        Assert.assertEquals(expectedCaseField.toString(),JSON.unquoted.parse<CaseField>(jsonPayload).toString())
     }
 
     @Test
@@ -299,7 +299,7 @@ class CaseFieldTest
         )
         val actualCaseFieldsList = CaseField().getCaseFields()
         println(JSON.unquoted.stringify(CaseField.serializer().list,actualCaseFieldsList))
-        Assertions.assertEquals(expectedCaseFieldsList,actualCaseFieldsList)
+        Assert.assertEquals(expectedCaseFieldsList,actualCaseFieldsList)
     }
 
     @Test

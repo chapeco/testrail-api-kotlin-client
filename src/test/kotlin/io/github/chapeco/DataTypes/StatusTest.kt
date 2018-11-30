@@ -2,8 +2,8 @@ package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class StatusTest
 {
@@ -32,7 +32,7 @@ class StatusTest
                 label = "some string",
                 name = "some name"
         )
-        Assertions.assertEquals(expectedStatus,actualStatus)
+        Assert.assertEquals(expectedStatus,actualStatus)
     }
 
     @Test
@@ -51,7 +51,7 @@ class StatusTest
                 name = "some name"
         )
         println(JSON.unquoted.stringify(actualStatus))
-        Assertions.assertEquals(expectedStatus,JSON.unquoted.stringify(actualStatus))
+        Assert.assertEquals(expectedStatus,JSON.unquoted.stringify(actualStatus))
     }
 
     @Test
@@ -68,7 +68,7 @@ class StatusTest
                 label = "some string",
                 name = "some name"
         )
-        Assertions.assertEquals(expectedStatus,JSON.unquoted.parse<Status>("{color_bright:1,color_dark:1,color_medium:1,id:1,is_final:true,is_system:true,is_untested:true,label:\"some string\",name:\"some name\"}"))
+        Assert.assertEquals(expectedStatus,JSON.unquoted.parse<Status>("{color_bright:1,color_dark:1,color_medium:1,id:1,is_final:true,is_system:true,is_untested:true,label:\"some string\",name:\"some name\"}"))
     }
 
     @Test
@@ -133,6 +133,6 @@ class StatusTest
         )
         val actualStatusesList = Status().getStatuses()
         println(JSON.stringify(Status.serializer().list,actualStatusesList))
-        Assertions.assertEquals(expectedStatusesList,actualStatusesList)
+        Assert.assertEquals(expectedStatusesList,actualStatusesList)
     }
 }

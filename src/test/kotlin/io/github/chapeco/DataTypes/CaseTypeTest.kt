@@ -2,8 +2,8 @@ package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class CaseTypeTest
 {
@@ -20,7 +20,7 @@ class CaseTypeTest
                 isDefault = true,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedCaseType,actualCaseType)
+        Assert.assertEquals(expectedCaseType,actualCaseType)
     }
 
     @Test
@@ -33,7 +33,7 @@ class CaseTypeTest
                 name = "some name"
         )
         println(JSON.unquoted.stringify(actualCaseType))
-        Assertions.assertEquals(expectedCaseType,JSON.unquoted.stringify(actualCaseType))
+        Assert.assertEquals(expectedCaseType,JSON.unquoted.stringify(actualCaseType))
     }
 
     @Test
@@ -44,7 +44,7 @@ class CaseTypeTest
                 isDefault = true,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedCaseType,JSON.unquoted.parse<CaseType>("{id:1,is_default:true,name:\"some name\"}"))
+        Assert.assertEquals(expectedCaseType,JSON.unquoted.parse<CaseType>("{id:1,is_default:true,name:\"some name\"}"))
     }
 
     @Test
@@ -66,6 +66,6 @@ class CaseTypeTest
         )
         val actualCaseTypeList = CaseType().getCaseTypes()
         println(JSON.unquoted.stringify(CaseType.serializer().list,actualCaseTypeList))
-        Assertions.assertEquals(expectedCaseTypeList,actualCaseTypeList)
+        Assert.assertEquals(expectedCaseTypeList,actualCaseTypeList)
     }
 }

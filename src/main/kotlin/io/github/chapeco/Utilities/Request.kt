@@ -40,7 +40,7 @@ class Request
         }
     }
 
-    fun Post(endpoint: String, jsonPayload: String): String?
+    fun Post(endpoint: String, jsonPayload: String = ""): String?
     {
         println(jsonPayload.replace(":\"null\"",":null"))
         val (request, response, result) = endpoint.httpPost()

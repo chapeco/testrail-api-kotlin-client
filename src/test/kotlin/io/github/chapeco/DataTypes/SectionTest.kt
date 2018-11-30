@@ -2,8 +2,8 @@ package io.github.chapeco.DataTypes
 
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class SectionTest
 {
@@ -28,7 +28,7 @@ class SectionTest
                 parentId = 1,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedSection,actualSection)
+        Assert.assertEquals(expectedSection,actualSection)
     }
 
     @Test
@@ -45,7 +45,7 @@ class SectionTest
                 name = "some name"
         )
         println(JSON.unquoted.stringify(actualSection))
-        Assertions.assertEquals(expectedSection,JSON.unquoted.stringify(actualSection))
+        Assert.assertEquals(expectedSection,JSON.unquoted.stringify(actualSection))
     }
 
     @Test
@@ -60,7 +60,7 @@ class SectionTest
                 parentId = 1,
                 name = "some name"
         )
-        Assertions.assertEquals(expectedSection,JSON.unquoted.parse<Section>("{depth:1,display_order:1,id:1,description:\"some description\",suite_id:1,parent_id:1,name:\"some name\"}"))
+        Assert.assertEquals(expectedSection,JSON.unquoted.parse<Section>("{depth:1,display_order:1,id:1,description:\"some description\",suite_id:1,parent_id:1,name:\"some name\"}"))
     }
 
     @Test
@@ -69,7 +69,7 @@ class SectionTest
         val expectedSection = JSON.unquoted.parse<Section>("{depth:0,display_order:1,id:1,description:null,suite_id:1,parent_id:null,name:API_Test_Section}")
         val actualSection = Section().getSection(1)
         println(JSON.unquoted.stringify(actualSection))
-        Assertions.assertEquals(expectedSection,actualSection)
+        Assert.assertEquals(expectedSection,actualSection)
     }
 
     @Test
@@ -80,7 +80,7 @@ class SectionTest
         )
         val actualSectionsList = Section().getSections(1,1)
         println(JSON.unquoted.stringify(Section.serializer().list,actualSectionsList))
-        Assertions.assertEquals(expectedSectionsList,actualSectionsList)
+        Assert.assertEquals(expectedSectionsList,actualSectionsList)
     }
 
     @Test
