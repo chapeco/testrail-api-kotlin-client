@@ -305,6 +305,6 @@ class CaseFieldTest
     @Test
     fun addCaseFieldTest()
     {
-        
+
     }
 }
