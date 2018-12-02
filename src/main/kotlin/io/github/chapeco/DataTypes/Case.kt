@@ -1,10 +1,12 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
 import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
+import java.lang.Exception
 
 @Serializable
 data class Case
@@ -50,7 +52,7 @@ data class Case
     fun getCase(caseId: Int): Case
     {
         val endpoint = "get_case/$caseId"
-        return JSON.unquoted.parse<Case>(Request().Get(endpoint)!!)
+        return JSON.unquoted.parse(Request().Get(endpoint)!!)
     }
 
     fun getCases
@@ -88,20 +90,26 @@ data class Case
         return JSON.unquoted.parse(Case.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addCase(sectionId: Int, case: Case): Case
+    fun addCase(): Case
     {
+        if(this.sectionId == null) throw MissingRequiredParamException("sectionId")
+        val sectionId = this.sectionId
         val endpoint = "add_case/$sectionId"
-        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(case))!!)
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updateCase(caseId: Int, case: Case): Case
+    fun updateCase(): Case
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val caseId = this.id
         val endpoint = "update_case/$caseId"
-        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(case))!!)
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun deleteCase(caseId: Int)
+    fun deleteCase()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val caseId = this.id
         val endpoint = "delete_case/$caseId"
         Request().Post(endpoint)
     }

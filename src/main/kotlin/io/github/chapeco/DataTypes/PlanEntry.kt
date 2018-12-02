@@ -1,7 +1,9 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JSON
 
 @Serializable
 data class PlanEntry
@@ -20,20 +22,21 @@ data class PlanEntry
 )
 {
     //TODO
-    fun addPlanEntry(planId: Int): Plan
+    fun addPlanEntry(planId: Int, plan: Plan): Plan
     {
         val endpoint = "add_plan_entry/$planId"
-        return Plan()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(plan))!!)
     }
 
-    fun updatePlanEntry(planId: Int, entryId: Int): Plan
+    fun updatePlanEntry(planId: Int, entryId: Int, plan: Plan): Plan
     {
         val endpoint = "update_plan_entry/$planId/$entryId"
-        return Plan()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(plan))!!)
     }
 
     fun deletePlanEntry(planId: Int, entryId: Int)
     {
         val endpoint = "delete_plan_entry/$planId/$entryId"
+        Request().Post(endpoint)
     }
 }

@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -37,18 +38,22 @@ data class Section
     fun addSection(projectId: Int): Section
     {
         val endpoint = "add_section/$projectId"
-        return Section()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updateSection(sectionId: Int): Section
+    fun updateSection(): Section
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val sectionId = this.id
         val endpoint = "update_section/$sectionId"
-        return Section()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun deleteSection(sectionId: Int)
+    fun deleteSection()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val sectionId = this.id
         val endpoint = "delete_section/$sectionId"
-
+        Request().Post(endpoint)
     }
 }

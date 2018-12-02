@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
@@ -41,24 +42,27 @@ data class Project
         val endpoint = StringBuilder()
         endpoint.append("get_projects")
         if(isCompleted != null) endpoint.append("&is_completed=$isCompleted")
-
         return JSON.unquoted.parse(Project.serializer().list,Request().Get(endpoint.toString())!!)
     }
 
     fun addProject(): Project
     {
         val endpoint = "add_project"
-        return Project()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updateProject(projectId: Int): Project
+    fun updateProject(): Project
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val projectId = this.id
         val endpoint = "update_project/$projectId"
-        return Project()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun deleteProject(projectId: Int)
+    fun deleteProject()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val projectId = this.id
         val endpoint = "delete_project/$projectId"
     }
 }

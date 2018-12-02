@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
@@ -41,21 +42,27 @@ data class Suite
         return JSON.unquoted.parse(Suite.serializer().list, Request().Get(endpoint)!!)
     }
 
-    fun addSuite(projectId: Int): Suite
+    fun addSuite(): Suite
     {
+        if(this.projectId == null) throw MissingRequiredParamException("projectId")
+        val projectId = this.projectId
         val endpoint = "add_suite/$projectId"
-        return Suite()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updateSuite(suiteId: Int): Suite
+    fun updateSuite(): Suite
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val suiteId = this.id
         val endpoint = "update_suite/$suiteId"
-        return Suite()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun deleteSuite(suiteId: Int)
+    fun deleteSuite()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val suiteId = this.id
         val endpoint = "delete_suite/$suiteId"
-
+        Request().Post(endpoint)
     }
 }

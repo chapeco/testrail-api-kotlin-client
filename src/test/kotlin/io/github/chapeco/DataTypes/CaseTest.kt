@@ -165,9 +165,10 @@ class CaseTest
     fun fAddCaseTest()
     {
             val expectedCase = Case(
+                    sectionId = 1,
                     title = "My Expected Case"
             )
-            val actualCase = Case().addCase(1,expectedCase)
+            val actualCase = expectedCase.addCase()
             println(actualCase.id)
             System.setProperty("updateCaseJSON", JSON.stringify(actualCase))
             System.setProperty("deleteCaseId", actualCase.id.toString())
@@ -179,7 +180,7 @@ class CaseTest
     fun gUpdateCaseTest()
     {
             val expectedCase = JSON.parse<Case>(System.getProperty("updateCaseJSON"))
-            val actualCase = Case().updateCase(expectedCase.id!!,expectedCase)
+            val actualCase = Case().updateCase()
             println(JSON.unquoted.stringify(actualCase))
             Assert.assertEquals(expectedCase.title,actualCase.title)
     }
@@ -188,7 +189,7 @@ class CaseTest
     fun hDeleteCaseTest()
     {
             val deletedCase = deleteCaseId
-            Case().deleteCase(System.getProperty("deleteCaseId").toInt())
+            Case().deleteCase()
             val expectedCase = false
             val actualCase = Case().getCases(1,1)
             println(JSON.unquoted.stringify(Case.serializer().list,actualCase))

@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
@@ -56,20 +57,27 @@ data class Milestone
         return JSON.unquoted.parse(Milestone.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addMilestone(projectId: Int): Milestone
+    fun addMilestone(): Milestone
     {
+        if(this.projectId == null) throw MissingRequiredParamException("projectId")
+        val projectId = this.projectId
         val endpoint = "add_milestone/$projectId"
-        return Milestone()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updateMilestone(milestoneId: Int): Milestone
+    fun updateMilestone(): Milestone
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val milestoneId = this.id
         val endpoint = "update_milestone/$milestoneId"
-        return Milestone()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun deleteMilestone(milestoneId: Int)
+    fun deleteMilestone()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val milestoneId = this.id
         val endpoint = "delete_milestone/$milestoneId"
+        Request().Post(endpoint)
     }
 }
