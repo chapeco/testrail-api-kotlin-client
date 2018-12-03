@@ -52,8 +52,7 @@ data class Case
         if(estimateForecast == null) estimateForecast = Timespan().parseTimespan(estimateForecastActual)
         if(estimate == null) estimate = Timespan().parseTimespan(estimateActual)
     }
-
-    //TODO
+    
     fun getCase(caseId: Int): Case
     {
         val endpoint = "get_case/$caseId"
