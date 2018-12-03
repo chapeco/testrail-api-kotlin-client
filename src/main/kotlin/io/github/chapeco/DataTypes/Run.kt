@@ -6,10 +6,14 @@ import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 
+/**
+ * Serializable data class for the TestRail Run DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-runs
+ */
 @Serializable
 data class Run
 (
-    //GET
         @Optional @SerialName("blocked_count") val blockedCount: Int? = null,
         @Optional @Transient var completedOn: Timestamp? = null,
         @Optional val config: String? = null,
@@ -32,12 +36,8 @@ data class Run
         @Optional @SerialName("retest_count") val retestCount: Int? = null,
         @Optional @SerialName("untested_count") val untestedCount: Int? = null,
         @Optional val url: String? = null,
-
-    //ADD
         @Optional @SerialName("suite_id") var suiteId: Int? = null,
         @Optional @SerialName("assignedto_id") var assignedToId: Int? = null,
-
-    //ADD/UPDATE
         @Optional var name: String? = null,
         @Optional var description: String? = null,
         @Optional @SerialName("milestone_id") var milestoneId: Int? = null,
@@ -53,7 +53,6 @@ data class Run
         if(createdOn == null) createdOn = Timestamp(createdOnActual)
     }
 
-    //TODO
     fun getRun(runId: Int): Run
     {
         val endpoint = "get_run/$runId"
@@ -116,5 +115,6 @@ data class Run
         if(this.id == null) throw MissingRequiredParamException("id")
         val runId = this.id
         val endpoint = "delete_run/$runId"
+        Request().Post(endpoint)
     }
 }

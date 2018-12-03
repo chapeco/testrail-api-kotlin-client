@@ -8,6 +8,11 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 import java.lang.Exception
 
+/**
+ * Serializable data class for the TestRail Case DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-cases
+ */
 @Serializable
 data class Case
 (

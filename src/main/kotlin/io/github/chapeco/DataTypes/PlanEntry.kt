@@ -7,17 +7,19 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 
+/**
+ * Serializable data class for the TestRail PlanEntry DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-plans
+ */
 @Serializable
 data class PlanEntry
 (
-        //ADD
         @Optional val id: String? = null,
         @Transient val planId: Int? = null,
         @Optional @SerialName("suite_id") var suiteId: Int? = null,
         @Optional @SerialName("config_ids") var configIds: List<Int>? = null,
         @Optional var runs: List<Run>? = null,
-
-        //ADD/UPDATE
         @Optional var name: String? = null,
         @Optional var description: String? = null,
         @Optional @SerialName("assignedto_id") var assignedToId: Int? = null,
@@ -25,7 +27,6 @@ data class PlanEntry
         @Optional @SerialName("case_ids") var caseIds: List<Int>? = null
 )
 {
-    //TODO
     fun addPlanEntry(): PlanEntry
     {
         if(this.planId == null) throw MissingRequiredParamException("planId")

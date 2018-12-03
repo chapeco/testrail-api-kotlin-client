@@ -1,21 +1,26 @@
 package io.github.chapeco.DataTypes
 
 import io.github.chapeco.Utilities.Request
+import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
 
+/**
+ * Serializable data class for the TestRail User DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-users
+ */
 @Serializable
 data class User
 (
-    val email: String? = null,
-    val id: Int? = null,
-    @SerialName("is_active") val isActive: Boolean? = null,
-    val name: String? = null
+    @Optional val email: String? = null,
+    @Optional val id: Int? = null,
+    @Optional @SerialName("is_active") val isActive: Boolean? = null,
+    @Optional val name: String? = null
 )
 {
-    //TODO
     fun getUser(userId: Int): User
     {
         val endpoint = "get_user/$userId"

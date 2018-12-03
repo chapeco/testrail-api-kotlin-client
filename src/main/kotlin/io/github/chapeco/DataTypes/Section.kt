@@ -8,6 +8,11 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
 
+/**
+ * Serializable data class for the TestRail Section DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-sections
+ */
 @Serializable
 data class Section
 (
@@ -21,7 +26,6 @@ data class Section
         @Optional var name: String? = null
 )
 {
-    //TODO
     fun getSection(sectionId: Int): Section
     {
         val endpoint = "get_section/$sectionId"
