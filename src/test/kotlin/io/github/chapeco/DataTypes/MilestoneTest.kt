@@ -166,6 +166,7 @@ class MilestoneTest
     {
         val expectedMilestone = Milestone(name = "API TEST Milestone", projectId = 1)
         val actualMilestone = expectedMilestone.addMilestone()
+        System.setProperty("milestoneId",actualMilestone.id.toString())
         println(JSON.unquoted.stringify(actualMilestone))
         Assert.assertEquals(expectedMilestone.name, actualMilestone.name)
     }
@@ -173,7 +174,7 @@ class MilestoneTest
     @Test
     fun updateMilestoneTest()
     {
-        val expectedUpdatedMilestone = Milestone(name = "API TEST Updated Milestone", id = 1)
+        val expectedUpdatedMilestone = Milestone(name = "API TEST Updated Milestone", id = System.getProperty("milestoneId").toInt())
         val actualUpdatedMilestone = expectedUpdatedMilestone.updateMilestone()
         println(JSON.unquoted.stringify(actualUpdatedMilestone))
         Assert.assertEquals(expectedUpdatedMilestone.name,actualUpdatedMilestone.name)
@@ -182,7 +183,7 @@ class MilestoneTest
     @Test
     fun deleteMilestoneTest()
     {
-        val expectedDeletedMilestone = Milestone(id = 1)
+        val expectedDeletedMilestone = Milestone(id = System.getProperty("milestoneId").toInt())
         expectedDeletedMilestone.deleteMilestone()
     }
 }

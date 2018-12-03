@@ -121,6 +121,7 @@ class SuiteTest
     {
         val expectedSuite = Suite(name = "API TEST Suite", projectId = 1)
         val actualSuite = expectedSuite.addSuite()
+        System.setProperty("suiteId",actualSuite.id.toString())
         println(JSON.unquoted.stringify(actualSuite))
         Assert.assertEquals(expectedSuite.name,actualSuite.name)
     }
@@ -128,7 +129,7 @@ class SuiteTest
     @Test
     fun updateSuiteTest()
     {
-        val expectedUpdatedSuite = Suite(name = "API TEST Updated Suite", id = 1)
+        val expectedUpdatedSuite = Suite(name = "API TEST Updated Suite", id = System.getProperty("suiteId").toInt())
         val actualUpdatedSuite = expectedUpdatedSuite.updateSuite()
         println(JSON.unquoted.stringify(actualUpdatedSuite))
         Assert.assertEquals(expectedUpdatedSuite.name,actualUpdatedSuite.name)
@@ -137,7 +138,7 @@ class SuiteTest
     @Test
     fun deleteSuiteTest()
     {
-        val expectedDeletedSuite = Suite(id = 1)
+        val expectedDeletedSuite = Suite(id = System.getProperty("suiteId").toInt())
         expectedDeletedSuite.deleteSuite()
     }
 }

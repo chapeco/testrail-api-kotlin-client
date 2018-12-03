@@ -88,6 +88,7 @@ class SectionTest
     {
         val expectedSection = Section(name = "API TEST Section", projectId = 1)
         val actualSection = expectedSection.addSection()
+        System.setProperty("sectionId",actualSection.id.toString())
         println(JSON.unquoted.stringify(actualSection))
         Assert.assertEquals(expectedSection.name,actualSection.name)
     }
@@ -95,7 +96,7 @@ class SectionTest
     @Test
     fun updateSectionTest()
     {
-        val expectedUpdatedSection = Section(name = "API TEST Updated Section", id = 1)
+        val expectedUpdatedSection = Section(name = "API TEST Updated Section", id = System.getProperty("sectionId").toInt())
         val actualUpdatedSection = expectedUpdatedSection.updateSection()
         println(JSON.unquoted.stringify(actualUpdatedSection))
         Assert.assertEquals(expectedUpdatedSection.name,actualUpdatedSection.name)
@@ -104,7 +105,7 @@ class SectionTest
     @Test
     fun deleteSectionTest()
     {
-        val expectedDeletedSection = Section(id = 1)
+        val expectedDeletedSection = Section(id = System.getProperty("sectionId").toInt())
         expectedDeletedSection.deleteSection()
     }
 }

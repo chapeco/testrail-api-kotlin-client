@@ -187,6 +187,7 @@ class PlanTest
     {
         val expectedPlan = Plan(name = "API TEST Plan",projectId = 1)
         val actualPlan = expectedPlan.addPlan()
+        System.setProperty("planId",actualPlan.id.toString())
         println(JSON.unquoted.stringify(actualPlan))
         Assert.assertEquals(expectedPlan.name,actualPlan.name)
     }
@@ -194,7 +195,7 @@ class PlanTest
     @Test
     fun updatePlanTest()
     {
-        val expectedUpdatedPlan = Plan(name = "API TEST Updated Plan",id = 1)
+        val expectedUpdatedPlan = Plan(name = "API TEST Updated Plan",id = System.getProperty("planId").toInt())
         val actualUpdatedPlan = expectedUpdatedPlan.updatePlan()
         println(JSON.unquoted.stringify(actualUpdatedPlan))
         Assert.assertEquals(expectedUpdatedPlan.name,actualUpdatedPlan.name)
@@ -203,7 +204,7 @@ class PlanTest
     @Test
     fun closePlanTest()
     {
-        val expectedClosedPlan = Plan(id = 1)
+        val expectedClosedPlan = Plan(id = System.getProperty("planId").toInt())
         val actualClosedPlan = expectedClosedPlan.closePlan()
         println(JSON.unquoted.stringify(actualClosedPlan))
         Assert.assertTrue(actualClosedPlan.isCompleted!!)
@@ -212,7 +213,7 @@ class PlanTest
     @Test
     fun deletePlanTest()
     {
-        val expectedDeletedPlan = Plan(id = 1)
+        val expectedDeletedPlan = Plan(id = System.getProperty("planId").toInt())
         expectedDeletedPlan.deletePlan()
     }
 }

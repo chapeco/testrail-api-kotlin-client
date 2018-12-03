@@ -107,6 +107,7 @@ class ProjectTest
     {
         val expectedProject = Project(name = "API TEST Project")
         val actualProject = expectedProject.addProject()
+        System.setProperty("projectId",actualProject.id.toString())
         println(JSON.unquoted.stringify(actualProject))
         Assert.assertEquals(expectedProject.name,actualProject.name)
     }
@@ -114,7 +115,7 @@ class ProjectTest
     @Test
     fun updateProjectTest()
     {
-        val expectedUpdatedProject = Project(name = "API TEST Updated Project", id = 1)
+        val expectedUpdatedProject = Project(name = "API TEST Updated Project", id = System.getProperty("projectId").toInt())
         val actualUpdatedProject = expectedUpdatedProject.updateProject()
         println(JSON.unquoted.stringify(actualUpdatedProject))
         Assert.assertEquals(expectedUpdatedProject.name,actualUpdatedProject.name)
@@ -123,7 +124,7 @@ class ProjectTest
     @Test
     fun deleteProjectTest()
     {
-        val expectedDeletedProject = Project(id = 1)
+        val expectedDeletedProject = Project(id = System.getProperty("projectId").toInt())
         expectedDeletedProject.deleteProject()
     }
 }

@@ -161,6 +161,7 @@ class RunTest
     {
         val expectedRun = Run(name = "API TEST Run")
         val actualRun = expectedRun.addRun()
+        System.setProperty("runId",actualRun.id.toString())
         println(JSON.unquoted.stringify(actualRun))
         Assert.assertEquals(expectedRun.name,actualRun.name)
     }
@@ -168,7 +169,7 @@ class RunTest
     @Test
     fun updateRunTest()
     {
-        val expectedUpdatedRun = Run(name = "API TEST Updated Run", id = 1)
+        val expectedUpdatedRun = Run(name = "API TEST Updated Run", id = System.getProperty("runId").toInt())
         val actualUpdatedRun = expectedUpdatedRun.updateRun()
         println(JSON.unquoted.stringify(actualUpdatedRun))
         Assert.assertEquals(expectedUpdatedRun.name,actualUpdatedRun.name)
@@ -177,7 +178,7 @@ class RunTest
     @Test
     fun closeRunTest()
     {
-        val expectedClosedRun = Run(id = 1)
+        val expectedClosedRun = Run(id = System.getProperty("runId").toInt())
         val actualClosedRun = expectedClosedRun.closeRun()
         println(JSON.unquoted.stringify(actualClosedRun))
         Assert.assertTrue(actualClosedRun.isCompleted!!)
@@ -186,7 +187,7 @@ class RunTest
     @Test
     fun deleteRunTest()
     {
-        val expectedDeletedRun = Run(id = 1)
+        val expectedDeletedRun = Run(id = System.getProperty("runId").toInt())
         expectedDeletedRun.deleteRun()
     }
 }
