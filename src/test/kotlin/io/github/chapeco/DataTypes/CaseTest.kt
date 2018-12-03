@@ -18,7 +18,7 @@ class CaseTest
     var deleteCaseId: Int? = 0
 
     @Test
-    fun aInstantiateCaseTest()
+    fun a_InstantiateCaseTest()
     {
         val expectedCase = Case(
                 createdBy = 1,
@@ -74,7 +74,7 @@ class CaseTest
     }
 
     @Test
-    fun bSerializeCaseTest()
+    fun b_SerializeCaseTest()
     {
         val expectedCase: String = "{created_by:1,id:1,section_id:1,suite_id:1,updated_by:1,title:\"My Expected Case\",template_id:1,type_id:1,priority_id:1,milestone_id:1,refs:\"My Expected Reference\",custom_automation_type:null,custom_expected:null,custom_preconds:null,custom_steps:null,custom_steps_separated:null,custom_mission:null,custom_goals:null,created_on:null,updated_on:2000,estimate_forecast:1s,estimate:1s}"
         val actualCase = Case(
@@ -104,7 +104,7 @@ class CaseTest
     }
 
     @Test
-    fun cDeserializeCaseTest()
+    fun c_DeserializeCaseTest()
     {
         val expectedCase = Case(
                 createdBy = 1,
@@ -132,7 +132,7 @@ class CaseTest
     }
 
     @Test
-    fun dGetCaseTest()
+    fun d_GetCaseTest()
     {
             val expectedCase = Case(
                     createdBy=1,
@@ -154,7 +154,7 @@ class CaseTest
     }
 
     @Test
-    fun eGetCasesTest()
+    fun e_GetCasesTest()
     {
             val actualCaseList = Case().getCases(1,suiteId = 1)
             println(JSON.unquoted.stringify(Case.serializer().list,actualCaseList))
@@ -162,12 +162,13 @@ class CaseTest
     }
 
     @Test
-    fun fAddCaseTest()
+    fun f_AddCaseTest()
     {
             val expectedCase = Case(
+                    sectionId = 1,
                     title = "My Expected Case"
             )
-            val actualCase = Case().addCase(1,expectedCase)
+            val actualCase = expectedCase.addCase()
             println(actualCase.id)
             System.setProperty("updateCaseJSON", JSON.stringify(actualCase))
             System.setProperty("deleteCaseId", actualCase.id.toString())
@@ -176,19 +177,19 @@ class CaseTest
     }
 
     @Test
-    fun gUpdateCaseTest()
+    fun g_UpdateCaseTest()
     {
             val expectedCase = JSON.parse<Case>(System.getProperty("updateCaseJSON"))
-            val actualCase = Case().updateCase(expectedCase.id!!,expectedCase)
+            val actualCase = Case().updateCase()
             println(JSON.unquoted.stringify(actualCase))
             Assert.assertEquals(expectedCase.title,actualCase.title)
     }
 
     @Test
-    fun hDeleteCaseTest()
+    fun h_DeleteCaseTest()
     {
             val deletedCase = deleteCaseId
-            Case().deleteCase(System.getProperty("deleteCaseId").toInt())
+            Case().deleteCase()
             val expectedCase = false
             val actualCase = Case().getCases(1,1)
             println(JSON.unquoted.stringify(Case.serializer().list,actualCase))

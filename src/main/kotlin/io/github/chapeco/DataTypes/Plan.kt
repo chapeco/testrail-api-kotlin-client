@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
@@ -76,26 +77,35 @@ data class Plan
         return JSON.unquoted.parse(Plan.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addPlan(projectId: Int): Plan
+    fun addPlan(): Plan
     {
+        if(this.projectId == null) throw MissingRequiredParamException("projectId")
+        val projectId = this.projectId
         val endpoint = "add_plan/$projectId"
-        return Plan()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updatePlan(planId: Int): Plan
+    fun updatePlan(): Plan
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val planId = this.id
         val endpoint = "update_plan/$planId"
-        return Plan()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun closePlan(planId: Int): Plan
+    fun closePlan(): Plan
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val planId = this.id
         val endpoint = "close_plan/$planId"
-        return Plan()
+        return JSON.unquoted.parse(Request().Post(endpoint)!!)
     }
 
-    fun deletePlan(planId: Int)
+    fun deletePlan()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val planId = this.id
         val endpoint = "delete_plan/$planId"
+        Request().Post(endpoint)
     }
 }

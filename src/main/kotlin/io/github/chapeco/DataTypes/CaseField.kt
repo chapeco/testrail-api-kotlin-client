@@ -44,6 +44,6 @@ data class CaseField
     fun addCaseField(): CaseField
     {
         val endpoint = "add_case_field/"
-        return CaseField()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 }

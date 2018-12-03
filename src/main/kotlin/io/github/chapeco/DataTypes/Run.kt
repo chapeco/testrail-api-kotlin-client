@@ -1,5 +1,6 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
@@ -86,27 +87,34 @@ data class Run
         return JSON.unquoted.parse(Run.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addRun(projectId: Int): Run
+    fun addRun(): Run
     {
+        if(this.projectId == null) throw MissingRequiredParamException("projectId")
+        val projectId = this.projectId
         val endpoint = "add_run/$projectId"
-        return Run()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updateRun(runId: Int): Run
+    fun updateRun(): Run
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val runId = this.id
         val endpoint = "update_run/$runId"
-        return Run()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun closeRun(runId: Int): Run
+    fun closeRun(): Run
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val runId = this.id
         val endpoint = "close_run/$runId"
-        return Run()
+        return JSON.unquoted.parse(Request().Post(endpoint)!!)
     }
 
-    fun deleteRun(runId: Int)
+    fun deleteRun()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val runId = this.id
         val endpoint = "delete_run/$runId"
-
     }
 }

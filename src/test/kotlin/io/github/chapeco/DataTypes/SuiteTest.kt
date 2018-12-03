@@ -119,18 +119,25 @@ class SuiteTest
     @Test
     fun addSuiteTest()
     {
-
+        val expectedSuite = Suite(name = "API TEST Suite", projectId = 1)
+        val actualSuite = expectedSuite.addSuite()
+        println(JSON.unquoted.stringify(actualSuite))
+        Assert.assertEquals(expectedSuite.name,actualSuite.name)
     }
 
     @Test
     fun updateSuiteTest()
     {
-
+        val expectedUpdatedSuite = Suite(name = "API TEST Updated Suite", id = 1)
+        val actualUpdatedSuite = expectedUpdatedSuite.updateSuite()
+        println(JSON.unquoted.stringify(actualUpdatedSuite))
+        Assert.assertEquals(expectedUpdatedSuite.name,actualUpdatedSuite.name)
     }
 
     @Test
     fun deleteSuiteTest()
     {
-
+        val expectedDeletedSuite = Suite(id = 1)
+        expectedDeletedSuite.deleteSuite()
     }
 }

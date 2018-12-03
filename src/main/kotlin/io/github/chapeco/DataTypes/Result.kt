@@ -1,6 +1,7 @@
 package io.github.chapeco.DataTypes
 
 import io.github.chapeco.DataTypes.SubTypes.Results
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
 import io.github.chapeco.Utilities.Timespan
 import io.github.chapeco.Utilities.Timestamp
@@ -94,19 +95,22 @@ data class Result
         return JSON.unquoted.parse(Result.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addResult(result: Result): Result
+    fun addResult(): Result
     {
-        val testId = result.testId
+        if(this.testId == null) throw MissingRequiredParamException("testId")
+        val testId = this.testId
         val endpoint = "add_result/$testId"
-        //println(JSON.stringify(result))
-        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(result))!!)
+        println(JSON.stringify(this))
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun addResultForCase(runId: Int, caseId: Int, result: Result): Result
+    fun addResultForCase(runId: Int): Result
     {
+        if(this.caseId == null) throw MissingRequiredParamException("caseId")
+        val caseId = this.caseId
         val endpoint = "add_result_for_case/$runId/$caseId"
-        println(JSON.stringify(result))
-        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(result))!!)
+        println(JSON.stringify(this))
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
     fun addResults(runId: Int, results: Results): List<Result>

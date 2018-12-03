@@ -1,6 +1,8 @@
 package io.github.chapeco.DataTypes
 
+import io.github.chapeco.Utilities.MissingRequiredParamException
 import io.github.chapeco.Utilities.Request
+import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
@@ -9,14 +11,14 @@ import kotlinx.serialization.list
 @Serializable
 data class Section
 (
-    val depth: Int? = null,
-    @SerialName("display_order") val displayOrder: Int? = null,
-    val id: Int? = null,
-
-    var description: String? = null,
-    @SerialName("suite_id") var suiteId: Int? = null,
-    @SerialName("parent_id") var parentId: Int? = null,
-    var name: String? = null
+        @Optional val depth: Int? = null,
+        @Optional @SerialName("display_order") val displayOrder: Int? = null,
+        @Optional val id: Int? = null,
+        @Transient val projectId: Int? = null,
+        @Optional var description: String? = null,
+        @Optional @SerialName("suite_id") var suiteId: Int? = null,
+        @Optional @SerialName("parent_id") var parentId: Int? = null,
+        @Optional var name: String? = null
 )
 {
     //TODO
@@ -34,21 +36,27 @@ data class Section
         return JSON.unquoted.parse(Section.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addSection(projectId: Int): Section
+    fun addSection(): Section
     {
+        if(this.projectId == null) throw MissingRequiredParamException("projectId")
+        val projectId = this.projectId
         val endpoint = "add_section/$projectId"
-        return Section()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun updateSection(sectionId: Int): Section
+    fun updateSection(): Section
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val sectionId = this.id
         val endpoint = "update_section/$sectionId"
-        return Section()
+        return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }
 
-    fun deleteSection(sectionId: Int)
+    fun deleteSection()
     {
+        if(this.id == null) throw MissingRequiredParamException("id")
+        val sectionId = this.id
         val endpoint = "delete_section/$sectionId"
-
+        Request().Post(endpoint)
     }
 }

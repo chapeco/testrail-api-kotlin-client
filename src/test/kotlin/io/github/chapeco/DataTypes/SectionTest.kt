@@ -86,18 +86,25 @@ class SectionTest
     @Test
     fun addSectionTest()
     {
-
+        val expectedSection = Section(name = "API TEST Section", projectId = 1)
+        val actualSection = expectedSection.addSection()
+        println(JSON.unquoted.stringify(actualSection))
+        Assert.assertEquals(expectedSection.name,actualSection.name)
     }
 
     @Test
     fun updateSectionTest()
     {
-
+        val expectedUpdatedSection = Section(name = "API TEST Updated Section", id = 1)
+        val actualUpdatedSection = expectedUpdatedSection.updateSection()
+        println(JSON.unquoted.stringify(actualUpdatedSection))
+        Assert.assertEquals(expectedUpdatedSection.name,actualUpdatedSection.name)
     }
 
     @Test
     fun deleteSectionTest()
     {
-
+        val expectedDeletedSection = Section(id = 1)
+        expectedDeletedSection.deleteSection()
     }
 }

@@ -123,7 +123,7 @@ class ResultTest
     fun addResultTest()
     {
         val expectedResult = Result(testId = 1, statusId = 1)
-        val actualResult = Result().addResult(expectedResult)
+        val actualResult = expectedResult.addResult()
         println(JSON.unquoted.stringify(actualResult))
         Assert.assertEquals(expectedResult.testId,actualResult.testId)
     }
@@ -131,8 +131,8 @@ class ResultTest
     @Test
     fun addResultForCaseTest()
     {
-        val expectedResult = Result(testId = 1, statusId = 1)
-        val actualResult = Result().addResultForCase(1,1,expectedResult)
+        val expectedResult = Result(caseId = 1, statusId = 1)
+        val actualResult = expectedResult.addResultForCase(1)
         println(JSON.unquoted.stringify(actualResult))
         Assert.assertEquals(expectedResult.testId,actualResult.testId)
     }

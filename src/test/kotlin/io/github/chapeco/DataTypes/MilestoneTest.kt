@@ -164,18 +164,25 @@ class MilestoneTest
     @Test
     fun addMilestoneTest()
     {
-
+        val expectedMilestone = Milestone(name = "API TEST Milestone", projectId = 1)
+        val actualMilestone = expectedMilestone.addMilestone()
+        println(JSON.unquoted.stringify(actualMilestone))
+        Assert.assertEquals(expectedMilestone.name, actualMilestone.name)
     }
 
     @Test
     fun updateMilestoneTest()
     {
-
+        val expectedUpdatedMilestone = Milestone(name = "API TEST Updated Milestone", id = 1)
+        val actualUpdatedMilestone = expectedUpdatedMilestone.updateMilestone()
+        println(JSON.unquoted.stringify(actualUpdatedMilestone))
+        Assert.assertEquals(expectedUpdatedMilestone.name,actualUpdatedMilestone.name)
     }
 
     @Test
     fun deleteMilestoneTest()
     {
-
+        val expectedDeletedMilestone = Milestone(id = 1)
+        expectedDeletedMilestone.deleteMilestone()
     }
 }
