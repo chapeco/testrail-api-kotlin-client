@@ -159,24 +159,34 @@ class RunTest
     @Test
     fun addRunTest()
     {
-
+        val expectedRun = Run(name = "API TEST Run")
+        val actualRun = expectedRun.addRun()
+        println(JSON.unquoted.stringify(actualRun))
+        Assert.assertEquals(expectedRun.name,actualRun.name)
     }
 
     @Test
     fun updateRunTest()
     {
-
+        val expectedUpdatedRun = Run(name = "API TEST Updated Run", id = 1)
+        val actualUpdatedRun = expectedUpdatedRun.updateRun()
+        println(JSON.unquoted.stringify(actualUpdatedRun))
+        Assert.assertEquals(expectedUpdatedRun.name,actualUpdatedRun.name)
     }
 
     @Test
     fun closeRunTest()
     {
-
+        val expectedClosedRun = Run(id = 1)
+        val actualClosedRun = expectedClosedRun.closeRun()
+        println(JSON.unquoted.stringify(actualClosedRun))
+        Assert.assertTrue(actualClosedRun.isCompleted!!)
     }
 
     @Test
     fun deleteRunTest()
     {
-
+        val expectedDeletedRun = Run(id = 1)
+        expectedDeletedRun.deleteRun()
     }
 }

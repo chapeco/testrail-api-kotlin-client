@@ -87,8 +87,10 @@ data class Run
         return JSON.unquoted.parse(Run.serializer().list, Request().Get(endpoint.toString())!!)
     }
 
-    fun addRun(projectId: Int): Run
+    fun addRun(): Run
     {
+        if(this.projectId == null) throw MissingRequiredParamException("projectId")
+        val projectId = this.projectId
         val endpoint = "add_run/$projectId"
         return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)
     }

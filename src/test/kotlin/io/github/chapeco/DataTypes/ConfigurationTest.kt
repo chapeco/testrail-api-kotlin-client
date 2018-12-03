@@ -55,36 +55,50 @@ class ConfigurationTest
     @Test
     fun addConfigGroupTest()
     {
-
+        val expectedConfigurationGroup = Configuration(name = "API TEST Configuration Group", projectId = 1)
+        val actualConfigurationGroup = expectedConfigurationGroup.addConfigGroup()
+        println(JSON.unquoted.stringify(actualConfigurationGroup))
+        Assert.assertEquals(expectedConfigurationGroup.name,actualConfigurationGroup.name)
     }
 
     @Test
     fun addConfigTest()
     {
-
+        val expectedConfiguration = Configuration(name = "API TEST Configuration", groupId = 2)
+        val actualConfiguration = expectedConfiguration.addConfig()
+        println(JSON.unquoted.stringify(actualConfiguration))
+        Assert.assertEquals(expectedConfiguration.name,actualConfiguration.name)
     }
 
     @Test
     fun updateConfigGroupTest()
     {
-
+        val expectedUpdatedConfigurationGroup = Configuration(name = "API TEST Updated Configuration Group", id = 2)
+        val actualUpdatedConfigurationGroup = expectedUpdatedConfigurationGroup.updateConfigGroup()
+        println(JSON.unquoted.stringify(actualUpdatedConfigurationGroup))
+        Assert.assertEquals(expectedUpdatedConfigurationGroup.name,actualUpdatedConfigurationGroup.name)
     }
 
     @Test
     fun updateConfigTest()
     {
-
+        val expectedUpdatedConfiguration = Configuration(name = "API TEST Updated Configuration", id = 1)
+        val actualUpdatedConfiguration = expectedUpdatedConfiguration.updateConfig()
+        println(JSON.unquoted.stringify(actualUpdatedConfiguration))
+        Assert.assertEquals(expectedUpdatedConfiguration.name,actualUpdatedConfiguration.name)
     }
 
     @Test
     fun deleteConfigGroupTest()
     {
-
+        val expectedConfigurationGroup = Configuration(id = 1)
+        expectedConfigurationGroup.deleteConfigGroup()
     }
 
     @Test
     fun deleteConfigTest()
     {
-
+        val expectedConfiguration = Configuration(id = 1)
+        expectedConfiguration.deleteConfig()
     }
 }

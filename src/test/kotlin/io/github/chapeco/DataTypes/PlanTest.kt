@@ -185,24 +185,34 @@ class PlanTest
     @Test
     fun addPlanTest()
     {
-
+        val expectedPlan = Plan(name = "API TEST Plan",projectId = 1)
+        val actualPlan = expectedPlan.addPlan()
+        println(JSON.unquoted.stringify(actualPlan))
+        Assert.assertEquals(expectedPlan.name,actualPlan.name)
     }
 
     @Test
     fun updatePlanTest()
     {
-
+        val expectedUpdatedPlan = Plan(name = "API TEST Updated Plan",id = 1)
+        val actualUpdatedPlan = expectedUpdatedPlan.updatePlan()
+        println(JSON.unquoted.stringify(actualUpdatedPlan))
+        Assert.assertEquals(expectedUpdatedPlan.name,actualUpdatedPlan.name)
     }
 
     @Test
     fun closePlanTest()
     {
-
+        val expectedClosedPlan = Plan(id = 1)
+        val actualClosedPlan = expectedClosedPlan.closePlan()
+        println(JSON.unquoted.stringify(actualClosedPlan))
+        Assert.assertTrue(actualClosedPlan.isCompleted!!)
     }
 
     @Test
     fun deletePlanTest()
     {
-
+        val expectedDeletedPlan = Plan(id = 1)
+        expectedDeletedPlan.deletePlan()
     }
 }

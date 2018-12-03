@@ -37,6 +37,7 @@ data class Configuration
     fun addConfig(): Configuration
     {
         if(this.name == null) throw MissingRequiredParamException("name")
+        if(this.groupId == null) throw MissingRequiredParamException("groupId")
         val configGroupId = this.groupId
         val endpoint = "add_config/$configGroupId"
         return JSON.unquoted.parse(Request().Post(endpoint,JSON.stringify(this))!!)

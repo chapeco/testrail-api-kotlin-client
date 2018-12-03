@@ -305,6 +305,9 @@ class CaseFieldTest
     @Test
     fun addCaseFieldTest()
     {
-
+        val expectedCaseField = CaseField()
+        val actualCaseField = expectedCaseField.addCaseField()
+        println(JSON.unquoted.stringify(actualCaseField))
+        Assert.assertEquals(expectedCaseField.name,actualCaseField.name)
     }
 }

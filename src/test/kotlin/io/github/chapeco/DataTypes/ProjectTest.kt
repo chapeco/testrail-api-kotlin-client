@@ -105,18 +105,25 @@ class ProjectTest
     @Test
     fun addProjectTest()
     {
-
+        val expectedProject = Project(name = "API TEST Project")
+        val actualProject = expectedProject.addProject()
+        println(JSON.unquoted.stringify(actualProject))
+        Assert.assertEquals(expectedProject.name,actualProject.name)
     }
 
     @Test
     fun updateProjectTest()
     {
-
+        val expectedUpdatedProject = Project(name = "API TEST Updated Project", id = 1)
+        val actualUpdatedProject = expectedUpdatedProject.updateProject()
+        println(JSON.unquoted.stringify(actualUpdatedProject))
+        Assert.assertEquals(expectedUpdatedProject.name,actualUpdatedProject.name)
     }
 
     @Test
     fun deleteProjectTest()
     {
-
+        val expectedDeletedProject = Project(id = 1)
+        expectedDeletedProject.deleteProject()
     }
 }
