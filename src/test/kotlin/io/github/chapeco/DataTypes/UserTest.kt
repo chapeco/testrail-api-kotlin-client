@@ -55,7 +55,7 @@ class UserTest()
     @Test
     fun getUserTest()
     {
-        val expectedUser = User(email = "dparker@betabreakers.com",id = 1,isActive = true, name = "David Parker")
+        val expectedUser = User(email = System.getProperty("testrailUsername"),id = 1,isActive = true, name = "David Parker")
         val actualUser = User().getUser(1)
         println(JSON.unquoted.stringify(actualUser))
         assertEquals(expectedUser,actualUser)
@@ -64,8 +64,8 @@ class UserTest()
     @Test
     fun getUserByEmailTest()
     {
-        val expectedUser = User(email = "dparker@betabreakers.com",id = 1,isActive = true, name = "David Parker")
-        val actualUser = User().getUserByEmail("dparker@betabreakers.com")
+        val expectedUser = User(email = System.getProperty("testrailUsername"),id = 1,isActive = true, name = "David Parker")
+        val actualUser = User().getUserByEmail(System.getProperty("testrailUsername"))
         println(JSON.unquoted.stringify(actualUser))
         assertEquals(expectedUser,actualUser)
     }
@@ -73,7 +73,7 @@ class UserTest()
     @Test
     fun getUsersTest()
     {
-        val expectedUser = User(email = "dparker@betabreakers.com",id = 1,isActive = true, name = "David Parker")
+        val expectedUser = User(email = System.getProperty("testrailUsername"),id = 1,isActive = true, name = "David Parker")
         val expectedUserList = List<User>(1) {expectedUser}
         val actualUserList = User().getUsers()
         println(JSON.unquoted.stringify(User.serializer().list,actualUserList))
