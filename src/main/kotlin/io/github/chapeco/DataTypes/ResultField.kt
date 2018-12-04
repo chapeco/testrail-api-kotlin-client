@@ -7,10 +7,14 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
 
+/**
+ * Serializable data class for the TestRail ResultField DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-results-fields
+ */
 @Serializable
 data class ResultField
 (
-    //GET
         val configs: List<Config>? = null,
         val description: String? = null,
         @SerialName("display_order") val displayOrder: Int? = null,
@@ -24,7 +28,6 @@ data class ResultField
         @SerialName("template_ids") var templateIds: List<Int>? = null
 )
 {
-    //TODO
     fun getResultFields(): List<ResultField>
     {
         val endpoint = "get_result_fields"

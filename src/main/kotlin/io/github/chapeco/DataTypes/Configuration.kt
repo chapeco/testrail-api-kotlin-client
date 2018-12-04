@@ -8,6 +8,11 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
 
+/**
+ * Serializable data class for the TestRail Configuration DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-configs
+ */
 @Serializable
 data class Configuration
 (
@@ -18,7 +23,6 @@ data class Configuration
         @Optional var name: String? = null
 )
 {
-    //TODO
     fun getConfigs(projectId: Int): List<Configuration>
     {
         val endpoint = "get_configs/$projectId"

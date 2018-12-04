@@ -15,8 +15,6 @@ import org.junit.runners.MethodSorters
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class CaseTest
 {
-    var deleteCaseId: Int? = 0
-
     @Test
     fun a_InstantiateCaseTest()
     {
@@ -169,9 +167,7 @@ class CaseTest
                     title = "My Expected Case"
             )
             val actualCase = expectedCase.addCase()
-            println(actualCase.id)
-            System.setProperty("updateCaseJSON", JSON.stringify(actualCase))
-            System.setProperty("deleteCaseId", actualCase.id.toString())
+            System.setProperty("caseId",actualCase.id.toString())
             println(JSON.unquoted.stringify(actualCase))
             Assert.assertEquals(expectedCase.title,actualCase.title)
     }
@@ -179,7 +175,10 @@ class CaseTest
     @Test
     fun g_UpdateCaseTest()
     {
-            val expectedCase = JSON.parse<Case>(System.getProperty("updateCaseJSON"))
+            val expectedCase = Case(
+                    id = System.getProperty("caseId").toInt(),
+                    title = "My Updated Expected Case"
+            )
             val actualCase = Case().updateCase()
             println(JSON.unquoted.stringify(actualCase))
             Assert.assertEquals(expectedCase.title,actualCase.title)
@@ -188,11 +187,13 @@ class CaseTest
     @Test
     fun h_DeleteCaseTest()
     {
-            val deletedCase = deleteCaseId
-            Case().deleteCase()
-            val expectedCase = false
+            val deletedCaseId = System.getProperty("caseId").toInt()
+            val expectedDeletedCase = Case(
+                    id = deletedCaseId
+            )
+            expectedDeletedCase.deleteCase()
             val actualCase = Case().getCases(1,1)
             println(JSON.unquoted.stringify(Case.serializer().list,actualCase))
-            Assert.assertEquals(expectedCase,JSON.unquoted.stringify(Case.serializer().list,actualCase).contains("id:$deletedCase"))
+            Assert.assertEquals(false,JSON.unquoted.stringify(Case.serializer().list,actualCase).contains("id:$deletedCaseId"))
     }
 }

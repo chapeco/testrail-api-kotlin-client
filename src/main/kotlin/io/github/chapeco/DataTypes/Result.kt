@@ -8,17 +8,19 @@ import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 
+/**
+ * Serializable data class for the TestRail Result DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-results
+ */
 @Serializable
 data class Result
 (
-    //GET
         @Optional @SerialName("created_by") var createdBy: Int? = null,
         @Optional @Transient var createdOn: Timestamp? = null,
         @Optional var id: Int? = null,
         @Optional @SerialName("test_id") var testId: Int? = null,
         @Optional @SerialName("case_id") var caseId: Int? = null,
-
-    //ADD
         @Optional @SerialName("status_id") var statusId: Int? = null,
         @Optional var comment: String? = null,
         @Optional var version: String? = null,
@@ -36,7 +38,6 @@ data class Result
         if(elapsed == null) elapsed = Timespan().parseTimespan(elapsedActual)
     }
 
-    //TODO
     fun getResults
     (
         testId: Int,

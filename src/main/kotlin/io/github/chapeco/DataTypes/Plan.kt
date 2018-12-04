@@ -6,10 +6,14 @@ import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 
+/**
+ * Serializable data class for the TestRail Plan DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-plans
+ */
 @Serializable
 data class Plan
 (
-    //GET
         @Optional @SerialName("assignedto_id") val assignedToId: Int? = null,
         @Optional @SerialName("blocked_count") val blockedCount: Int? = null,
         @Optional @Transient var completedOn: Timestamp? = null,
@@ -30,8 +34,6 @@ data class Plan
         @Optional @SerialName("retest_count") val retestCount: Int? = null,
         @Optional @SerialName("untested_count") val untestedCount: Int? = null,
         @Optional val url: String? = null,
-
-    //ADD/UPDATE
         @Optional var name: String? = null,
         @Optional var description: String? = null,
         @Optional @SerialName("milestone_id") var milestoneId: Int? = null,
@@ -46,7 +48,6 @@ data class Plan
         if(createdOn == null) createdOn = Timestamp(createdOnActual)
     }
 
-    //TODO
     fun getPlan(planId: Int): Plan
     {
         val endpoint = "get_plan/$planId"

@@ -57,6 +57,7 @@ class ConfigurationTest
     {
         val expectedConfigurationGroup = Configuration(name = "API TEST Configuration Group", projectId = 1)
         val actualConfigurationGroup = expectedConfigurationGroup.addConfigGroup()
+        System.setProperty("configurationGroupId",actualConfigurationGroup.id.toString())
         println(JSON.unquoted.stringify(actualConfigurationGroup))
         Assert.assertEquals(expectedConfigurationGroup.name,actualConfigurationGroup.name)
     }
@@ -64,8 +65,9 @@ class ConfigurationTest
     @Test
     fun addConfigTest()
     {
-        val expectedConfiguration = Configuration(name = "API TEST Configuration", groupId = 2)
+        val expectedConfiguration = Configuration(name = "API TEST Configuration", groupId = System.getProperty("configurationGroupId").toInt())
         val actualConfiguration = expectedConfiguration.addConfig()
+        System.setProperty("configurationId",actualConfiguration.id.toString())
         println(JSON.unquoted.stringify(actualConfiguration))
         Assert.assertEquals(expectedConfiguration.name,actualConfiguration.name)
     }
@@ -73,7 +75,7 @@ class ConfigurationTest
     @Test
     fun updateConfigGroupTest()
     {
-        val expectedUpdatedConfigurationGroup = Configuration(name = "API TEST Updated Configuration Group", id = 2)
+        val expectedUpdatedConfigurationGroup = Configuration(name = "API TEST Updated Configuration Group", id = System.getProperty("configurationGroupId").toInt())
         val actualUpdatedConfigurationGroup = expectedUpdatedConfigurationGroup.updateConfigGroup()
         println(JSON.unquoted.stringify(actualUpdatedConfigurationGroup))
         Assert.assertEquals(expectedUpdatedConfigurationGroup.name,actualUpdatedConfigurationGroup.name)
@@ -82,7 +84,7 @@ class ConfigurationTest
     @Test
     fun updateConfigTest()
     {
-        val expectedUpdatedConfiguration = Configuration(name = "API TEST Updated Configuration", id = 1)
+        val expectedUpdatedConfiguration = Configuration(name = "API TEST Updated Configuration", id = System.getProperty("configurationId").toInt())
         val actualUpdatedConfiguration = expectedUpdatedConfiguration.updateConfig()
         println(JSON.unquoted.stringify(actualUpdatedConfiguration))
         Assert.assertEquals(expectedUpdatedConfiguration.name,actualUpdatedConfiguration.name)
@@ -91,14 +93,14 @@ class ConfigurationTest
     @Test
     fun deleteConfigGroupTest()
     {
-        val expectedConfigurationGroup = Configuration(id = 1)
+        val expectedConfigurationGroup = Configuration(id = System.getProperty("configurationGroupId").toInt())
         expectedConfigurationGroup.deleteConfigGroup()
     }
 
     @Test
     fun deleteConfigTest()
     {
-        val expectedConfiguration = Configuration(id = 1)
+        val expectedConfiguration = Configuration(id = System.getProperty("configurationId").toInt())
         expectedConfiguration.deleteConfig()
     }
 }

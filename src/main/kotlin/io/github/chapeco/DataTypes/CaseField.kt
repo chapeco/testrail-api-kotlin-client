@@ -9,10 +9,14 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
 
+/**
+ * Serializable data class for the TestRail CaseField DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-cases-fields
+ */
 @Serializable
 data class CaseField
 (
-    //GET
         @Optional val id: Int? = null,
         @Optional @SerialName("system_name") val systemName: String? = null,
         @Optional @SerialName("entity_id") val entityId: Int? = null,
@@ -24,7 +28,6 @@ data class CaseField
         @Optional @SerialName("status_id") val statusId: Int? = null,
         @Optional @SerialName("is_system") val isSystem: Boolean? = null,
 
-    //ADD/UPDATE
         @Optional var type: Type? = null,
         @Optional var name: String? = null,
         @Optional var label: String? = null,
@@ -34,7 +37,6 @@ data class CaseField
         @Optional var configs: List<Config>? = null
 )
 {
-    //TODO
     fun getCaseFields(): List<CaseField>
     {
         val endpoint = "get_case_fields/"

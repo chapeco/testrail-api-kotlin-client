@@ -6,22 +6,22 @@ import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 
+/**
+ * Serializable data class for the TestRail Project DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-projects
+ */
 @Serializable
 data class Project
 (
-    //GET
-        val id: Int? = null,
-        @Transient var completedOn: Timestamp? = null,
-        val url: String? = null,
-
-    //ADD/UPDATE
-        var name: String? = null,
-        var announcement: String? = null,
-        @SerialName("show_announcement") var showAnnouncement: Boolean? = null,
-        @SerialName("suite_mode") var suiteMode: Int? = null,
-
-    //UPDATE
-        @SerialName("is_completed") var isCompleted: Boolean? = null
+        @Optional val id: Int? = null,
+        @Optional @Transient var completedOn: Timestamp? = null,
+        @Optional val url: String? = null,
+        @Optional var name: String? = null,
+        @Optional var announcement: String? = null,
+        @Optional @SerialName("show_announcement") var showAnnouncement: Boolean? = null,
+        @Optional @SerialName("suite_mode") var suiteMode: Int? = null,
+        @Optional @SerialName("is_completed") var isCompleted: Boolean? = null
 )
 {
     @Optional @SerialName("completed_on") val completedOnActual: Long? = completedOn.toString().toLongOrNull()
@@ -30,7 +30,6 @@ data class Project
         if(completedOn == null) completedOn = Timestamp(completedOnActual)
     }
 
-    //TODO
     fun getProject(projectId: Int): Project
     {
         val endpoint = "get_project/$projectId"
@@ -64,5 +63,6 @@ data class Project
         if(this.id == null) throw MissingRequiredParamException("id")
         val projectId = this.id
         val endpoint = "delete_project/$projectId"
+        Request().Post(endpoint)
     }
 }

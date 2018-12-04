@@ -6,25 +6,25 @@ import io.github.chapeco.Utilities.Timestamp
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 
+/**
+ * Serializable data class for the TestRail Milestone DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-milestones
+ */
 @Serializable
 data class Milestone
 (
-    //GET
         @Optional @Transient var completedOn: Timestamp? = null,
         @Optional val id: Int? = null,
         @Optional val milestones: List<Milestone>? = null,
         @Optional @SerialName("project_id") val projectId: Int? = null,
         @Optional @Transient var startedOn: Timestamp? = null,
         @Optional val url: String? = null,
-
-    //ADD/UPDATE
         @Optional var name: String? = null,
         @Optional var description: String? = null,
         @Optional @Transient var dueOn: Timestamp? = null,
         @Optional @SerialName("parent_id") var parentId: Int? = null,
         @Optional @Transient var startOn: Timestamp? = null,
-
-    //UPDATE
         @Optional @SerialName("is_completed") var isCompleted: Boolean? = null,
         @Optional @SerialName("is_started") var isStarted: Boolean? = null
 )
@@ -41,7 +41,6 @@ data class Milestone
         if(startOn == null) startOn = Timestamp(startOnActual)
     }
 
-    //TODO
     fun getMilestone(milestoneId: Int): Milestone
     {
         val endpoint = "get_milestone/$milestoneId"

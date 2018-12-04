@@ -6,8 +6,12 @@ import io.github.chapeco.Utilities.Timestamp
 import io.github.chapeco.Utilities.Request
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
-import java.lang.Exception
 
+/**
+ * Serializable data class for the TestRail Case DataType
+ *
+ * See: http://docs.gurock.com/testrail-api2/reference-cases
+ */
 @Serializable
 data class Case
 (
@@ -48,7 +52,6 @@ data class Case
         if(estimate == null) estimate = Timespan().parseTimespan(estimateActual)
     }
 
-    //TODO
     fun getCase(caseId: Int): Case
     {
         val endpoint = "get_case/$caseId"
