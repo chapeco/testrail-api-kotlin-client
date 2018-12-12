@@ -1,6 +1,21 @@
 # TestRail API Kotlin Client
 
+## Overview
+
+The goal of this project is to simplify the process of making GET & POST requests to the TestRail RESTful API service using the Kotlin programming language. Kotlin was chosen for this project since it offers multi-language interoperability, native serialization support, open source HTTP networking libraries, data classes with optional parameters, and null safety. Currently this project is focused on supporting JVM languages. In the long term of this project, the goal is to support all languages that are interoperable with Kotlin.
+
+&nbsp;
+
+For detailed documentation of all data types and methods available in this client please refer to the [wiki](https://github.com/chapeco/testrail-api-kotlin-client/wiki).
+
 ## Setup
+
+Maven Dependency (IN PROGRESS - Check Back Soon):
+
+```
+TODO
+```
+
 
 Set the following system properties with valid values:
 
