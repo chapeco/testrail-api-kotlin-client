@@ -34,7 +34,7 @@ Set the following system properties with valid values:
 
 ## Example Usage
 
-###For in depth documentation refer to the [Wiki](https://github.com/chapeco/testrail-api-kotlin-client/wiki)
+### For in depth documentation refer to the [Wiki](https://github.com/chapeco/testrail-api-kotlin-client/wiki)
 
 ### Creating a new case in TestRail:
 
